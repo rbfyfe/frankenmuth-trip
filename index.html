@@ -362,6 +362,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   opacity: 0.4;
 }
 .timeline-card {
+  position: relative;
   flex: 1;
   background: var(--white);
   border-radius: var(--radius);
@@ -669,6 +670,180 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   .map-container { height: 400px; }
   .hero { min-height: 70vh; }
 }
+
+/* ═══════════════════════════════════════════
+   INTERACTIVE EDITING
+   ═══════════════════════════════════════════ */
+.timeline-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  color: var(--gray);
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all 0.2s;
+  z-index: 2;
+}
+.timeline-item:hover .timeline-remove { opacity: 0.6; }
+.timeline-remove:hover { opacity: 1 !important; background: #FEE2E2; color: #DC2626; }
+.timeline-time { cursor: pointer; }
+.timeline-time:hover { background: rgba(139,37,0,0.15); }
+.time-edit-input {
+  font-family: var(--font);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--red);
+  background: var(--white);
+  border: 1.5px solid var(--red);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  outline: none;
+  flex-shrink: 0;
+}
+.add-to-day-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 10px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--green);
+  background: rgba(45,80,22,0.08);
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+.add-to-day-btn:hover { background: rgba(45,80,22,0.18); color: var(--green-light); }
+.day-picker-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,24,16,0.35);
+  backdrop-filter: blur(2px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.day-picker-overlay.show { opacity: 1; pointer-events: auto; }
+.day-picker {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 24px;
+  width: 90%;
+  max-width: 340px;
+}
+.day-picker h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.day-picker-sub { font-size: 0.85rem; color: var(--gray); margin-bottom: 16px; }
+.day-picker-days { display: flex; gap: 8px; margin-bottom: 16px; }
+.day-picker-day {
+  flex: 1;
+  padding: 10px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  background: var(--cream);
+  color: var(--brown-light);
+  transition: all 0.2s;
+  line-height: 1.3;
+}
+.day-picker-day:hover { opacity: 0.85; }
+.day-picker-day.selected { color: #FFF; }
+.day-picker-day[data-day="1"].selected { background: var(--red); }
+.day-picker-day[data-day="2"].selected { background: var(--green); }
+.day-picker-day[data-day="3"].selected { background: var(--wood); color: var(--brown); }
+.day-picker-day small { font-weight: 400; font-size: 0.7rem; }
+.day-picker-time {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.day-picker-time label { font-size: 0.85rem; font-weight: 600; white-space: nowrap; }
+.day-picker-time input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.85rem;
+}
+.day-picker-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.day-picker-cancel {
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gray);
+  background: var(--cream);
+}
+.day-picker-confirm {
+  padding: 9px 20px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #FFF;
+  background: var(--green);
+  transition: opacity 0.2s;
+}
+.day-picker-confirm:hover { opacity: 0.85; }
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3000;
+  pointer-events: none;
+}
+.toast {
+  background: var(--brown);
+  color: #FFF;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateY(0); }
+.reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--gray);
+  background: var(--cream);
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+.reset-btn:hover { background: var(--gray-light); color: var(--brown); }
+.section-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
 </style>
 </head>
 <body>
@@ -700,7 +875,10 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 <!-- ═══════════ ITINERARY ═══════════ -->
 <section class="section" id="section-itinerary">
-  <h2 class="section-title">Day-by-Day Itinerary</h2>
+  <div class="section-header-row">
+    <h2 class="section-title">Day-by-Day Itinerary</h2>
+    <button class="reset-btn" id="resetBtn" style="display:none">&#8634; Reset</button>
+  </div>
   <p class="section-desc">A fun-packed family getaway to Michigan's Little Bavaria with two young kids, finishing with a stop in Grand Rapids on the drive home.</p>
   <div class="map-container"><div id="itineraryMap"></div></div>
   <div class="day-filters" id="dayFilters"></div>
@@ -744,6 +922,28 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
     <div class="route-item"><span>Frankenmuth &#8594; Holland (direct)</span><span class="route-time">~2.5–3 hours</span></div>
   </div>
 </section>
+
+<!-- Day Picker Overlay -->
+<div class="day-picker-overlay" id="dayPickerOverlay">
+  <div class="day-picker">
+    <h3>Add to Itinerary</h3>
+    <p class="day-picker-sub"><span class="day-picker-name"></span></p>
+    <div class="day-picker-days">
+      <button class="day-picker-day selected" data-day="1">Day 1<br><small>Sun</small></button>
+      <button class="day-picker-day" data-day="2">Day 2<br><small>Mon</small></button>
+      <button class="day-picker-day" data-day="3">Day 3<br><small>Tue</small></button>
+    </div>
+    <div class="day-picker-time">
+      <label>Time</label>
+      <input type="time" id="pickerTime" value="12:00">
+    </div>
+    <div class="day-picker-actions">
+      <button class="day-picker-cancel" id="pickerCancel">Cancel</button>
+      <button class="day-picker-confirm" id="pickerConfirm">Add</button>
+    </div>
+  </div>
+</div>
+<div class="toast-container" id="toastContainer"><div class="toast"></div></div>
 
 <footer class="footer">
   Made with care for the family trip &middot; Frankenmuth 2026
@@ -863,6 +1063,49 @@ const PRACTICAL = {
 };
 
 /* ═══════════════════════════════════════════
+   STATE MANAGEMENT
+   ═══════════════════════════════════════════ */
+let userItinerary;
+
+function loadItinerary() {
+  const saved = localStorage.getItem('fmuth_itinerary');
+  if (saved) {
+    try { userItinerary = JSON.parse(saved); }
+    catch(e) { userItinerary = JSON.parse(JSON.stringify(DAYS)); }
+  } else {
+    userItinerary = JSON.parse(JSON.stringify(DAYS));
+  }
+}
+
+function saveItinerary() {
+  localStorage.setItem('fmuth_itinerary', JSON.stringify(userItinerary));
+}
+
+function timeTo24(timeStr) {
+  const [time, period] = timeStr.split(' ');
+  let [h, m] = time.split(':').map(Number);
+  if (period === 'PM' && h !== 12) h += 12;
+  if (period === 'AM' && h === 12) h = 0;
+  return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`;
+}
+
+function timeTo12(time24) {
+  let [h, m] = time24.split(':').map(Number);
+  const period = h >= 12 ? 'PM' : 'AM';
+  if (h === 0) h = 12;
+  else if (h > 12) h -= 12;
+  return `${h}:${String(m).padStart(2,'0')} ${period}`;
+}
+
+function timeToMinutes(timeStr) {
+  const [time, period] = timeStr.split(' ');
+  let [h, m] = time.split(':').map(Number);
+  if (period === 'PM' && h !== 12) h += 12;
+  if (period === 'AM' && h === 12) h = 0;
+  return h * 60 + m;
+}
+
+/* ═══════════════════════════════════════════
    UTILITIES
    ═══════════════════════════════════════════ */
 function stars(rating) {
@@ -906,7 +1149,8 @@ function initMaps() {
   L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(itineraryMap);
   mapsInitialized.itinerary = true;
 
-  populateItinerary();
+  loadItinerary();
+  renderItinerary();
   populateInfo();
 }
 
@@ -940,22 +1184,31 @@ function initSectionMap(section) {
 const dayColors = { 1: '#8B2500', 2: '#2D5016', 3: '#D4A574' };
 const dayClasses = { 1: 'marker-day1', 2: 'marker-day2', 3: 'marker-day3' };
 
-function populateItinerary() {
+function renderItinerary() {
   const filtersEl = document.getElementById('dayFilters');
   const timelineEl = document.getElementById('itineraryTimeline');
+
+  // Clear existing markers and polylines
+  itineraryMarkers.forEach(m => {
+    itineraryMap.removeLayer(m.marker);
+    itineraryMap.removeLayer(m.polyline);
+  });
+  itineraryMarkers.length = 0;
+  timelineEl.innerHTML = '';
+
   const bounds = [];
 
   // Day filter buttons
   filtersEl.innerHTML = `
-    <button class="day-btn active" data-day="0">All Days</button>
-    <button class="day-btn" data-day="1">Day 1 &middot; Sun</button>
-    <button class="day-btn" data-day="2">Day 2 &middot; Mon</button>
-    <button class="day-btn" data-day="3">Day 3 &middot; Tue</button>
+    <button class="day-btn${activeFilter===0?' active':''}" data-day="0">All Days</button>
+    <button class="day-btn${activeFilter===1?' active':''}" data-day="1">Day 1 &middot; Sun</button>
+    <button class="day-btn${activeFilter===2?' active':''}" data-day="2">Day 2 &middot; Mon</button>
+    <button class="day-btn${activeFilter===3?' active':''}" data-day="3">Day 3 &middot; Tue</button>
   `;
 
   let globalIdx = 0;
 
-  DAYS.forEach(day => {
+  userItinerary.forEach(day => {
     // Route polyline
     const routeCoords = day.locations.map(l => [l.lat, l.lng]);
     const polyline = L.polyline(routeCoords, { color: dayColors[day.day_number], weight: 3, opacity: 0.5, dashArray: '8 6' }).addTo(itineraryMap);
@@ -1008,6 +1261,7 @@ function populateItinerary() {
           ${i < day.locations.length - 1 ? '<div class="timeline-connector"></div>' : ''}
         </div>
         <div class="timeline-card">
+          <button class="timeline-remove" title="Remove">&times;</button>
           <div class="timeline-card-header">
             <h4>${loc.name}</h4>
             <span class="timeline-time">${loc.time}</span>
@@ -1018,12 +1272,50 @@ function populateItinerary() {
           <div class="timeline-notes">${loc.notes}</div>
         </div>
       `;
-      item.addEventListener('click', () => {
+      // Click card → fly to marker
+      item.addEventListener('click', (e) => {
+        if (e.target.closest('.timeline-remove') || e.target.closest('.time-edit-input')) return;
         document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
         item.classList.add('active');
         itineraryMap.flyTo([loc.lat, loc.lng], 16, { duration: 0.8 });
         marker.openPopup();
       });
+
+      // Remove button
+      item.querySelector('.timeline-remove').addEventListener('click', (e) => {
+        e.stopPropagation();
+        const dayObj = userItinerary.find(d => d.day_number === day.day_number);
+        dayObj.locations.splice(i, 1);
+        saveItinerary();
+        renderItinerary();
+        showToast('Removed from itinerary');
+      });
+
+      // Time editing
+      item.querySelector('.timeline-time').addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (item.querySelector('.time-edit-input')) return;
+        const timeSpan = e.currentTarget;
+        const input = document.createElement('input');
+        input.type = 'time';
+        input.className = 'time-edit-input';
+        input.value = timeTo24(loc.time);
+        timeSpan.replaceWith(input);
+        input.focus();
+        const commit = () => {
+          if (input.value) {
+            loc.time = timeTo12(input.value);
+            const dObj = userItinerary.find(d => d.day_number === day.day_number);
+            dObj.locations.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+            saveItinerary();
+            renderItinerary();
+            showToast('Time updated');
+          }
+        };
+        input.addEventListener('blur', commit);
+        input.addEventListener('keydown', (ke) => { if (ke.key === 'Enter') { ke.preventDefault(); input.blur(); } });
+      });
+
       timelineEl.appendChild(item);
     });
   });
@@ -1040,6 +1332,12 @@ function populateItinerary() {
       filterItinerary(day);
     });
   });
+
+  // Apply current filter
+  if (activeFilter !== 0) filterItinerary(activeFilter);
+
+  // Show/hide reset button
+  document.getElementById('resetBtn').style.display = localStorage.getItem('fmuth_itinerary') ? '' : 'none';
 }
 
 function filterItinerary(day) {
@@ -1110,8 +1408,10 @@ function populateRestaurants() {
       <div class="card-notes">${r.notes}</div>
       <div class="card-address">&#128205; ${r.address}</div>
       ${r.tags ? `<div class="card-tags">${r.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+      <button class="add-to-day-btn" data-type="restaurant" data-idx="${i}">+ Add to Day</button>
     `;
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.add-to-day-btn')) return;
       document.querySelectorAll('#restaurantGrid .card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       restaurantMap.flyTo([r.lat, r.lng], 16, { duration: 0.8 });
@@ -1166,8 +1466,10 @@ function populateSweets() {
       <div class="card-notes">${s.notes}</div>
       <div class="card-address">&#128205; ${s.address}</div>
       ${s.tags ? `<div class="card-tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
+      <button class="add-to-day-btn" data-type="sweet" data-idx="${i}">+ Add to Day</button>
     `;
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.add-to-day-btn')) return;
       document.querySelectorAll('#sweetsGrid .card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       sweetsMap.flyTo([s.lat, s.lng], 17, { duration: 0.8 });
@@ -1209,8 +1511,10 @@ function populateActivities() {
       <div class="card-notes">${a.notes}</div>
       <div class="card-address">&#128205; ${a.address}</div>
       ${a.goodFor ? `<div class="card-tags"><span class="tag">${a.goodFor}</span></div>` : ''}
+      <button class="add-to-day-btn" data-type="activity" data-idx="${i}">+ Add to Day</button>
     `;
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.add-to-day-btn')) return;
       document.querySelectorAll('#activitiesGrid .card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       activitiesMap.flyTo([a.lat, a.lng], 15, { duration: 0.8 });
@@ -1282,6 +1586,99 @@ function populateInfo() {
     grid.appendChild(card);
   });
 }
+
+/* ═══════════════════════════════════════════
+   DAY PICKER & TOAST
+   ═══════════════════════════════════════════ */
+let pickerData = null;
+
+function showDayPicker(type, idx) {
+  const sources = { restaurant: RESTAURANTS, sweet: SWEETS, activity: ACTIVITIES };
+  const item = sources[type][idx];
+  pickerData = { item, type };
+  const overlay = document.getElementById('dayPickerOverlay');
+  overlay.querySelector('.day-picker-name').textContent = item.name;
+  overlay.querySelectorAll('.day-picker-day').forEach(d => d.classList.remove('selected'));
+  overlay.querySelector('.day-picker-day[data-day="1"]').classList.add('selected');
+  overlay.querySelector('#pickerTime').value = '12:00';
+  overlay.classList.add('show');
+}
+
+function hideDayPicker() {
+  document.getElementById('dayPickerOverlay').classList.remove('show');
+  pickerData = null;
+}
+
+function confirmAddToDay() {
+  if (!pickerData) return;
+  const overlay = document.getElementById('dayPickerOverlay');
+  const selectedDay = overlay.querySelector('.day-picker-day.selected');
+  if (!selectedDay) return;
+  const dayNum = parseInt(selectedDay.dataset.day);
+  const timeVal = overlay.querySelector('#pickerTime').value;
+  const time12 = timeTo12(timeVal);
+  const { item, type } = pickerData;
+  const loc = {
+    name: item.name, lat: item.lat, lng: item.lng,
+    address: item.address, notes: item.notes,
+    time: time12, duration: 30,
+    rating: item.rating, ratingCount: item.ratingCount,
+    cost: item.cost, category: type,
+    cuisine: item.cuisine, price: item.price,
+    freeSamples: item.freeSamples, highlight: item.highlight
+  };
+  const dayObj = userItinerary.find(d => d.day_number === dayNum);
+  dayObj.locations.push(loc);
+  dayObj.locations.sort((a, b) => timeToMinutes(a.time) - timeToMinutes(b.time));
+  saveItinerary();
+  hideDayPicker();
+  renderItinerary();
+  showToast(`Added to Day ${dayNum}`);
+}
+
+function showToast(msg) {
+  const toast = document.querySelector('#toastContainer .toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+function resetItinerary() {
+  localStorage.removeItem('fmuth_itinerary');
+  userItinerary = JSON.parse(JSON.stringify(DAYS));
+  renderItinerary();
+  showToast('Reset to default');
+}
+
+// Day picker day selection
+document.querySelectorAll('.day-picker-day').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.day-picker-day').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  });
+});
+
+// Close overlay on background click
+document.getElementById('dayPickerOverlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) hideDayPicker();
+});
+
+// Confirm/cancel buttons
+document.getElementById('pickerConfirm').addEventListener('click', confirmAddToDay);
+document.getElementById('pickerCancel').addEventListener('click', hideDayPicker);
+
+// Reset button
+document.getElementById('resetBtn').addEventListener('click', resetItinerary);
+
+// Add-to-day button delegation
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('.add-to-day-btn');
+  if (btn) {
+    e.stopPropagation();
+    showDayPicker(btn.dataset.type, parseInt(btn.dataset.idx));
+  }
+});
 
 /* ═══════════════════════════════════════════
    NAVIGATION
