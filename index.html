@@ -758,35 +758,34 @@ const DAYS = [
     day_number: 1, title: "Sunday: Arrive & Explore Before Check-In",
     narrative: "Arrive around noon and hit the town before your 4pm check-in. Bronner's opens at noon on Sundays — perfect timing. Stroll Main Street, grab lunch, then check in and splash until bedtime.",
     locations: [
-      { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12–5:30pm. Strollers available. Kids will love the lights and displays. Budget ~45–60 min.", time: "12:00 PM", duration: 60 },
-      { name: "Visitor & Welcome Center", lat: 43.3278156, lng: -83.7396648, address: "635 S Main St, Frankenmuth, MI 48734", notes: "Grab the FREE coupon book and pick up the Gnome Scavenger Hunt guide. Sunday hours 12–5pm.", time: "1:15 PM", duration: 10 },
-      { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St, Frankenmuth, MI 48734", notes: "Free cheese samples! 270+ varieties including chocolate cheese and cheese shaped like animals. Quick fun stop for kids.", time: "1:30 PM", duration: 15 },
-      { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St, Frankenmuth, MI 48734", notes: "Watch fudge being made right in front of you. Free samples. Right on Main Street.", time: "1:50 PM", duration: 15 },
-      { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", notes: "Louisiana-style beignets with powdered sugar + great coffee. Perfect quick lunch with kids.", time: "2:15 PM", duration: 30 },
-      { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", notes: "40+ indoor shops. Kids love the Mirror Maze, xylophone/drums play area, and SugarHigh Bakery. Good spot to hunt gnomes.", time: "2:50 PM", duration: 50 },
-      { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Check in at 4pm. Waterpark access starts immediately — open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120 },
-      { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75 }
+      { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12–5:30pm. Strollers available. Kids will love the lights and displays. Budget ~45–60 min.", time: "12:00 PM", duration: 60, rating: 4.7, ratingCount: 16781, cost: "FREE", category: "activity" },
+      { name: "Visitor & Welcome Center", lat: 43.3278156, lng: -83.7396648, address: "635 S Main St, Frankenmuth, MI 48734", notes: "Grab the FREE coupon book and pick up the Gnome Scavenger Hunt guide. Sunday hours 12–5pm.", time: "1:15 PM", duration: 10, cost: "FREE", category: "activity" },
+      { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St, Frankenmuth, MI 48734", notes: "Free cheese samples! 270+ varieties including chocolate cheese and cheese shaped like animals. Quick fun stop for kids.", time: "1:30 PM", duration: 15, rating: 4.6, ratingCount: 4874, category: "sweets", freeSamples: true },
+      { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St, Frankenmuth, MI 48734", notes: "Watch fudge being made right in front of you. Free samples. Right on Main Street.", time: "1:50 PM", duration: 15, rating: 4.7, ratingCount: 1109, category: "sweets", freeSamples: true },
+      { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", notes: "Louisiana-style beignets with powdered sugar + great coffee. Perfect quick lunch with kids.", time: "2:15 PM", duration: 30, rating: 4.3, ratingCount: 32, cuisine: "Cajun / Caf\u00e9", price: "$", category: "restaurant" },
+      { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", notes: "40+ indoor shops. Kids love the Mirror Maze, xylophone/drums play area, and SugarHigh Bakery. Good spot to hunt gnomes.", time: "2:50 PM", duration: 50, rating: 4.7, ratingCount: 13742, cost: "Free to browse", category: "activity" },
+      { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Check in at 4pm. Waterpark access starts immediately — open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120, rating: 4.5, category: "activity" },
+      { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75, rating: 4.3, ratingCount: 12631, cuisine: "German / American", price: "$$", category: "restaurant", highlight: true }
     ]
   },
   {
     day_number: 2, title: "Monday: Waterpark Day + Town Fun",
     narrative: "Full waterpark day with breaks to explore town. Mix in mini golf, arcade, and a walk through town for gnome hunting and sweet shops.",
     locations: [
-      { name: "Bavarian Inn Lodge — Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Waterpark 10am–8pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180 },
-      { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00BD S Main St, Frankenmuth, MI 48734", notes: "Midday break from the waterpark. Watch taffy being pulled — mesmerizing for the almost-4-year-old.", time: "1:30 PM", duration: 15 },
-      { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St, Frankenmuth, MI 48734", notes: "40 flavors of Hudsonville ice cream, house-made waffle cones. Great midday treat. Just off Main Street.", time: "2:00 PM", duration: 20 },
-      { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75 }
+      { name: "Bavarian Inn Lodge — Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Waterpark 10am–8pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180, rating: 4.5, cost: "Included with stay", category: "activity" },
+      { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00BD S Main St, Frankenmuth, MI 48734", notes: "Midday break from the waterpark. Watch taffy being pulled — mesmerizing for the almost-4-year-old.", time: "1:30 PM", duration: 15, rating: 4.3, ratingCount: 51, category: "sweets", freeSamples: true },
+      { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St, Frankenmuth, MI 48734", notes: "40 flavors of Hudsonville ice cream, house-made waffle cones. Great midday treat. Just off Main Street.", time: "2:00 PM", duration: 20, rating: 4.6, ratingCount: 400, category: "sweets" },
+      { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75, rating: 4.4, ratingCount: 18879, cuisine: "American / German", price: "$$", category: "restaurant", highlight: true }
     ]
   },
   {
     day_number: 3, title: "Tuesday: Checkout & Drive to Holland via Grand Rapids",
     narrative: "Morning waterpark session, check out by 11am, then head west. Grand Rapids is the perfect pit stop — about 2 hours from Frankenmuth, 35 min from Holland.",
     locations: [
-      { name: "Bavarian Inn Lodge — Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60 },
-      { name: "Birch Run Premium Outlets", lat: 43.246353, lng: -83.7751016, address: "12240 S Beyer Rd, Birch Run, MI 48415", notes: "Optional quick stop — 10 min south on I-75. 100+ outlet stores (Nike, Under Armour, Coach). Opens at 10am.", time: "11:15 AM", duration: 45 },
-      { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "TOP PICK for your kids' ages. Dedicated Just-For-Tots area for the 17-month-old. Little GR mini city, bubbles, Water Works for the almost-4-year-old. Open Tues 9am–4pm. Plan 1.5–2 hrs.", time: "1:30 PM", duration: 120 },
-      { name: "Grand Rapids Public Museum", lat: 42.965528, lng: -85.676715, address: "272 Pearl St NW, Grand Rapids, MI 49504", notes: "Alternative or addition: 1928 carousel ($1–2/ride), Tyrannosaurs exhibit, Backyard Adventures. Walking distance from Children's Museum. Open Tues 9am–5pm.", time: "1:30 PM", duration: 120 },
-      { name: "Frederik Meijer Gardens", lat: 42.9801375, lng: -85.5863723, address: "1000 E Beltline Ave NE, Grand Rapids, MI 49525", notes: "Another option — on the east side of GR so you'd hit it first. Tropical conservatory, children's garden area. Great for stroller walks. Open Tues 9am–9pm.", time: "1:00 PM", duration: 90 }
+      { name: "Bavarian Inn Lodge — Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60, category: "activity" },
+      { name: "Birch Run Premium Outlets", lat: 43.246353, lng: -83.7751016, address: "12240 S Beyer Rd, Birch Run, MI 48415", notes: "Optional quick stop — 10 min south on I-75. 100+ outlet stores (Nike, Under Armour, Coach). Opens at 10am.", time: "11:15 AM", duration: 45, category: "activity" },
+      { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "TOP PICK for your kids' ages. Dedicated Just-For-Tots area for the 17-month-old. Little GR mini city, bubbles, Water Works for the almost-4-year-old. Open Tues 9am–4pm. Plan 1.5–2 hrs.", time: "1:30 PM", duration: 120, rating: 4.5, ratingCount: 0, cost: "Admission fee", category: "activity" },
+      { name: "Grand Rapids Children's Museum — Departure", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "Head home to Holland — only 35 min from Grand Rapids.", time: "3:30 PM", duration: 0 }
     ]
   }
 ];
@@ -899,29 +898,40 @@ const tileAttr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenS
 let itineraryMap, restaurantMap, sweetsMap, activitiesMap;
 const itineraryMarkers = [];
 let activeFilter = 0;
+const mapsInitialized = { itinerary: false, restaurants: false, sweets: false, activities: false };
 
 function initMaps() {
-  // Itinerary map
+  // Only init itinerary map on load (it's visible)
   itineraryMap = L.map('itineraryMap', { scrollWheelZoom: false }).setView([43.32, -83.74], 13);
   L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(itineraryMap);
-
-  // Restaurant map
-  restaurantMap = L.map('restaurantMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 14);
-  L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(restaurantMap);
-
-  // Sweets map
-  sweetsMap = L.map('sweetsMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 15);
-  L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(sweetsMap);
-
-  // Activities map
-  activitiesMap = L.map('activitiesMap', { scrollWheelZoom: false }).setView([43.32, -83.74], 12);
-  L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(activitiesMap);
+  mapsInitialized.itinerary = true;
 
   populateItinerary();
-  populateRestaurants();
-  populateSweets();
-  populateActivities();
   populateInfo();
+}
+
+function initSectionMap(section) {
+  if (mapsInitialized[section]) {
+    // Just invalidate size for already-initialized maps
+    const map = { restaurants: restaurantMap, sweets: sweetsMap, activities: activitiesMap }[section];
+    if (map) setTimeout(() => map.invalidateSize(), 50);
+    return;
+  }
+  mapsInitialized[section] = true;
+
+  if (section === 'restaurants') {
+    restaurantMap = L.map('restaurantMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 14);
+    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(restaurantMap);
+    populateRestaurants();
+  } else if (section === 'sweets') {
+    sweetsMap = L.map('sweetsMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 15);
+    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(sweetsMap);
+    populateSweets();
+  } else if (section === 'activities') {
+    activitiesMap = L.map('activitiesMap', { scrollWheelZoom: false }).setView([43.32, -83.74], 12);
+    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(activitiesMap);
+    populateActivities();
+  }
 }
 
 /* ═══════════════════════════════════════════
@@ -978,6 +988,20 @@ function populateItinerary() {
       item.className = `timeline-item day${day.day_number}`;
       item.dataset.day = day.day_number;
       item.dataset.idx = idx;
+      // Build badges
+      let badges = '';
+      if (loc.highlight) badges += '<span class="badge badge-highlight">Must Try</span> ';
+      if (loc.freeSamples) badges += '<span class="badge badge-samples">Free Samples</span> ';
+      if (loc.cost && loc.cost.toUpperCase().includes('FREE')) badges += '<span class="badge badge-free">Free</span> ';
+      if (loc.cuisine) badges += `<span class="badge badge-price">${loc.cuisine}</span> `;
+      if (loc.price) badges += `<span class="badge badge-price">${loc.price}</span> `;
+
+      // Rating line
+      let ratingHtml = '';
+      if (loc.rating) {
+        ratingHtml = `<div class="card-rating"><span class="stars">${stars(loc.rating)}</span> ${loc.rating}${loc.ratingCount ? ` <span style="color:var(--gray);font-weight:400">(${formatCount(loc.ratingCount)} reviews)</span>` : ''}</div>`;
+      }
+
       item.innerHTML = `
         <div class="timeline-line">
           <div class="timeline-dot"></div>
@@ -988,6 +1012,8 @@ function populateItinerary() {
             <h4>${loc.name}</h4>
             <span class="timeline-time">${loc.time}</span>
           </div>
+          ${badges ? `<div style="margin-bottom:6px">${badges}</div>` : ''}
+          ${ratingHtml}
           <div class="timeline-meta">${loc.duration} min &middot; ${loc.address}</div>
           <div class="timeline-notes">${loc.notes}</div>
         </div>
@@ -1279,12 +1305,10 @@ tabs.forEach(tab => {
       }
     });
 
-    // Invalidate map sizes after showing
+    // Init or refresh maps after showing section
     setTimeout(() => {
       if (target === 'itinerary') itineraryMap.invalidateSize();
-      if (target === 'restaurants') restaurantMap.invalidateSize();
-      if (target === 'sweets') sweetsMap.invalidateSize();
-      if (target === 'activities') activitiesMap.invalidateSize();
+      else initSectionMap(target);
     }, 100);
   });
 });
