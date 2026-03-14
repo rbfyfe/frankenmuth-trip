@@ -1221,10 +1221,10 @@ const DESTINATIONS = {
       heroGradient: 'linear-gradient(175deg, #0A1628 0%, #1B3A5C 35%, #2A5580 65%, #3B7DD8 100%)'
     },
     tabs: [
+      { id: 'mylist', label: 'My List', type: 'mylist' },
       { id: 'restaurants', label: 'Restaurants', type: 'cards', markerClass: 'marker-default', mapZoom: 13, desc: 'The best eats in Chicago.' },
       { id: 'bars', label: 'Bars', type: 'cards', markerClass: 'marker-default', mapZoom: 13, desc: 'Cocktail bars, rooftops, and speakeasies.' },
-      { id: 'activities', label: 'Activities', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Museums, tours, and iconic experiences.' },
-      { id: 'mylist', label: 'My List', type: 'mylist' }
+      { id: 'activities', label: 'Activities', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Museums, tours, and iconic experiences.' }
     ],
     data: {
       restaurants: [
@@ -1233,8 +1233,8 @@ const DESTINATIONS = {
         { name: "Girl & The Goat", lat: 41.8843, lng: -87.6484, address: "809 W Randolph St, Chicago, IL 60607", cuisine: "New American", rating: 4.5, ratingCount: 4200, price: "$$$", hours: "Mon\u2013Thu 4:30\u201310pm, Fri\u2013Sat 4:30\u201311pm, Sun 4:30\u201310pm", notes: "Stephanie Izard's flagship. Bold flavors, creative small plates. Book well in advance.", tags: ["fine dining", "small plates", "celebrity chef"] }
       ],
       bars: [
-        { name: "The Violet Hour", lat: 41.9011, lng: -87.6776, address: "1520 N Damen Ave, Chicago, IL 60622", rating: 4.5, ratingCount: 1800, hours: "Sun\u2013Fri 6pm\u20132am, Sat 6pm\u20133am", notes: "Pioneering cocktail bar in Wicker Park. No sign outside \u2014 look for the door in the mural. No standing, no phones.", tags: ["cocktails", "speakeasy", "wicker park"] },
-        { name: "Cindy's Rooftop", lat: 41.8825, lng: -87.6248, address: "12 S Michigan Ave, Chicago, IL 60603", rating: 4.2, ratingCount: 3400, hours: "Daily 11am\u2013midnight", notes: "Stunning views of Millennium Park and the lake from the Chicago Athletic Association hotel.", tags: ["rooftop", "views", "downtown"] }
+        { name: "The Violet Hour", lat: 41.9011, lng: -87.6776, address: "1520 N Damen Ave, Chicago, IL 60622", cuisine: "Cocktail Bar", rating: 4.5, ratingCount: 1800, hours: "Sun\u2013Fri 6pm\u20132am, Sat 6pm\u20133am", notes: "Pioneering cocktail bar in Wicker Park. No sign outside \u2014 look for the door in the mural. No standing, no phones.", tags: ["cocktails", "speakeasy", "wicker park"] },
+        { name: "Cindy's Rooftop", lat: 41.8825, lng: -87.6248, address: "12 S Michigan Ave, Chicago, IL 60603", cuisine: "Rooftop Bar", rating: 4.2, ratingCount: 3400, hours: "Daily 11am\u2013midnight", notes: "Stunning views of Millennium Park and the lake from the Chicago Athletic Association hotel.", tags: ["rooftop", "views", "downtown"] }
       ],
       activities: [
         { name: "Art Institute of Chicago", lat: 41.8796, lng: -87.6237, address: "111 S Michigan Ave, Chicago, IL 60603", rating: 4.8, ratingCount: 45000, hours: "Thu\u2013Mon 11am\u20136pm", notes: "World-class art museum. Don't miss the Impressionist galleries, American Gothic, and the Thorne Miniature Rooms.", cost: "$25\u2013$35", goodFor: "All ages", tags: ["museum", "art", "iconic"] },
@@ -1261,12 +1261,12 @@ const DESTINATIONS = {
       heroGradient: 'linear-gradient(175deg, #1B4332 0%, #2D6A4F 35%, #40916C 65%, #52B788 100%)'
     },
     tabs: [
+      { id: 'mylist', label: 'My List', type: 'mylist' },
       { id: 'play', label: 'Indoor Play', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Playgrounds, play cafes, and soft play spaces perfect for ages 0\u20136.' },
       { id: 'museums', label: 'Museums', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Children\u2019s museums, hologram zoo, theatre, and unique experiences.' },
       { id: 'active', label: 'Active', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Water parks, bowling, climbing, and trampoline parks.' },
       { id: 'nature', label: 'Nature', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Animals, gardens, farms, and outdoor adventures.' },
-      { id: 'free', label: 'Free', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Free and low-cost outings, events, and crafts.' },
-      { id: 'mylist', label: 'My List', type: 'mylist' }
+      { id: 'free', label: 'Free', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Free and low-cost outings, events, and crafts.' }
     ],
     data: {
       play: [
@@ -1274,7 +1274,7 @@ const DESTINATIONS = {
         { name: "Kids Empire Deerfield", lat: 42.170, lng: -87.844, address: "405 Lake Cook Rd, Deerfield, IL 60015", rating: 4.7, ratingCount: 506, hours: "Sat 10am\u201310pm", notes: "Same Kids Empire format. Spacious, very clean. Car rides available for $3 card. No food service, snacks only.", cost: "~$18/child", goodFor: "Ages 1\u201312", tags: ["indoor playground", "toddler zone", "all-day pass", "~20 min"] },
         { name: "Time Out Party & Play", lat: 42.219, lng: -87.969, address: "204 Hawthorn Ctr, Vernon Hills, IL 60061", rating: 5.0, ratingCount: 285, hours: "Sat 10am\u20137:30pm", notes: "Sensory room with busy boards and educational play panels. Fully netted, safe for roaming toddlers. Ball pits, colorful tube structures. Same mall as Hologram Zoo. Reviewers specifically praise it for ages 1\u20133. Check hours \u2014 may close for private parties.", cost: "~$15/child", goodFor: "Ages 0\u20135", tags: ["sensory play", "toddler favorite", "hawthorn mall", "~8 min"] },
         { name: "The Hangout", lat: 42.286, lng: -87.953, address: "777 N Milwaukee Ave, Libertyville, IL 60048", rating: 4.8, ratingCount: 28, hours: "Sat 9am\u20131pm", notes: "Right in Libertyville. Slides, gymnastics rings, kitchen play area, open running space. Smaller and cozy. Owner is praised for being welcoming. Short Saturday hours \u2014 arrive early.", cost: "~$15/child", goodFor: "Ages 0\u20136", tags: ["libertyville", "cozy", "short hours", "~2 min"] },
-        { name: "Kids Clubhouse", lat: 42.340, lng: -88.040, address: "405 S Illinois 83, Grayslake, IL 60030", rating: 5.0, ratingCount: 30, hours: "Sat 10am\u20137pm", notes: "Brand new. Ball pit, slides, carousel, bouncy house, imaginative play stations (kitchen, hospital, restaurant). Multiple rooms with different experiences. Reviewers with 1-year-olds specifically love it.", goodFor: "Ages 0\u20136", tags: ["brand new", "imaginative play", "toddler favorite", "~15 min"] },
+        { name: "Kids Clubhouse", lat: 42.340, lng: -88.040, address: "405 S Illinois 83, Grayslake, IL 60030", rating: 5.0, ratingCount: 30, hours: "Sat 10am\u20137pm", notes: "Brand new. Ball pit, slides, carousel, bouncy house, imaginative play stations (kitchen, hospital, restaurant). Multiple rooms with different experiences. Reviewers with 1-year-olds specifically love it.", cost: "~$15/child", goodFor: "Ages 0\u20136", tags: ["brand new", "imaginative play", "toddler favorite", "~15 min"] },
         { name: "Lava Island", lat: 42.170, lng: -88.048, address: "20771 N Rand Rd, Kildeer, IL 60047", rating: 4.8, ratingCount: 200, hours: "Sat 9am\u201310pm", notes: "30,000 sq ft tropical-themed indoor playground. Dedicated toddler zone for ages 0\u20134. Trampolines, foam pits, tricycle track, volcano slide. Adults can climb alongside kids (6ft+ clearance). Opened Feb 2026. Socks required ($3.50).", goodFor: "Ages 0\u201314", tags: ["huge", "toddler zone", "trampolines", "new 2026", "~20 min"] },
         { name: "2 Hours of Freedom", lat: 42.158, lng: -87.962, address: "1425 Busch Pkwy, Buffalo Grove, IL 60089", rating: 4.9, ratingCount: 24, hours: "Sat 9am\u20139pm", notes: "Inflatable playground with dedicated toddler zone. Bounce houses, slides, obstacle courses. Extremely clean per every review. Memberships available.", cost: "~$15\u201318/child", goodFor: "Ages 1\u201312", tags: ["inflatables", "toddler zone", "very clean", "~20 min"] },
         { name: "Yu Kids Island", lat: 42.219, lng: -87.970, address: "401 Hawthorn Ctr, Vernon Hills, IL 60061", hours: "Sat \u2014 varies", notes: "Small indoor playground at Hawthorn Mall. Slides, small bounce house, balloon floating pit. Socks required. Combine with Hologram Zoo in same mall.", cost: "~$10/kid", goodFor: "Ages 0\u20136", tags: ["hawthorn mall", "quick stop", "budget", "~8 min"] },
@@ -1484,6 +1484,7 @@ function loadDestination(destId) {
   if (!dest) { renderLanding(); return; }
 
   currentDest = dest;
+  activeFilter = 0;
   destroyAllMaps();
   applyTheme(dest.theme);
 
@@ -1512,15 +1513,15 @@ function loadDestination(destId) {
   });
   navInner.innerHTML = navHtml;
 
-  // Sections
+  // Sections — build full HTML string first, then assign once
   const container = document.getElementById('sectionsContainer');
-  container.innerHTML = '';
+  let sectionsHtml = '';
 
   dest.tabs.forEach((tab, i) => {
     const hidden = i > 0 ? ' section-hidden' : '';
 
     if (tab.type === 'itinerary') {
-      container.innerHTML += `
+      sectionsHtml += `
         <section class="section${hidden}" id="section-${tab.id}">
           <div class="section-header-row">
             <h2 class="section-title">${dest.itineraryTitle || 'Itinerary'}</h2>
@@ -1533,7 +1534,7 @@ function loadDestination(destId) {
         </section>
       `;
     } else if (tab.type === 'cards') {
-      container.innerHTML += `
+      sectionsHtml += `
         <section class="section${hidden}" id="section-${tab.id}">
           <h2 class="section-title">${tab.label}</h2>
           <p class="section-desc">${tab.desc || ''}</p>
@@ -1543,7 +1544,7 @@ function loadDestination(destId) {
         </section>
       `;
     } else if (tab.type === 'info') {
-      container.innerHTML += `
+      sectionsHtml += `
         <section class="section${hidden}" id="section-${tab.id}">
           <h2 class="section-title">Practical Info</h2>
           <p class="section-desc">Everything you need to know for a smooth trip.</p>
@@ -1557,7 +1558,7 @@ function loadDestination(destId) {
         </section>
       `;
     } else if (tab.type === 'mylist') {
-      container.innerHTML += `
+      sectionsHtml += `
         <section class="section${hidden}" id="section-${tab.id}">
           <h2 class="section-title">My List</h2>
           <p class="section-desc">Places you want to check out.</p>
@@ -1567,6 +1568,8 @@ function loadDestination(destId) {
       `;
     }
   });
+
+  container.innerHTML = sectionsHtml;
 
   // Footer
   document.getElementById('appFooter').textContent = dest.footerText || '';
@@ -2172,6 +2175,7 @@ function refreshBookmarkButtons() {
 let pickerData = null;
 
 function showDayPicker(type, idx) {
+  if (!userItinerary) return;
   const data = currentDest.data[type];
   if (!data) return;
   const item = data[idx];
@@ -2281,18 +2285,18 @@ document.addEventListener('click', (e) => {
     hideDayPicker();
     return;
   }
+
+  // Reset button
+  if (e.target.closest('#resetBtn')) {
+    resetItinerary();
+    return;
+  }
 });
 
 // Confirm/cancel day picker
 document.getElementById('pickerConfirm').addEventListener('click', confirmAddToDay);
 document.getElementById('pickerCancel').addEventListener('click', hideDayPicker);
 
-// Reset button (using delegation since it's dynamically created)
-document.addEventListener('click', (e) => {
-  if (e.target.closest('#resetBtn')) {
-    resetItinerary();
-  }
-});
 
 /* ═══════════════════════════════════════════
    HASH ROUTING
