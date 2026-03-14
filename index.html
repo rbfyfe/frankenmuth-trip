@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Frankenmuth Family Trip · March 1–3, 2026</title>
+<title>My Travel Guide</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
@@ -16,6 +16,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
+  --primary: #8B2500;
+  --primary-light: #A83210;
+  --accent: #2D5016;
+  --accent-light: #3A6B1E;
   --red: #8B2500;
   --red-light: #A83210;
   --green: #2D5016;
@@ -48,9 +52,94 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; display: block; }
-a { color: var(--red); text-decoration: none; }
+a { color: var(--primary); text-decoration: none; }
 a:hover { text-decoration: underline; }
 button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+
+/* ═══════════════════════════════════════════
+   LANDING PAGE
+   ═══════════════════════════════════════════ */
+.landing {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  background: var(--ivory);
+}
+.landing-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 800;
+  color: var(--brown);
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.landing-subtitle {
+  font-size: 1rem;
+  color: var(--gray);
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.landing-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 700px;
+}
+@media (min-width: 540px) {
+  .landing-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.dest-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 220px;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  color: #FFF;
+  text-decoration: none;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: var(--shadow-lg);
+}
+.dest-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(44,24,16,0.18); text-decoration: none; }
+.dest-card-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  margin-bottom: 0.5rem;
+}
+.dest-card-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.dest-card-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.75rem;
+}
+.dest-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.dest-card-stat {
+  font-size: 0.72rem;
+  font-weight: 500;
+  background: rgba(255,255,255,0.15);
+  padding: 4px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+}
 
 /* ═══════════════════════════════════════════
    HERO
@@ -64,7 +153,6 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   justify-content: center;
   text-align: center;
   padding: 3rem 1.5rem 4rem;
-  background: linear-gradient(175deg, #3A1A0A 0%, #5C2E14 35%, #8B4726 65%, var(--red) 100%);
   overflow: hidden;
 }
 .hero::before {
@@ -72,8 +160,8 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 20% 80%, rgba(212,165,116,0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 20%, rgba(139,37,0,0.2) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 80%, rgba(255,255,255,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0,0,0,0.1) 0%, transparent 50%);
   pointer-events: none;
 }
 .hero::after {
@@ -174,6 +262,19 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   margin: 0 auto;
 }
 .nav-inner::-webkit-scrollbar { display: none; }
+.nav-back {
+  display: flex;
+  align-items: center;
+  padding: 14px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  white-space: nowrap;
+  text-decoration: none;
+  border-right: 1px solid var(--gray-light);
+  flex-shrink: 0;
+}
+.nav-back:hover { text-decoration: none; color: var(--primary-light); background: rgba(0,0,0,0.02); }
 .nav-tab {
   flex: 1;
   min-width: max-content;
@@ -194,13 +295,28 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   transform: translateX(-50%);
   width: 0;
   height: 3px;
-  background: var(--red);
+  background: var(--primary);
   border-radius: 3px 3px 0 0;
   transition: width 0.25s;
 }
-.nav-tab.active { color: var(--red); }
+.nav-tab.active { color: var(--primary); }
 .nav-tab.active::after { width: 60%; }
 .nav-tab:hover { color: var(--brown); }
+.nav-tab .tab-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 50px;
+  background: var(--primary);
+  color: #FFF;
+  font-size: 0.65rem;
+  font-weight: 700;
+  margin-left: 5px;
+  vertical-align: middle;
+}
 
 /* ═══════════════════════════════════════════
    SECTIONS
@@ -258,9 +374,10 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .marker-day1 { background: var(--red); }
 .marker-day2 { background: var(--green); }
 .marker-day3 { background: var(--wood); color: var(--brown); }
-.marker-restaurant { background: var(--red); }
+.marker-restaurant { background: var(--primary); }
 .marker-sweet { background: var(--pink); }
-.marker-activity { background: var(--green); }
+.marker-activity { background: var(--accent); }
+.marker-default { background: var(--primary); }
 .marker-icon.active { transform: scale(1.3); box-shadow: 0 0 0 4px rgba(139,37,0,0.3), 0 2px 8px rgba(0,0,0,0.3); }
 
 /* ═══════════════════════════════════════════
@@ -373,7 +490,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   margin-bottom: 6px;
 }
 .timeline-item:hover .timeline-card { box-shadow: var(--shadow-lg); border-color: var(--cream); }
-.timeline-item.active .timeline-card { border-color: var(--red); box-shadow: 0 0 0 3px rgba(139,37,0,0.1); }
+.timeline-item.active .timeline-card { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(139,37,0,0.1); }
 .timeline-card-header {
   display: flex;
   align-items: flex-start;
@@ -389,7 +506,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .timeline-time {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--red);
+  color: var(--primary);
   white-space: nowrap;
   background: rgba(139,37,0,0.06);
   padding: 3px 10px;
@@ -428,7 +545,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   cursor: pointer;
 }
 .card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
-.card.active { border-color: var(--red); }
+.card.active { border-color: var(--primary); }
 .card-name {
   font-size: 1.05rem;
   font-weight: 700;
@@ -495,9 +612,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   letter-spacing: 0.04em;
   white-space: nowrap;
 }
-.badge-highlight { background: var(--red); color: #FFF; }
+.badge-highlight { background: var(--primary); color: #FFF; }
 .badge-warning { background: #F59E0B; color: #78350F; }
-.badge-free { background: var(--green); color: #FFF; }
+.badge-free { background: var(--accent); color: #FFF; }
 .badge-samples { background: var(--pink); color: #FFF; }
 .badge-price { background: var(--cream); color: var(--brown-light); font-weight: 600; }
 
@@ -575,7 +692,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 }
 .checklist-item input[type="checkbox"] {
   margin-top: 3px;
-  accent-color: var(--green);
+  accent-color: var(--accent);
   width: 16px;
   height: 16px;
   cursor: pointer;
@@ -603,7 +720,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .route-item:not(:last-child) { border-bottom: 1px solid rgba(0,0,0,0.06); }
 .route-time {
   font-weight: 700;
-  color: var(--red);
+  color: var(--primary);
 }
 
 /* ═══════════════════════════════════════════
@@ -633,7 +750,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .leaflet-popup-content strong { font-weight: 700; }
 .leaflet-popup-content .popup-time {
   font-size: 0.75rem;
-  color: var(--red);
+  color: var(--primary);
   font-weight: 600;
 }
 .leaflet-popup-content .popup-addr {
@@ -699,9 +816,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-family: var(--font);
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--red);
+  color: var(--primary);
   background: var(--white);
-  border: 1.5px solid var(--red);
+  border: 1.5px solid var(--primary);
   border-radius: var(--radius-sm);
   padding: 3px 8px;
   outline: none;
@@ -715,12 +832,12 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   padding: 7px 16px;
   font-size: 0.78rem;
   font-weight: 600;
-  color: var(--green);
+  color: var(--accent);
   background: rgba(45,80,22,0.08);
   border-radius: 50px;
   transition: all 0.2s;
 }
-.add-to-day-btn:hover { background: rgba(45,80,22,0.18); color: var(--green-light); }
+.add-to-day-btn:hover { background: rgba(45,80,22,0.18); color: var(--accent-light); }
 .day-picker-overlay {
   position: fixed;
   inset: 0;
@@ -764,10 +881,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   line-height: 1.3;
 }
 .day-picker-day:hover { opacity: 0.85; }
-.day-picker-day.selected { color: #FFF; }
-.day-picker-day[data-day="1"].selected { background: var(--red); }
-.day-picker-day[data-day="2"].selected { background: var(--green); }
-.day-picker-day[data-day="3"].selected { background: var(--wood); color: var(--brown); }
+.day-picker-day.selected { color: #FFF; background: var(--primary); }
 .day-picker-day small { font-weight: 400; font-size: 0.7rem; }
 .day-picker-time {
   display: flex;
@@ -799,7 +913,7 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-size: 0.82rem;
   font-weight: 600;
   color: #FFF;
-  background: var(--green);
+  background: var(--accent);
   transition: opacity 0.2s;
 }
 .day-picker-confirm:hover { opacity: 0.85; }
@@ -844,242 +958,333 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   justify-content: space-between;
   margin-bottom: 0.5rem;
 }
+
+/* ═══════════════════════════════════════════
+   MY LIST (Explorer format)
+   ═══════════════════════════════════════════ */
+.bookmark-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(0,0,0,0.04);
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+.bookmark-btn:hover { background: rgba(0,0,0,0.08); }
+.bookmark-btn.saved { color: #FFF; background: var(--primary); }
+.bookmark-btn.saved:hover { opacity: 0.85; }
+
+.mylist-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--gray);
+}
+.mylist-empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+.mylist-empty h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 0.5rem;
+}
+.mylist-empty p {
+  font-size: 0.9rem;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.mylist-group {
+  margin-bottom: 2rem;
+}
+.mylist-group-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--cream);
+  text-transform: capitalize;
+}
+.mylist-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  padding: 7px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #DC2626;
+  background: #FEE2E2;
+  border-radius: 50px;
+  transition: all 0.2s;
+}
+.mylist-remove:hover { background: #FECACA; }
 </style>
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
-<section class="hero">
-  <div class="hero-badge">&#127795; Family Adventure</div>
-  <h1>Frankenmuth<br>Family Trip</h1>
-  <p class="hero-subtitle">March 1–3, 2026 &middot; Michigan's Little Bavaria</p>
-  <div class="hero-stats">
-    <span class="hero-stat">3 Days</span>
-    <span class="hero-stat">2 Kids</span>
-    <span class="hero-stat">1 Waterpark</span>
-    <span class="hero-stat">Endless Chicken Dinners</span>
-  </div>
-  <div class="scroll-hint">&#8595;</div>
-</section>
+<!-- ═══════════ LANDING ═══════════ -->
+<div id="landing"></div>
 
-<!-- ═══════════ NAV ═══════════ -->
-<nav class="nav" id="mainNav">
-  <div class="nav-inner">
-    <button class="nav-tab active" data-section="itinerary">Itinerary</button>
-    <button class="nav-tab" data-section="restaurants">Restaurants</button>
-    <button class="nav-tab" data-section="sweets">Sweets</button>
-    <button class="nav-tab" data-section="activities">Activities</button>
-    <button class="nav-tab" data-section="info">Info</button>
-  </div>
-</nav>
+<!-- ═══════════ APP ═══════════ -->
+<div id="app" style="display:none">
+  <section class="hero" id="appHero"></section>
+  <nav class="nav" id="mainNav">
+    <div class="nav-inner" id="navInner"></div>
+  </nav>
+  <div id="sectionsContainer"></div>
 
-<!-- ═══════════ ITINERARY ═══════════ -->
-<section class="section" id="section-itinerary">
-  <div class="section-header-row">
-    <h2 class="section-title">Day-by-Day Itinerary</h2>
-    <button class="reset-btn" id="resetBtn" style="display:none">&#8634; Reset</button>
-  </div>
-  <p class="section-desc">A fun-packed family getaway to Michigan's Little Bavaria with two young kids, finishing with a stop in Grand Rapids on the drive home.</p>
-  <div class="map-container"><div id="itineraryMap"></div></div>
-  <div class="day-filters" id="dayFilters"></div>
-  <div class="timeline" id="itineraryTimeline"></div>
-</section>
-
-<!-- ═══════════ RESTAURANTS ═══════════ -->
-<section class="section section-hidden" id="section-restaurants">
-  <h2 class="section-title">Restaurant Guide</h2>
-  <p class="section-desc">From famous chicken dinners to beignets and pizza — every spot worth eating at.</p>
-  <div class="map-container"><div id="restaurantMap"></div></div>
-  <div class="filter-bar" id="restaurantFilters"></div>
-  <div class="card-grid" id="restaurantGrid"></div>
-</section>
-
-<!-- ═══════════ SWEETS ═══════════ -->
-<section class="section section-hidden" id="section-sweets">
-  <h2 class="section-title">Candy &amp; Sweet Shops</h2>
-  <p class="section-desc">Fudge, taffy, chocolate, ice cream — Frankenmuth is a sugar paradise.</p>
-  <div class="map-container"><div id="sweetsMap"></div></div>
-  <div class="card-grid" id="sweetsGrid"></div>
-</section>
-
-<!-- ═══════════ ACTIVITIES ═══════════ -->
-<section class="section section-hidden" id="section-activities">
-  <h2 class="section-title">Kid-Friendly Activities</h2>
-  <p class="section-desc">Waterparks, scavenger hunts, museums, and more — all perfect for little ones.</p>
-  <div class="map-container"><div id="activitiesMap"></div></div>
-  <div class="card-grid" id="activitiesGrid"></div>
-</section>
-
-<!-- ═══════════ PRACTICAL INFO ═══════════ -->
-<section class="section section-hidden" id="section-info">
-  <h2 class="section-title">Practical Info</h2>
-  <p class="section-desc">Everything you need to know for a smooth trip.</p>
-  <div class="info-grid" id="infoGrid"></div>
-  <div class="route-info">
-    <h4 style="font-size:0.9rem;font-weight:700;margin-bottom:12px;">&#128663; Drive Times</h4>
-    <div class="route-item"><span>Frankenmuth &#8594; Grand Rapids</span><span class="route-time">~2 hours</span></div>
-    <div class="route-item"><span>Grand Rapids &#8594; Holland</span><span class="route-time">~35 min</span></div>
-    <div class="route-item"><span>Frankenmuth &#8594; Holland (direct)</span><span class="route-time">~2.5–3 hours</span></div>
-  </div>
-</section>
-
-<!-- Day Picker Overlay -->
-<div class="day-picker-overlay" id="dayPickerOverlay">
-  <div class="day-picker">
-    <h3>Add to Itinerary</h3>
-    <p class="day-picker-sub"><span class="day-picker-name"></span></p>
-    <div class="day-picker-days">
-      <button class="day-picker-day selected" data-day="1">Day 1<br><small>Sun</small></button>
-      <button class="day-picker-day" data-day="2">Day 2<br><small>Mon</small></button>
-      <button class="day-picker-day" data-day="3">Day 3<br><small>Tue</small></button>
-    </div>
-    <div class="day-picker-time">
-      <label>Time</label>
-      <input type="time" id="pickerTime" value="12:00">
-    </div>
-    <div class="day-picker-actions">
-      <button class="day-picker-cancel" id="pickerCancel">Cancel</button>
-      <button class="day-picker-confirm" id="pickerConfirm">Add</button>
+  <!-- Day Picker Overlay -->
+  <div class="day-picker-overlay" id="dayPickerOverlay">
+    <div class="day-picker">
+      <h3>Add to Itinerary</h3>
+      <p class="day-picker-sub"><span class="day-picker-name"></span></p>
+      <div class="day-picker-days" id="dayPickerDays"></div>
+      <div class="day-picker-time">
+        <label>Time</label>
+        <input type="time" id="pickerTime" value="12:00">
+      </div>
+      <div class="day-picker-actions">
+        <button class="day-picker-cancel" id="pickerCancel">Cancel</button>
+        <button class="day-picker-confirm" id="pickerConfirm">Add</button>
+      </div>
     </div>
   </div>
+  <div class="toast-container" id="toastContainer"><div class="toast"></div></div>
+  <footer class="footer" id="appFooter"></footer>
 </div>
-<div class="toast-container" id="toastContainer"><div class="toast"></div></div>
-
-<footer class="footer">
-  Made with care for the family trip &middot; Frankenmuth 2026
-</footer>
 
 <script>
 /* ═══════════════════════════════════════════
-   DATA
+   DESTINATIONS REGISTRY
    ═══════════════════════════════════════════ */
-const DAYS = [
-  {
-    day_number: 1, title: "Sunday: Arrive & Explore Before Check-In",
-    narrative: "Arrive around noon and hit the town before your 4pm check-in. Bronner's opens at noon on Sundays — perfect timing. Stroll Main Street, grab lunch, then check in and splash until bedtime.",
-    locations: [
-      { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12–5:30pm. Strollers available. Kids will love the lights and displays. Budget ~45–60 min.", time: "12:00 PM", duration: 60, rating: 4.7, ratingCount: 16781, cost: "FREE", category: "activity" },
-      { name: "Visitor & Welcome Center", lat: 43.3278156, lng: -83.7396648, address: "635 S Main St, Frankenmuth, MI 48734", notes: "Grab the FREE coupon book and pick up the Gnome Scavenger Hunt guide. Sunday hours 12–5pm.", time: "1:15 PM", duration: 10, cost: "FREE", category: "activity" },
-      { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St, Frankenmuth, MI 48734", notes: "Free cheese samples! 270+ varieties including chocolate cheese and cheese shaped like animals. Quick fun stop for kids.", time: "1:30 PM", duration: 15, rating: 4.6, ratingCount: 4874, category: "sweets", freeSamples: true },
-      { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St, Frankenmuth, MI 48734", notes: "Watch fudge being made right in front of you. Free samples. Right on Main Street.", time: "1:50 PM", duration: 15, rating: 4.7, ratingCount: 1109, category: "sweets", freeSamples: true },
-      { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", notes: "Louisiana-style beignets with powdered sugar + great coffee. Perfect quick lunch with kids.", time: "2:15 PM", duration: 30, rating: 4.3, ratingCount: 32, cuisine: "Cajun / Caf\u00e9", price: "$", category: "restaurant" },
-      { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", notes: "40+ indoor shops. Kids love the Mirror Maze, xylophone/drums play area, and SugarHigh Bakery. Good spot to hunt gnomes.", time: "2:50 PM", duration: 50, rating: 4.7, ratingCount: 13742, cost: "Free to browse", category: "activity" },
-      { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Check in at 4pm. Waterpark access starts immediately — open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120, rating: 4.5, category: "activity" },
-      { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75, rating: 4.3, ratingCount: 12631, cuisine: "German / American", price: "$$", category: "restaurant", highlight: true }
-    ]
+const DESTINATIONS = {
+  frankenmuth: {
+    id: 'frankenmuth',
+    name: 'Frankenmuth',
+    title: 'Frankenmuth<br>Family Trip',
+    subtitle: 'March 1\u20133, 2026 \u00b7 Michigan\u2019s Little Bavaria',
+    badge: '\ud83c\udf33 Family Adventure',
+    heroStats: ['3 Days', '2 Kids', '1 Waterpark', 'Endless Chicken Dinners'],
+    format: 'itinerary',
+    mapCenter: [43.32, -83.74],
+    mapZoom: 13,
+    theme: {
+      primary: '#8B2500', primaryLight: '#A83210',
+      accent: '#2D5016', accentLight: '#3A6B1E',
+      heroGradient: 'linear-gradient(175deg, #3A1A0A 0%, #5C2E14 35%, #8B4726 65%, #8B2500 100%)'
+    },
+    tabs: [
+      { id: 'itinerary', label: 'Itinerary', type: 'itinerary' },
+      { id: 'restaurants', label: 'Restaurants', type: 'cards', markerClass: 'marker-restaurant', mapZoom: 14, desc: 'From famous chicken dinners to beignets and pizza \u2014 every spot worth eating at.' },
+      { id: 'sweets', label: 'Sweets', type: 'cards', markerClass: 'marker-sweet', mapZoom: 15, desc: 'Fudge, taffy, chocolate, ice cream \u2014 Frankenmuth is a sugar paradise.' },
+      { id: 'activities', label: 'Activities', type: 'cards', markerClass: 'marker-activity', mapZoom: 12, desc: 'Waterparks, scavenger hunts, museums, and more \u2014 all perfect for little ones.' },
+      { id: 'info', label: 'Info', type: 'info' }
+    ],
+    itineraryTitle: 'Day-by-Day Itinerary',
+    itineraryDesc: 'A fun-packed family getaway to Michigan\u2019s Little Bavaria with two young kids, finishing with a stop in Grand Rapids on the drive home.',
+    data: {
+      days: [
+        {
+          day_number: 1, title: "Sunday: Arrive & Explore Before Check-In",
+          narrative: "Arrive around noon and hit the town before your 4pm check-in. Bronner\u2019s opens at noon on Sundays \u2014 perfect timing. Stroll Main Street, grab lunch, then check in and splash until bedtime.",
+          locations: [
+            { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12\u20135:30pm. Strollers available. Kids will love the lights and displays. Budget ~45\u201360 min.", time: "12:00 PM", duration: 60, rating: 4.7, ratingCount: 16781, cost: "FREE", category: "activity" },
+            { name: "Visitor & Welcome Center", lat: 43.3278156, lng: -83.7396648, address: "635 S Main St, Frankenmuth, MI 48734", notes: "Grab the FREE coupon book and pick up the Gnome Scavenger Hunt guide. Sunday hours 12\u20135pm.", time: "1:15 PM", duration: 10, cost: "FREE", category: "activity" },
+            { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St, Frankenmuth, MI 48734", notes: "Free cheese samples! 270+ varieties including chocolate cheese and cheese shaped like animals. Quick fun stop for kids.", time: "1:30 PM", duration: 15, rating: 4.6, ratingCount: 4874, category: "sweets", freeSamples: true },
+            { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St, Frankenmuth, MI 48734", notes: "Watch fudge being made right in front of you. Free samples. Right on Main Street.", time: "1:50 PM", duration: 15, rating: 4.7, ratingCount: 1109, category: "sweets", freeSamples: true },
+            { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", notes: "Louisiana-style beignets with powdered sugar + great coffee. Perfect quick lunch with kids.", time: "2:15 PM", duration: 30, rating: 4.3, ratingCount: 32, cuisine: "Cajun / Caf\u00e9", price: "$", category: "restaurant" },
+            { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", notes: "40+ indoor shops. Kids love the Mirror Maze, xylophone/drums play area, and SugarHigh Bakery. Good spot to hunt gnomes.", time: "2:50 PM", duration: 50, rating: 4.7, ratingCount: 13742, cost: "Free to browse", category: "activity" },
+            { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Check in at 4pm. Waterpark access starts immediately \u2014 open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120, rating: 4.5, category: "activity" },
+            { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75, rating: 4.3, ratingCount: 12631, cuisine: "German / American", price: "$$", category: "restaurant", highlight: true }
+          ]
+        },
+        {
+          day_number: 2, title: "Monday: Waterpark Day + Town Fun",
+          narrative: "Full waterpark day with breaks to explore town. Mix in mini golf, arcade, and a walk through town for gnome hunting and sweet shops.",
+          locations: [
+            { name: "Bavarian Inn Lodge \u2014 Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Waterpark 10am\u20138pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180, rating: 4.5, cost: "Included with stay", category: "activity" },
+            { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00bd S Main St, Frankenmuth, MI 48734", notes: "Midday break from the waterpark. Watch taffy being pulled \u2014 mesmerizing for the almost-4-year-old.", time: "1:30 PM", duration: 15, rating: 4.3, ratingCount: 51, category: "sweets", freeSamples: true },
+            { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St, Frankenmuth, MI 48734", notes: "40 flavors of Hudsonville ice cream, house-made waffle cones. Great midday treat. Just off Main Street.", time: "2:00 PM", duration: 20, rating: 4.6, ratingCount: 400, category: "sweets" },
+            { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75, rating: 4.4, ratingCount: 18879, cuisine: "American / German", price: "$$", category: "restaurant", highlight: true }
+          ]
+        },
+        {
+          day_number: 3, title: "Tuesday: Checkout & Drive to Holland via Grand Rapids",
+          narrative: "Morning waterpark session, check out by 11am, then head west. Grand Rapids is the perfect pit stop \u2014 about 2 hours from Frankenmuth, 35 min from Holland.",
+          locations: [
+            { name: "Bavarian Inn Lodge \u2014 Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60, category: "activity" },
+            { name: "Birch Run Premium Outlets", lat: 43.246353, lng: -83.7751016, address: "12240 S Beyer Rd, Birch Run, MI 48415", notes: "Optional quick stop \u2014 10 min south on I-75. 100+ outlet stores (Nike, Under Armour, Coach). Opens at 10am.", time: "11:15 AM", duration: 45, category: "activity" },
+            { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "TOP PICK for your kids' ages. Dedicated Just-For-Tots area for the 17-month-old. Little GR mini city, bubbles, Water Works for the almost-4-year-old. Open Tues 9am\u20134pm. Plan 1.5\u20132 hrs.", time: "1:30 PM", duration: 120, rating: 4.5, ratingCount: 0, cost: "Admission fee", category: "activity" },
+            { name: "Grand Rapids Children's Museum \u2014 Departure", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "Head home to Holland \u2014 only 35 min from Grand Rapids.", time: "3:30 PM", duration: 0 }
+          ]
+        }
+      ],
+      restaurants: [
+        { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", cuisine: "German / American", rating: 4.3, ratingCount: 12631, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "Famous family-style chicken dinner. Giant platters, German decor, staff in traditional attire. Kids' menu available.", tags: ["chicken dinner","family-style","german","kids menu"], highlight: true },
+        { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", cuisine: "American / German", rating: 4.4, ratingCount: 18879, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "The other famous chicken dinner spot. Similar family-style experience. Explore the bakery & gift shops downstairs.", tags: ["chicken dinner","family-style","bakery","kids menu"], highlight: true },
+        { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", cuisine: "Cajun / Caf\u00e9", rating: 4.3, ratingCount: 32, price: "$", hours: "Varies", notes: "Louisiana-style beignets, gumbo, caf\u00e9 au lait. Quick & easy with kids. Two locations.", tags: ["beignets","coffee","quick bite","cajun"] },
+        { name: "La Cr\u00eape du Jour", lat: 43.3235818, lng: -83.7397406, address: "925 S Main St H7 (River Place)", cuisine: "French / Cr\u00eapes", rating: 4.5, ratingCount: 1346, price: "$", hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Sweet & savory crepes at River Place. Gluten-free options. Kids love the cookie dough crepe.", tags: ["crepes","gluten-free","river place","quick bite"] },
+        { name: "Pasty Haus", lat: 43.3239861, lng: -83.739832, address: "925 S Main St G2 (River Place)", cuisine: "Michigan / Comfort", rating: 4.4, ratingCount: 477, price: "$$", hours: "Sun\u2013Thu 11am\u20136pm, Fri\u2013Sat 11am\u20138pm", notes: "Pasties, brats, bubble tea at River Place. Vegan options. Good quick lunch.", tags: ["pasties","vegan options","bubble tea","river place"] },
+        { name: "T.Dub's Pizzeria & Pub", lat: 43.3285098, lng: -83.7393061, address: "565 S Main St, Frankenmuth, MI 48734", cuisine: "Pizza / American", rating: 4.3, ratingCount: 2512, price: "$$", hours: "Sun 8am\u20138pm, Mon\u2013Thu 8am\u20139pm, Fri\u2013Sat 7am\u201311pm", notes: "Pizza, breakfast pizza, burgers. Full kids' menu. Great for casual meals.", tags: ["pizza","breakfast","burgers","kids menu","casual"] },
+        { name: "Tiffany's Food & Spirits", lat: 43.327686, lng: -83.7403254, address: "656 S Main St, Frankenmuth, MI 48734", cuisine: "Italian / American", rating: 4.4, ratingCount: 3651, price: "$$", hours: "Wed\u2013Sun 11am\u201310pm", notes: "Homemade Sicilian pizza, pasta, seafood, kids' menu.", tags: ["italian","pizza","pasta"], warning: "Closed Mon & Tue" },
+        { name: "Frankenmuth Brewery", lat: 43.3311219, lng: -83.7377741, address: "425 S Main St, Frankenmuth, MI 48734", cuisine: "Brewpub / American", rating: 4.0, ratingCount: 1728, price: "$$", hours: "Thu\u2013Sat 11:30am\u2013varies, Sun 11:30am\u20137pm", notes: "Craft root beer for kids, craft beer for parents. Comfort food.", tags: ["brewery","root beer","comfort food"], warning: "Closed Sun\u2013Wed" }
+      ],
+      sweets: [
+        { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St", rating: 4.7, ratingCount: 1109, hours: "Sun\u2013Thu 10am\u20137pm, Fri\u2013Sat 10am\u20138pm", notes: "Watch fudge being made on marble slabs. Free samples! A must-stop.", tags: ["fudge","free samples","watch them make it"], freeSamples: true },
+        { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00bd S Main St", rating: 4.3, ratingCount: 51, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Watch taffy being pulled on vintage machines. Free samples. Mesmerizing for kids.", tags: ["taffy","free samples","watch them make it"], freeSamples: true },
+        { name: "Zak & Mac's Chocolate Haus", lat: 43.328006, lng: -83.7401821, address: "636 S Main St", rating: 4.4, ratingCount: 230, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Handmade chocolates, chocolate-covered strawberries, cocoa bombs. Kids love the chocolate dinosaurs.", tags: ["chocolate","handmade","cocoa bombs"] },
+        { name: "SugarHigh Bakery", lat: 43.3240242, lng: -83.7396641, address: "925 S Main St G1 (River Place)", rating: 4.6, ratingCount: 1045, hours: "Sun\u2013Thu 11am\u20137pm, Fri\u2013Sat 11am\u20138pm", notes: "Cupcake Wars winner! Creative flavors like maple bacon & blackout. At River Place.", tags: ["cupcakes","bakery","award-winning","river place"] },
+        { name: "SugarRush Sweets & Treats", lat: 43.323807, lng: -83.739519, address: "925 S Main St G3 (River Place)", rating: 4.4, ratingCount: 108, hours: "Sun\u2013Thu 10am\u20137pm, Fri\u2013Sat 10am\u20138pm", notes: "Huge candy selection, milkshakes, ice cream. Vegan options too. At River Place.", tags: ["candy","milkshakes","ice cream","vegan","river place"] },
+        { name: "Rau's Country Store", lat: 43.3275347, lng: -83.7404001, address: "656 S Main St", rating: 4.7, ratingCount: 404, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Old-fashioned candy paradise across 3 floors. Taffy, bulk candy, novelty sweets, squished penny machine.", tags: ["old-fashioned candy","bulk candy","3 floors","novelty"] },
+        { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St", rating: 4.6, ratingCount: 4874, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Not candy but\u2026 chocolate cheese and free samples of 270+ varieties. A sweet-adjacent must-stop.", tags: ["cheese","chocolate cheese","free samples"], freeSamples: true },
+        { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St", rating: 4.6, ratingCount: 400, hours: "Varies seasonally", notes: "40 Hudsonville ice cream flavors, house-made waffle cones. Perfect post-waterpark treat.", tags: ["ice cream","waffle cones","hudsonville"] }
+      ],
+      activities: [
+        { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", rating: 4.7, ratingCount: 16781, hours: "Mon\u2013Sat 9am\u20135:30pm, Sun 12\u20135:30pm", notes: "World's largest Christmas store. FREE admission. 1.5 football fields of ornaments. Strollers available. Free personalization in Section 8.", cost: "FREE", goodFor: "All ages" },
+        { name: "Gnome Scavenger Hunt", lat: 43.3278156, lng: -83.7396648, address: "Start at Visitor Center, 635 S Main St", notes: "40+ gnomes hidden throughout downtown shops. Find 15 for a prize! Pick up guide at Visitor Center. The almost-4-year-old will love this.", cost: "FREE", goodFor: "Toddlers & up" },
+        { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", rating: 4.7, ratingCount: 13742, hours: "Sun\u2013Thu 11am\u20136pm, Fri\u2013Sat 11am\u20138pm", notes: "40+ indoor shops. Ultimate Mirror Maze, xylophone/drums play area for kids. Also has SugarHigh Bakery and multiple sweet shops.", cost: "Free to browse", goodFor: "All ages" },
+        { name: "Bavarian Blast Waterpark", lat: 43.325915, lng: -83.736793, address: "Bavarian Inn Lodge, 1 Covered Bridge Ln", rating: 4.5, hours: "Sun\u2013Thu 10am\u20138pm, Fri\u2013Sat 10am\u20139pm", notes: "Michigan's biggest indoor waterpark (170,000 sq ft). Always 80\u00b0F. Wave pool, Not So Lazy River, toddler slides. Kids under 48\" must wear lifejackets.", cost: "Included with stay", goodFor: "All ages" },
+        { name: "Family Fun Center", lat: 43.325915, lng: -83.736793, address: "Bavarian Inn Lodge, 1 Covered Bridge Ln", notes: "180+ arcade games, 18-hole indoor mini golf, mini bowling, Build-A-Bear Workshop. Laser tag & ropes course require 42\" minimum.", cost: "Pay per activity", goodFor: "Almost-4 especially" },
+        { name: "Holz Br\u00fccke Covered Bridge", lat: 43.3269, lng: -83.7418, address: "Connects downtown to Bavarian Inn", notes: "Wooden covered bridge \u2014 quick photo op, kids love walking through it.", cost: "FREE", goodFor: "All ages" },
+        { name: "Bronner's Christmas Lane", lat: 43.335, lng: -83.753, address: "Near Bronner's Christmas Wonderland", notes: "Half-mile outdoor light display with 100,000+ lights. Illuminated nightly year-round. Great pajama drive after dinner!", cost: "FREE", goodFor: "All ages \u2014 from the car" },
+        { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", rating: 4.5, hours: "Tues 9am\u20134pm", notes: "Tuesday pit stop. Two floors of hands-on exhibits. Dedicated Just-For-Tots area for the 17-month-old. Water Works, bubbles for the almost-4-year-old. Bring change of clothes.", cost: "Admission fee", goodFor: "Ages 0\u201310" }
+      ],
+      practical: {
+        waterpark: [
+          "Waterpark access: 4pm check-in day through checkout morning",
+          "Hours: Sun\u2013Thu 10am\u20138pm, Fri\u2013Sat 10am\u20139pm",
+          "Always 80\u00b0F inside with glass walls/roof for natural light",
+          "Kids under 48\" MUST wear lifejackets at all times",
+          "Toddler slides: Kinder Blast (36\"+), Buttered Noodle",
+          "Wave pool has gentle shore area perfect for little ones",
+          "Not So Lazy River \u2014 Bavarian twist on lazy river",
+          "Swim-up bar for parents (bring physical ID)",
+          "No outside food/beverages (concessions available)",
+          "Towel rental available \u2014 $25 fee if not returned"
+        ],
+        gnomeHunt: [
+          "40+ gnomes hidden in downtown shops",
+          "Pick up the guide at the Visitor & Welcome Center",
+          "Find at least 15 gnomes to earn a prize!",
+          "Great ongoing activity while walking Main Street",
+          "The almost-4-year-old will love searching for them"
+        ],
+        freeStuff: [
+          "Coupon book at Visitor Center (significant savings)",
+          "Bronner's Christmas Wonderland admission",
+          "Gnome Scavenger Hunt guide at Visitor Center",
+          "Cheese Haus samples (270+ varieties)",
+          "Fudge Kitchen samples",
+          "Taffy Kitchen samples",
+          "Bronner's 25 Christmas Lane light display (nightly)",
+          "Walking the Holz Br\u00fccke Covered Bridge"
+        ],
+        packing: [
+          "Swimsuits & swim diapers for the 17-month-old",
+          "Change of clothes (for Water Works in GR)",
+          "Stroller (though Bronner's has loaners)",
+          "Physical ID for swim-up bar",
+          "Comfortable walking shoes for Main Street"
+        ]
+      },
+      routeInfo: [
+        { route: 'Frankenmuth \u2192 Grand Rapids', time: '~2 hours' },
+        { route: 'Grand Rapids \u2192 Holland', time: '~35 min' },
+        { route: 'Frankenmuth \u2192 Holland (direct)', time: '~2.5\u20133 hours' }
+      ]
+    },
+    footerText: 'Made with care for the family trip \u00b7 Frankenmuth 2026'
   },
-  {
-    day_number: 2, title: "Monday: Waterpark Day + Town Fun",
-    narrative: "Full waterpark day with breaks to explore town. Mix in mini golf, arcade, and a walk through town for gnome hunting and sweet shops.",
-    locations: [
-      { name: "Bavarian Inn Lodge — Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Waterpark 10am–8pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180, rating: 4.5, cost: "Included with stay", category: "activity" },
-      { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00BD S Main St, Frankenmuth, MI 48734", notes: "Midday break from the waterpark. Watch taffy being pulled — mesmerizing for the almost-4-year-old.", time: "1:30 PM", duration: 15, rating: 4.3, ratingCount: 51, category: "sweets", freeSamples: true },
-      { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St, Frankenmuth, MI 48734", notes: "40 flavors of Hudsonville ice cream, house-made waffle cones. Great midday treat. Just off Main Street.", time: "2:00 PM", duration: 20, rating: 4.6, ratingCount: 400, category: "sweets" },
-      { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75, rating: 4.4, ratingCount: 18879, cuisine: "American / German", price: "$$", category: "restaurant", highlight: true }
-    ]
-  },
-  {
-    day_number: 3, title: "Tuesday: Checkout & Drive to Holland via Grand Rapids",
-    narrative: "Morning waterpark session, check out by 11am, then head west. Grand Rapids is the perfect pit stop — about 2 hours from Frankenmuth, 35 min from Holland.",
-    locations: [
-      { name: "Bavarian Inn Lodge — Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60, category: "activity" },
-      { name: "Birch Run Premium Outlets", lat: 43.246353, lng: -83.7751016, address: "12240 S Beyer Rd, Birch Run, MI 48415", notes: "Optional quick stop — 10 min south on I-75. 100+ outlet stores (Nike, Under Armour, Coach). Opens at 10am.", time: "11:15 AM", duration: 45, category: "activity" },
-      { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "TOP PICK for your kids' ages. Dedicated Just-For-Tots area for the 17-month-old. Little GR mini city, bubbles, Water Works for the almost-4-year-old. Open Tues 9am–4pm. Plan 1.5–2 hrs.", time: "1:30 PM", duration: 120, rating: 4.5, ratingCount: 0, cost: "Admission fee", category: "activity" },
-      { name: "Grand Rapids Children's Museum — Departure", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "Head home to Holland — only 35 min from Grand Rapids.", time: "3:30 PM", duration: 0 }
-    ]
+
+  chicago: {
+    id: 'chicago',
+    name: 'Chicago',
+    title: 'Chicago<br>City Guide',
+    subtitle: 'The Windy City',
+    badge: '\ud83c\udfd9\ufe0f City Explorer',
+    heroStats: ['Deep Dish', 'Architecture', 'Museums', 'Jazz'],
+    format: 'explorer',
+    mapCenter: [41.8781, -87.6298],
+    mapZoom: 12,
+    theme: {
+      primary: '#1B3A5C', primaryLight: '#2A5580',
+      accent: '#C4372B', accentLight: '#D64A3E',
+      heroGradient: 'linear-gradient(175deg, #0A1628 0%, #1B3A5C 35%, #2A5580 65%, #3B7DD8 100%)'
+    },
+    tabs: [
+      { id: 'restaurants', label: 'Restaurants', type: 'cards', markerClass: 'marker-default', mapZoom: 13, desc: 'The best eats in Chicago.' },
+      { id: 'bars', label: 'Bars', type: 'cards', markerClass: 'marker-default', mapZoom: 13, desc: 'Cocktail bars, rooftops, and speakeasies.' },
+      { id: 'activities', label: 'Activities', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Museums, tours, and iconic experiences.' },
+      { id: 'mylist', label: 'My List', type: 'mylist' }
+    ],
+    data: {
+      restaurants: [
+        { name: "Lou Malnati's Pizzeria", lat: 41.8903, lng: -87.6339, address: "439 N Wells St, Chicago, IL 60654", cuisine: "Deep Dish Pizza", rating: 4.4, ratingCount: 12500, price: "$$", hours: "Sun\u2013Thu 11am\u201310pm, Fri\u2013Sat 11am\u201311pm", notes: "The original Chicago deep dish. Buttercrust is the signature. Multiple locations throughout the city.", tags: ["deep dish", "iconic", "family-friendly"] },
+        { name: "Portillo's", lat: 41.8856, lng: -87.6307, address: "100 W Ontario St, Chicago, IL 60654", cuisine: "Hot Dogs / Italian Beef", rating: 4.3, ratingCount: 8900, price: "$", hours: "Daily 10am\u201310pm", notes: "Legendary Chicago hot dogs and Italian beef sandwiches. The chocolate cake shake is a must.", tags: ["hot dogs", "italian beef", "iconic", "casual"] },
+        { name: "Girl & The Goat", lat: 41.8843, lng: -87.6484, address: "809 W Randolph St, Chicago, IL 60607", cuisine: "New American", rating: 4.5, ratingCount: 4200, price: "$$$", hours: "Mon\u2013Thu 4:30\u201310pm, Fri\u2013Sat 4:30\u201311pm, Sun 4:30\u201310pm", notes: "Stephanie Izard's flagship. Bold flavors, creative small plates. Book well in advance.", tags: ["fine dining", "small plates", "celebrity chef"] }
+      ],
+      bars: [
+        { name: "The Violet Hour", lat: 41.9011, lng: -87.6776, address: "1520 N Damen Ave, Chicago, IL 60622", rating: 4.5, ratingCount: 1800, hours: "Sun\u2013Fri 6pm\u20132am, Sat 6pm\u20133am", notes: "Pioneering cocktail bar in Wicker Park. No sign outside \u2014 look for the door in the mural. No standing, no phones.", tags: ["cocktails", "speakeasy", "wicker park"] },
+        { name: "Cindy's Rooftop", lat: 41.8825, lng: -87.6248, address: "12 S Michigan Ave, Chicago, IL 60603", rating: 4.2, ratingCount: 3400, hours: "Daily 11am\u2013midnight", notes: "Stunning views of Millennium Park and the lake from the Chicago Athletic Association hotel.", tags: ["rooftop", "views", "downtown"] }
+      ],
+      activities: [
+        { name: "Art Institute of Chicago", lat: 41.8796, lng: -87.6237, address: "111 S Michigan Ave, Chicago, IL 60603", rating: 4.8, ratingCount: 45000, hours: "Thu\u2013Mon 11am\u20136pm", notes: "World-class art museum. Don't miss the Impressionist galleries, American Gothic, and the Thorne Miniature Rooms.", cost: "$25\u2013$35", goodFor: "All ages", tags: ["museum", "art", "iconic"] },
+        { name: "Architecture Boat Tour", lat: 41.8888, lng: -87.6243, address: "Michigan Ave & Wacker Dr", rating: 4.8, ratingCount: 22000, hours: "Varies by season", notes: "See Chicago's iconic skyline from the river. Multiple companies run tours from Michigan Ave bridge.", cost: "$40\u2013$55", goodFor: "All ages", tags: ["tour", "architecture", "boat"] },
+        { name: "Millennium Park", lat: 41.8827, lng: -87.6233, address: "201 E Randolph St, Chicago, IL 60602", rating: 4.7, ratingCount: 35000, hours: "Daily 6am\u201311pm", notes: "Cloud Gate (The Bean), Crown Fountain, Lurie Garden. Free outdoor concerts in summer.", cost: "FREE", goodFor: "All ages", tags: ["park", "free", "iconic"] }
+      ]
+    },
+    footerText: 'Your personal Chicago guide'
   }
-];
-
-const RESTAURANTS = [
-  { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", cuisine: "German / American", rating: 4.3, ratingCount: 12631, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "Famous family-style chicken dinner. Giant platters, German decor, staff in traditional attire. Kids' menu available.", tags: ["chicken dinner","family-style","german","kids menu"], highlight: true },
-  { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", cuisine: "American / German", rating: 4.4, ratingCount: 18879, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "The other famous chicken dinner spot. Similar family-style experience. Explore the bakery & gift shops downstairs.", tags: ["chicken dinner","family-style","bakery","kids menu"], highlight: true },
-  { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", cuisine: "Cajun / Caf\u00e9", rating: 4.3, ratingCount: 32, price: "$", hours: "Varies", notes: "Louisiana-style beignets, gumbo, caf\u00e9 au lait. Quick & easy with kids. Two locations.", tags: ["beignets","coffee","quick bite","cajun"] },
-  { name: "La Cr\u00eape du Jour", lat: 43.3235818, lng: -83.7397406, address: "925 S Main St H7 (River Place)", cuisine: "French / Cr\u00eapes", rating: 4.5, ratingCount: 1346, price: "$", hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Sweet & savory crepes at River Place. Gluten-free options. Kids love the cookie dough crepe.", tags: ["crepes","gluten-free","river place","quick bite"] },
-  { name: "Pasty Haus", lat: 43.3239861, lng: -83.739832, address: "925 S Main St G2 (River Place)", cuisine: "Michigan / Comfort", rating: 4.4, ratingCount: 477, price: "$$", hours: "Sun\u2013Thu 11am\u20136pm, Fri\u2013Sat 11am\u20138pm", notes: "Pasties, brats, bubble tea at River Place. Vegan options. Good quick lunch.", tags: ["pasties","vegan options","bubble tea","river place"] },
-  { name: "T.Dub's Pizzeria & Pub", lat: 43.3285098, lng: -83.7393061, address: "565 S Main St, Frankenmuth, MI 48734", cuisine: "Pizza / American", rating: 4.3, ratingCount: 2512, price: "$$", hours: "Sun 8am\u20138pm, Mon\u2013Thu 8am\u20139pm, Fri\u2013Sat 7am\u201311pm", notes: "Pizza, breakfast pizza, burgers. Full kids' menu. Great for casual meals.", tags: ["pizza","breakfast","burgers","kids menu","casual"] },
-  { name: "Tiffany's Food & Spirits", lat: 43.327686, lng: -83.7403254, address: "656 S Main St, Frankenmuth, MI 48734", cuisine: "Italian / American", rating: 4.4, ratingCount: 3651, price: "$$", hours: "Wed\u2013Sun 11am\u201310pm", notes: "Homemade Sicilian pizza, pasta, seafood, kids' menu.", tags: ["italian","pizza","pasta"], warning: "Closed Mon & Tue" },
-  { name: "Frankenmuth Brewery", lat: 43.3311219, lng: -83.7377741, address: "425 S Main St, Frankenmuth, MI 48734", cuisine: "Brewpub / American", rating: 4.0, ratingCount: 1728, price: "$$", hours: "Thu\u2013Sat 11:30am\u2013varies, Sun 11:30am\u20137pm", notes: "Craft root beer for kids, craft beer for parents. Comfort food.", tags: ["brewery","root beer","comfort food"], warning: "Closed Sun\u2013Wed" }
-];
-
-const SWEETS = [
-  { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St", rating: 4.7, ratingCount: 1109, hours: "Sun\u2013Thu 10am\u20137pm, Fri\u2013Sat 10am\u20138pm", notes: "Watch fudge being made on marble slabs. Free samples! A must-stop.", tags: ["fudge","free samples","watch them make it"], freeSamples: true },
-  { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00BD S Main St", rating: 4.3, ratingCount: 51, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Watch taffy being pulled on vintage machines. Free samples. Mesmerizing for kids.", tags: ["taffy","free samples","watch them make it"], freeSamples: true },
-  { name: "Zak & Mac's Chocolate Haus", lat: 43.328006, lng: -83.7401821, address: "636 S Main St", rating: 4.4, ratingCount: 230, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Handmade chocolates, chocolate-covered strawberries, cocoa bombs. Kids love the chocolate dinosaurs.", tags: ["chocolate","handmade","cocoa bombs"] },
-  { name: "SugarHigh Bakery", lat: 43.3240242, lng: -83.7396641, address: "925 S Main St G1 (River Place)", rating: 4.6, ratingCount: 1045, hours: "Sun\u2013Thu 11am\u20137pm, Fri\u2013Sat 11am\u20138pm", notes: "Cupcake Wars winner! Creative flavors like maple bacon & blackout. At River Place.", tags: ["cupcakes","bakery","award-winning","river place"] },
-  { name: "SugarRush Sweets & Treats", lat: 43.323807, lng: -83.739519, address: "925 S Main St G3 (River Place)", rating: 4.4, ratingCount: 108, hours: "Sun\u2013Thu 10am\u20137pm, Fri\u2013Sat 10am\u20138pm", notes: "Huge candy selection, milkshakes, ice cream. Vegan options too. At River Place.", tags: ["candy","milkshakes","ice cream","vegan","river place"] },
-  { name: "Rau's Country Store", lat: 43.3275347, lng: -83.7404001, address: "656 S Main St", rating: 4.7, ratingCount: 404, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Old-fashioned candy paradise across 3 floors. Taffy, bulk candy, novelty sweets, squished penny machine.", tags: ["old-fashioned candy","bulk candy","3 floors","novelty"] },
-  { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St", rating: 4.6, ratingCount: 4874, hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Not candy but\u2026 chocolate cheese and free samples of 270+ varieties. A sweet-adjacent must-stop.", tags: ["cheese","chocolate cheese","free samples"], freeSamples: true },
-  { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St", rating: 4.6, ratingCount: 400, hours: "Varies seasonally", notes: "40 Hudsonville ice cream flavors, house-made waffle cones. Perfect post-waterpark treat.", tags: ["ice cream","waffle cones","hudsonville"] }
-];
-
-const ACTIVITIES = [
-  { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", rating: 4.7, ratingCount: 16781, hours: "Mon\u2013Sat 9am\u20135:30pm, Sun 12\u20135:30pm", notes: "World's largest Christmas store. FREE admission. 1.5 football fields of ornaments. Strollers available. Free personalization in Section 8.", cost: "FREE", goodFor: "All ages" },
-  { name: "Gnome Scavenger Hunt", lat: 43.3278156, lng: -83.7396648, address: "Start at Visitor Center, 635 S Main St", notes: "40+ gnomes hidden throughout downtown shops. Find 15 for a prize! Pick up guide at Visitor Center. The almost-4-year-old will love this.", cost: "FREE", goodFor: "Toddlers & up" },
-  { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", rating: 4.7, ratingCount: 13742, hours: "Sun\u2013Thu 11am\u20136pm, Fri\u2013Sat 11am\u20138pm", notes: "40+ indoor shops. Ultimate Mirror Maze, xylophone/drums play area for kids. Also has SugarHigh Bakery and multiple sweet shops.", cost: "Free to browse", goodFor: "All ages" },
-  { name: "Bavarian Blast Waterpark", lat: 43.325915, lng: -83.736793, address: "Bavarian Inn Lodge, 1 Covered Bridge Ln", rating: 4.5, hours: "Sun\u2013Thu 10am\u20138pm, Fri\u2013Sat 10am\u20139pm", notes: "Michigan's biggest indoor waterpark (170,000 sq ft). Always 80\u00b0F. Wave pool, Not So Lazy River, toddler slides. Kids under 48\" must wear lifejackets.", cost: "Included with stay", goodFor: "All ages" },
-  { name: "Family Fun Center", lat: 43.325915, lng: -83.736793, address: "Bavarian Inn Lodge, 1 Covered Bridge Ln", notes: "180+ arcade games, 18-hole indoor mini golf, mini bowling, Build-A-Bear Workshop. Laser tag & ropes course require 42\" minimum.", cost: "Pay per activity", goodFor: "Almost-4 especially" },
-  { name: "Holz Br\u00fccke Covered Bridge", lat: 43.3269, lng: -83.7418, address: "Connects downtown to Bavarian Inn", notes: "Wooden covered bridge \u2014 quick photo op, kids love walking through it.", cost: "FREE", goodFor: "All ages" },
-  { name: "Bronner's Christmas Lane", lat: 43.335, lng: -83.753, address: "Near Bronner's Christmas Wonderland", notes: "Half-mile outdoor light display with 100,000+ lights. Illuminated nightly year-round. Great pajama drive after dinner!", cost: "FREE", goodFor: "All ages \u2014 from the car" },
-  { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", rating: 4.5, hours: "Tues 9am\u20134pm", notes: "Tuesday pit stop. Two floors of hands-on exhibits. Dedicated Just-For-Tots area for the 17-month-old. Water Works, bubbles for the almost-4-year-old. Bring change of clothes.", cost: "Admission fee", goodFor: "Ages 0\u201310" }
-];
-
-const PRACTICAL = {
-  waterpark: [
-    "Waterpark access: 4pm check-in day through checkout morning",
-    "Hours: Sun\u2013Thu 10am\u20138pm, Fri\u2013Sat 10am\u20139pm",
-    "Always 80\u00b0F inside with glass walls/roof for natural light",
-    "Kids under 48\" MUST wear lifejackets at all times",
-    "Toddler slides: Kinder Blast (36\"+), Buttered Noodle",
-    "Wave pool has gentle shore area perfect for little ones",
-    "Not So Lazy River \u2014 Bavarian twist on lazy river",
-    "Swim-up bar for parents (bring physical ID)",
-    "No outside food/beverages (concessions available)",
-    "Towel rental available \u2014 $25 fee if not returned"
-  ],
-  gnomeHunt: [
-    "40+ gnomes hidden in downtown shops",
-    "Pick up the guide at the Visitor & Welcome Center",
-    "Find at least 15 gnomes to earn a prize!",
-    "Great ongoing activity while walking Main Street",
-    "The almost-4-year-old will love searching for them"
-  ],
-  freeStuff: [
-    "Coupon book at Visitor Center (significant savings)",
-    "Bronner's Christmas Wonderland admission",
-    "Gnome Scavenger Hunt guide at Visitor Center",
-    "Cheese Haus samples (270+ varieties)",
-    "Fudge Kitchen samples",
-    "Taffy Kitchen samples",
-    "Bronner's 25 Christmas Lane light display (nightly)",
-    "Walking the Holz Br\u00fccke Covered Bridge"
-  ],
-  packing: [
-    "Swimsuits & swim diapers for the 17-month-old",
-    "Change of clothes (for Water Works in GR)",
-    "Stroller (though Bronner's has loaners)",
-    "Physical ID for swim-up bar",
-    "Comfortable walking shoes for Main Street"
-  ]
 };
 
 /* ═══════════════════════════════════════════
-   STATE MANAGEMENT
+   GLOBAL STATE
    ═══════════════════════════════════════════ */
-let userItinerary;
+let currentDest = null;
+const maps = {};
+let itineraryMarkers = [];
+let activeFilter = 0;
+let userItinerary = null;
+let cardMarkers = {};
 
-function loadItinerary() {
-  const saved = localStorage.getItem('fmuth_itinerary');
-  if (saved) {
-    try { userItinerary = JSON.parse(saved); }
-    catch(e) { userItinerary = JSON.parse(JSON.stringify(DAYS)); }
-  } else {
-    userItinerary = JSON.parse(JSON.stringify(DAYS));
-  }
+/* ═══════════════════════════════════════════
+   UTILITIES
+   ═══════════════════════════════════════════ */
+function stars(rating) {
+  const full = Math.floor(rating);
+  const half = rating % 1 >= 0.3;
+  let s = '';
+  for (let i = 0; i < full; i++) s += '\u2605';
+  if (half) s += '\u00bd';
+  return s;
 }
 
-function saveItinerary() {
-  localStorage.setItem('fmuth_itinerary', JSON.stringify(userItinerary));
+function createMarkerIcon(cls, label) {
+  return L.divIcon({
+    className: '',
+    html: `<div class="marker-icon ${cls}">${label}</div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+    popupAnchor: [0, -20]
+  });
 }
+
+function formatCount(n) {
+  if (n >= 1000) return (n/1000).toFixed(1).replace(/\.0$/,'') + 'k';
+  return n;
+}
+
+const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+const tileAttr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
 function timeTo24(timeStr) {
   const [time, period] = timeStr.split(' ');
@@ -1106,112 +1311,322 @@ function timeToMinutes(timeStr) {
 }
 
 /* ═══════════════════════════════════════════
-   UTILITIES
+   STORAGE (scoped per destination)
    ═══════════════════════════════════════════ */
-function stars(rating) {
-  const full = Math.floor(rating);
-  const half = rating % 1 >= 0.3;
-  let s = '';
-  for (let i = 0; i < full; i++) s += '\u2605';
-  if (half) s += '\u00BD';
-  return s;
+function loadState(key) {
+  return JSON.parse(localStorage.getItem(`travel_${currentDest.id}_${key}`) || 'null');
 }
 
-function createMarkerIcon(cls, label) {
-  return L.divIcon({
-    className: '',
-    html: `<div class="marker-icon ${cls}">${label}</div>`,
-    iconSize: [32, 32],
-    iconAnchor: [16, 16],
-    popupAnchor: [0, -20]
+function saveState(key, value) {
+  localStorage.setItem(`travel_${currentDest.id}_${key}`, JSON.stringify(value));
+}
+
+function migrateStorage() {
+  // Migrate old fmuth_* keys to travel_frankenmuth_*
+  const old = localStorage.getItem('fmuth_itinerary');
+  if (old) {
+    localStorage.setItem('travel_frankenmuth_itinerary', old);
+    localStorage.removeItem('fmuth_itinerary');
+  }
+  ['free', 'pack'].forEach(k => {
+    const v = localStorage.getItem(`fmuth_${k}`);
+    if (v) {
+      localStorage.setItem(`travel_frankenmuth_${k}`, v);
+      localStorage.removeItem(`fmuth_${k}`);
+    }
   });
 }
 
-function formatCount(n) {
-  if (n >= 1000) return (n/1000).toFixed(1).replace(/\.0$/,'') + 'k';
-  return n;
-}
-
 /* ═══════════════════════════════════════════
-   MAPS
+   MAP HELPERS
    ═══════════════════════════════════════════ */
-const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-const tileAttr = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
-
-let itineraryMap, restaurantMap, sweetsMap, activitiesMap;
-const itineraryMarkers = [];
-let activeFilter = 0;
-const mapsInitialized = { itinerary: false, restaurants: false, sweets: false, activities: false };
-
-function initMaps() {
-  // Only init itinerary map on load (it's visible)
-  itineraryMap = L.map('itineraryMap', { scrollWheelZoom: false }).setView([43.32, -83.74], 13);
-  L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(itineraryMap);
-  mapsInitialized.itinerary = true;
-
-  loadItinerary();
-  renderItinerary();
-  populateInfo();
+function getOrCreateMap(containerId, center, zoom) {
+  if (maps[containerId]) {
+    setTimeout(() => maps[containerId].invalidateSize(), 50);
+    return maps[containerId];
+  }
+  const map = L.map(containerId, { scrollWheelZoom: false }).setView(center, zoom);
+  L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(map);
+  maps[containerId] = map;
+  return map;
 }
 
-function initSectionMap(section) {
-  if (mapsInitialized[section]) {
-    // Just invalidate size for already-initialized maps
-    const map = { restaurants: restaurantMap, sweets: sweetsMap, activities: activitiesMap }[section];
-    if (map) setTimeout(() => map.invalidateSize(), 50);
-    return;
-  }
-  mapsInitialized[section] = true;
-
-  if (section === 'restaurants') {
-    restaurantMap = L.map('restaurantMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 14);
-    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(restaurantMap);
-    populateRestaurants();
-  } else if (section === 'sweets') {
-    sweetsMap = L.map('sweetsMap', { scrollWheelZoom: false }).setView([43.327, -83.739], 15);
-    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(sweetsMap);
-    populateSweets();
-  } else if (section === 'activities') {
-    activitiesMap = L.map('activitiesMap', { scrollWheelZoom: false }).setView([43.32, -83.74], 12);
-    L.tileLayer(tileUrl, { attribution: tileAttr }).addTo(activitiesMap);
-    populateActivities();
-  }
+function destroyAllMaps() {
+  Object.keys(maps).forEach(k => {
+    maps[k].remove();
+    delete maps[k];
+  });
+  itineraryMarkers = [];
+  cardMarkers = {};
 }
 
 /* ═══════════════════════════════════════════
-   ITINERARY
+   LANDING PAGE
+   ═══════════════════════════════════════════ */
+function renderLanding() {
+  document.getElementById('app').style.display = 'none';
+  const landing = document.getElementById('landing');
+  landing.style.display = '';
+
+  let cards = '';
+  Object.values(DESTINATIONS).forEach(dest => {
+    const statsHtml = dest.heroStats.map(s => `<span class="dest-card-stat">${s}</span>`).join('');
+    cards += `
+      <a class="dest-card" href="#${dest.id}" style="background:${dest.theme.heroGradient}">
+        <div class="dest-card-badge">${dest.badge}</div>
+        <div class="dest-card-name">${dest.name}</div>
+        <div class="dest-card-subtitle">${dest.subtitle}</div>
+        <div class="dest-card-stats">${statsHtml}</div>
+      </a>
+    `;
+  });
+
+  landing.innerHTML = `
+    <h1 class="landing-title">My Travel Guide</h1>
+    <p class="landing-subtitle">Where are we going?</p>
+    <div class="landing-grid">${cards}</div>
+  `;
+
+  document.title = 'My Travel Guide';
+}
+
+/* ═══════════════════════════════════════════
+   THEME
+   ═══════════════════════════════════════════ */
+function applyTheme(theme) {
+  const root = document.documentElement;
+  root.style.setProperty('--primary', theme.primary);
+  root.style.setProperty('--primary-light', theme.primaryLight);
+  root.style.setProperty('--accent', theme.accent);
+  root.style.setProperty('--accent-light', theme.accentLight);
+}
+
+/* ═══════════════════════════════════════════
+   DESTINATION LOADING
+   ═══════════════════════════════════════════ */
+function loadDestination(destId) {
+  const dest = DESTINATIONS[destId];
+  if (!dest) { renderLanding(); return; }
+
+  currentDest = dest;
+  destroyAllMaps();
+  applyTheme(dest.theme);
+
+  document.title = `${dest.name} \u2014 My Travel Guide`;
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('app').style.display = '';
+
+  // Hero
+  const hero = document.getElementById('appHero');
+  hero.style.background = dest.theme.heroGradient;
+  hero.innerHTML = `
+    <div class="hero-badge">${dest.badge}</div>
+    <h1>${dest.title}</h1>
+    <p class="hero-subtitle">${dest.subtitle}</p>
+    <div class="hero-stats">${dest.heroStats.map(s => `<span class="hero-stat">${s}</span>`).join('')}</div>
+    <div class="scroll-hint">&#8595;</div>
+  `;
+
+  // Nav
+  const navInner = document.getElementById('navInner');
+  let navHtml = '<a class="nav-back" href="#">\u2190 Trips</a>';
+  dest.tabs.forEach((tab, i) => {
+    const active = i === 0 ? ' active' : '';
+    const badge = tab.type === 'mylist' ? '<span class="tab-badge" id="mylistBadge" style="display:none">0</span>' : '';
+    navHtml += `<button class="nav-tab${active}" data-section="${tab.id}">${tab.label}${badge}</button>`;
+  });
+  navInner.innerHTML = navHtml;
+
+  // Sections
+  const container = document.getElementById('sectionsContainer');
+  container.innerHTML = '';
+
+  dest.tabs.forEach((tab, i) => {
+    const hidden = i > 0 ? ' section-hidden' : '';
+
+    if (tab.type === 'itinerary') {
+      container.innerHTML += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <div class="section-header-row">
+            <h2 class="section-title">${dest.itineraryTitle || 'Itinerary'}</h2>
+            <button class="reset-btn" id="resetBtn" style="display:none">&#8634; Reset</button>
+          </div>
+          <p class="section-desc">${dest.itineraryDesc || ''}</p>
+          <div class="map-container"><div id="map-${dest.id}-${tab.id}"></div></div>
+          <div class="day-filters" id="dayFilters"></div>
+          <div class="timeline" id="itineraryTimeline"></div>
+        </section>
+      `;
+    } else if (tab.type === 'cards') {
+      container.innerHTML += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <h2 class="section-title">${tab.label}</h2>
+          <p class="section-desc">${tab.desc || ''}</p>
+          <div class="map-container"><div id="map-${dest.id}-${tab.id}"></div></div>
+          <div class="filter-bar" id="filters-${tab.id}"></div>
+          <div class="card-grid" id="grid-${tab.id}"></div>
+        </section>
+      `;
+    } else if (tab.type === 'info') {
+      container.innerHTML += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <h2 class="section-title">Practical Info</h2>
+          <p class="section-desc">Everything you need to know for a smooth trip.</p>
+          <div class="info-grid" id="infoGrid"></div>
+          ${dest.data.routeInfo ? `
+            <div class="route-info">
+              <h4 style="font-size:0.9rem;font-weight:700;margin-bottom:12px;">&#128663; Drive Times</h4>
+              ${dest.data.routeInfo.map(r => `<div class="route-item"><span>${r.route}</span><span class="route-time">${r.time}</span></div>`).join('')}
+            </div>
+          ` : ''}
+        </section>
+      `;
+    } else if (tab.type === 'mylist') {
+      container.innerHTML += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <h2 class="section-title">My List</h2>
+          <p class="section-desc">Places you want to check out.</p>
+          <div id="mylistMap" style="display:none"><div class="map-container"><div id="map-${dest.id}-mylist"></div></div></div>
+          <div id="mylistContent"></div>
+        </section>
+      `;
+    }
+  });
+
+  // Footer
+  document.getElementById('appFooter').textContent = dest.footerText || '';
+
+  // Wire up nav tabs
+  wireNavTabs();
+
+  // Init first tab
+  const firstTab = dest.tabs[0];
+  initTab(firstTab);
+}
+
+/* ═══════════════════════════════════════════
+   TAB INITIALIZATION
+   ═══════════════════════════════════════════ */
+function initTab(tab) {
+  if (tab.type === 'itinerary') {
+    const mapId = `map-${currentDest.id}-${tab.id}`;
+    getOrCreateMap(mapId, currentDest.mapCenter, currentDest.mapZoom);
+    loadItinerary();
+    renderItinerary();
+    if (currentDest.data.practical) populateInfo();
+  } else if (tab.type === 'cards') {
+    const mapId = `map-${currentDest.id}-${tab.id}`;
+    const map = getOrCreateMap(mapId, currentDest.mapCenter, tab.mapZoom || currentDest.mapZoom);
+    populateCards(tab.id, currentDest.data[tab.id], tab.markerClass || 'marker-default', map);
+  } else if (tab.type === 'info') {
+    if (currentDest.data.practical) populateInfo();
+  } else if (tab.type === 'mylist') {
+    renderMyList();
+    updateMyListBadge();
+  }
+}
+
+function wireNavTabs() {
+  const navInner = document.getElementById('navInner');
+  navInner.querySelectorAll('.nav-tab').forEach(tabBtn => {
+    tabBtn.addEventListener('click', () => {
+      const target = tabBtn.dataset.section;
+
+      // Update active tab
+      navInner.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      tabBtn.classList.add('active');
+
+      // Show/hide sections
+      currentDest.tabs.forEach(t => {
+        const el = document.getElementById(`section-${t.id}`);
+        if (el) {
+          if (t.id === target) {
+            el.classList.remove('section-hidden');
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            el.classList.add('section-hidden');
+          }
+        }
+      });
+
+      // Init tab if needed
+      const tabConfig = currentDest.tabs.find(t => t.id === target);
+      setTimeout(() => {
+        if (tabConfig) {
+          if (tabConfig.type === 'itinerary') {
+            const mapId = `map-${currentDest.id}-${tabConfig.id}`;
+            if (maps[mapId]) maps[mapId].invalidateSize();
+          } else if (tabConfig.type === 'cards') {
+            const mapId = `map-${currentDest.id}-${tabConfig.id}`;
+            if (!maps[mapId]) {
+              const map = getOrCreateMap(mapId, currentDest.mapCenter, tabConfig.mapZoom || currentDest.mapZoom);
+              populateCards(tabConfig.id, currentDest.data[tabConfig.id], tabConfig.markerClass || 'marker-default', map);
+            } else {
+              maps[mapId].invalidateSize();
+            }
+          } else if (tabConfig.type === 'mylist') {
+            renderMyList();
+          } else if (tabConfig.type === 'info') {
+            if (!document.getElementById('infoGrid').children.length && currentDest.data.practical) {
+              populateInfo();
+            }
+          }
+        }
+      }, 100);
+    });
+  });
+}
+
+/* ═══════════════════════════════════════════
+   ITINERARY (Format A)
    ═══════════════════════════════════════════ */
 const dayColors = { 1: '#8B2500', 2: '#2D5016', 3: '#D4A574' };
 const dayClasses = { 1: 'marker-day1', 2: 'marker-day2', 3: 'marker-day3' };
 
+function loadItinerary() {
+  const saved = loadState('itinerary');
+  if (saved) {
+    userItinerary = saved;
+  } else {
+    userItinerary = JSON.parse(JSON.stringify(currentDest.data.days));
+  }
+}
+
+function saveItinerary() {
+  saveState('itinerary', userItinerary);
+}
+
 function renderItinerary() {
+  const mapId = `map-${currentDest.id}-itinerary`;
+  const map = maps[mapId];
+  if (!map) return;
+
   const filtersEl = document.getElementById('dayFilters');
   const timelineEl = document.getElementById('itineraryTimeline');
 
   // Clear existing markers and polylines
   itineraryMarkers.forEach(m => {
-    itineraryMap.removeLayer(m.marker);
-    itineraryMap.removeLayer(m.polyline);
+    map.removeLayer(m.marker);
+    map.removeLayer(m.polyline);
   });
-  itineraryMarkers.length = 0;
+  itineraryMarkers = [];
   timelineEl.innerHTML = '';
 
   const bounds = [];
 
   // Day filter buttons
-  filtersEl.innerHTML = `
-    <button class="day-btn${activeFilter===0?' active':''}" data-day="0">All Days</button>
-    <button class="day-btn${activeFilter===1?' active':''}" data-day="1">Day 1 &middot; Sun</button>
-    <button class="day-btn${activeFilter===2?' active':''}" data-day="2">Day 2 &middot; Mon</button>
-    <button class="day-btn${activeFilter===3?' active':''}" data-day="3">Day 3 &middot; Tue</button>
-  `;
+  let filterHtml = `<button class="day-btn${activeFilter===0?' active':''}" data-day="0">All Days</button>`;
+  userItinerary.forEach(day => {
+    filterHtml += `<button class="day-btn${activeFilter===day.day_number?' active':''}" data-day="${day.day_number}">Day ${day.day_number}</button>`;
+  });
+  filtersEl.innerHTML = filterHtml;
 
   let globalIdx = 0;
 
   userItinerary.forEach(day => {
     // Route polyline
     const routeCoords = day.locations.map(l => [l.lat, l.lng]);
-    const polyline = L.polyline(routeCoords, { color: dayColors[day.day_number], weight: 3, opacity: 0.5, dashArray: '8 6' }).addTo(itineraryMap);
+    const polyline = L.polyline(routeCoords, { color: dayColors[day.day_number] || '#888', weight: 3, opacity: 0.5, dashArray: '8 6' }).addTo(map);
 
     // Day header in timeline
     const header = document.createElement('div');
@@ -1230,8 +1645,8 @@ function renderItinerary() {
 
       // Map marker
       const marker = L.marker([loc.lat, loc.lng], {
-        icon: createMarkerIcon(dayClasses[day.day_number], i + 1)
-      }).addTo(itineraryMap);
+        icon: createMarkerIcon(dayClasses[day.day_number] || 'marker-default', i + 1)
+      }).addTo(map);
       marker.bindPopup(`<strong>${loc.name}</strong><br><span class="popup-time">${loc.time} &middot; ${loc.duration} min</span><br><span class="popup-addr">${loc.address}</span>`);
 
       itineraryMarkers.push({ marker, polyline, day: day.day_number, idx });
@@ -1241,7 +1656,7 @@ function renderItinerary() {
       item.className = `timeline-item day${day.day_number}`;
       item.dataset.day = day.day_number;
       item.dataset.idx = idx;
-      // Build badges
+
       let badges = '';
       if (loc.highlight) badges += '<span class="badge badge-highlight">Must Try</span> ';
       if (loc.freeSamples) badges += '<span class="badge badge-samples">Free Samples</span> ';
@@ -1249,7 +1664,6 @@ function renderItinerary() {
       if (loc.cuisine) badges += `<span class="badge badge-price">${loc.cuisine}</span> `;
       if (loc.price) badges += `<span class="badge badge-price">${loc.price}</span> `;
 
-      // Rating line
       let ratingHtml = '';
       if (loc.rating) {
         ratingHtml = `<div class="card-rating"><span class="stars">${stars(loc.rating)}</span> ${loc.rating}${loc.ratingCount ? ` <span style="color:var(--gray);font-weight:400">(${formatCount(loc.ratingCount)} reviews)</span>` : ''}</div>`;
@@ -1272,12 +1686,13 @@ function renderItinerary() {
           <div class="timeline-notes">${loc.notes}</div>
         </div>
       `;
-      // Click card → fly to marker
+
+      // Click card -> fly to marker
       item.addEventListener('click', (e) => {
         if (e.target.closest('.timeline-remove') || e.target.closest('.time-edit-input')) return;
         document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
         item.classList.add('active');
-        itineraryMap.flyTo([loc.lat, loc.lng], 16, { duration: 0.8 });
+        map.flyTo([loc.lat, loc.lng], 16, { duration: 0.8 });
         marker.openPopup();
       });
 
@@ -1320,210 +1735,161 @@ function renderItinerary() {
     });
   });
 
-  if (bounds.length) itineraryMap.fitBounds(bounds, { padding: [30, 30] });
+  if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
 
   // Filter button clicks
   filtersEl.querySelectorAll('.day-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       filtersEl.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const day = parseInt(btn.dataset.day);
-      activeFilter = day;
-      filterItinerary(day);
+      const d = parseInt(btn.dataset.day);
+      activeFilter = d;
+      filterItinerary(d);
     });
   });
 
-  // Apply current filter
   if (activeFilter !== 0) filterItinerary(activeFilter);
 
   // Show/hide reset button
-  document.getElementById('resetBtn').style.display = localStorage.getItem('fmuth_itinerary') ? '' : 'none';
+  const resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) {
+    resetBtn.style.display = loadState('itinerary') ? '' : 'none';
+  }
 }
 
 function filterItinerary(day) {
-  const bounds = [];
+  const mapId = `map-${currentDest.id}-itinerary`;
+  const map = maps[mapId];
+  if (!map) return;
 
-  // Show/hide markers and polylines
+  const bounds = [];
   itineraryMarkers.forEach(m => {
     if (day === 0 || m.day === day) {
-      itineraryMap.addLayer(m.marker);
-      itineraryMap.addLayer(m.polyline);
+      map.addLayer(m.marker);
+      map.addLayer(m.polyline);
       bounds.push(m.marker.getLatLng());
     } else {
-      itineraryMap.removeLayer(m.marker);
-      itineraryMap.removeLayer(m.polyline);
+      map.removeLayer(m.marker);
+      map.removeLayer(m.polyline);
     }
   });
 
-  // Show/hide timeline items and day headers
   document.querySelectorAll('.timeline-item, .day-header').forEach(el => {
     const d = parseInt(el.dataset.day);
     el.style.display = (day === 0 || d === day) ? '' : 'none';
   });
 
-  if (bounds.length) itineraryMap.fitBounds(bounds.map(b => [b.lat, b.lng]), { padding: [30, 30] });
+  if (bounds.length) map.fitBounds(bounds.map(b => [b.lat, b.lng]), { padding: [30, 30] });
 }
 
 /* ═══════════════════════════════════════════
-   RESTAURANTS
+   CARDS (consolidated renderer)
    ═══════════════════════════════════════════ */
-const restaurantMarkerMap = [];
+function populateCards(tabId, data, markerClass, map) {
+  if (!data || !data.length) return;
 
-function populateRestaurants() {
-  const grid = document.getElementById('restaurantGrid');
+  const grid = document.getElementById(`grid-${tabId}`);
+  const filtersEl = document.getElementById(`filters-${tabId}`);
+  if (!grid) return;
+  grid.innerHTML = '';
+
+  const isExplorer = currentDest.format === 'explorer';
   const bounds = [];
-  let activeTag = 'all';
+  const markers = [];
 
   // Collect unique tags for filters
-  const allTags = new Set();
-  RESTAURANTS.forEach(r => { if (r.tags) r.tags.forEach(t => allTags.add(t)); });
-  const filtersEl = document.getElementById('restaurantFilters');
-  filtersEl.innerHTML = '<button class="filter-btn active" data-tag="all">All</button>';
-  ['chicken dinner','quick bite','pizza','italian','cajun','brewery'].forEach(tag => {
-    if (allTags.has(tag)) {
+  const tagCounts = {};
+  data.forEach(item => { (item.tags || []).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }); });
+  const topTags = Object.keys(tagCounts).sort((a,b) => tagCounts[b] - tagCounts[a]).slice(0, 8);
+
+  if (filtersEl && topTags.length > 1) {
+    filtersEl.innerHTML = '<button class="filter-btn active" data-tag="all">All</button>';
+    topTags.forEach(tag => {
       filtersEl.innerHTML += `<button class="filter-btn" data-tag="${tag}">${tag}</button>`;
-    }
-  });
+    });
+  } else if (filtersEl) {
+    filtersEl.innerHTML = '';
+  }
 
-  RESTAURANTS.forEach((r, i) => {
-    bounds.push([r.lat, r.lng]);
+  data.forEach((item, i) => {
+    bounds.push([item.lat, item.lng]);
 
-    const marker = L.marker([r.lat, r.lng], {
-      icon: createMarkerIcon('marker-restaurant', i + 1)
-    }).addTo(restaurantMap);
-    marker.bindPopup(`<strong>${r.name}</strong><br><span class="popup-time">${r.cuisine} &middot; ${r.price}</span><br><span class="popup-addr">${r.address}</span>`);
+    const marker = L.marker([item.lat, item.lng], {
+      icon: createMarkerIcon(markerClass, i + 1)
+    }).addTo(map);
+
+    let popupContent = `<strong>${item.name}</strong>`;
+    if (item.cuisine && item.price) popupContent += `<br><span class="popup-time">${item.cuisine} &middot; ${item.price}</span>`;
+    popupContent += `<br><span class="popup-addr">${item.address}</span>`;
+    marker.bindPopup(popupContent);
 
     const card = document.createElement('div');
     card.className = 'card';
-    card.dataset.tags = (r.tags || []).join(',');
-    card.innerHTML = `
-      <div class="card-name">
-        ${r.name}
-        ${r.highlight ? '<span class="badge badge-highlight">Must Try</span>' : ''}
-        ${r.warning ? `<span class="badge badge-warning">${r.warning}</span>` : ''}
-      </div>
-      <div class="card-cuisine">${r.cuisine} &middot; <span class="badge badge-price">${r.price}</span></div>
-      <div class="card-rating"><span class="stars">${stars(r.rating)}</span> ${r.rating} <span style="color:var(--gray);font-weight:400">(${formatCount(r.ratingCount)})</span></div>
-      <div class="card-hours">${r.hours}</div>
-      <div class="card-notes">${r.notes}</div>
-      <div class="card-address">&#128205; ${r.address}</div>
-      ${r.tags ? `<div class="card-tags">${r.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-      <button class="add-to-day-btn" data-type="restaurant" data-idx="${i}">+ Add to Day</button>
-    `;
+    card.dataset.tags = (item.tags || []).join(',');
+    card.dataset.tab = tabId;
+    card.dataset.idx = i;
+
+    // Build card HTML
+    let html = '<div class="card-name">';
+    html += item.name;
+    if (item.highlight) html += ' <span class="badge badge-highlight">Must Try</span>';
+    if (item.warning) html += ` <span class="badge badge-warning">${item.warning}</span>`;
+    if (item.freeSamples) html += ' <span class="badge badge-samples">Free Samples</span>';
+    const isFree = item.cost && (item.cost.toUpperCase().includes('FREE') || item.cost.toLowerCase().includes('included'));
+    if (isFree) html += ' <span class="badge badge-free">Free</span>';
+    html += '</div>';
+
+    if (item.cuisine) html += `<div class="card-cuisine">${item.cuisine}${item.price ? ` &middot; <span class="badge badge-price">${item.price}</span>` : ''}</div>`;
+    if (item.rating) html += `<div class="card-rating"><span class="stars">${stars(item.rating)}</span> ${item.rating} <span style="color:var(--gray);font-weight:400">(${formatCount(item.ratingCount || 0)})</span></div>`;
+    if (item.hours) html += `<div class="card-hours">${item.hours}</div>`;
+    if (item.cost && !isFree) html += `<div class="card-hours" style="color:var(--brown)">${item.cost}</div>`;
+    html += `<div class="card-notes">${item.notes}</div>`;
+    html += `<div class="card-address">&#128205; ${item.address}</div>`;
+    if (item.tags) html += `<div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
+    if (item.goodFor) html += `<div class="card-tags"><span class="tag">${item.goodFor}</span></div>`;
+
+    // Action button
+    if (isExplorer) {
+      const saved = isInMyList(tabId, i);
+      html += `<button class="bookmark-btn${saved ? ' saved' : ''}" data-tab="${tabId}" data-idx="${i}">${saved ? '\u2665 Saved' : '+ Save'}</button>`;
+    } else {
+      html += `<button class="add-to-day-btn" data-type="${tabId}" data-idx="${i}">+ Add to Day</button>`;
+    }
+
+    card.innerHTML = html;
+
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-day-btn')) return;
-      document.querySelectorAll('#restaurantGrid .card').forEach(c => c.classList.remove('active'));
+      if (e.target.closest('.add-to-day-btn') || e.target.closest('.bookmark-btn')) return;
+      grid.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
-      restaurantMap.flyTo([r.lat, r.lng], 16, { duration: 0.8 });
+      map.flyTo([item.lat, item.lng], 16, { duration: 0.8 });
       marker.openPopup();
     });
+
     grid.appendChild(card);
-    restaurantMarkerMap.push({ marker, card, tags: r.tags || [] });
+    markers.push({ marker, card, tags: item.tags || [] });
   });
 
-  if (bounds.length) restaurantMap.fitBounds(bounds, { padding: [30, 30] });
+  cardMarkers[tabId] = markers;
+
+  if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
 
   // Tag filters
-  filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tag = btn.dataset.tag;
-      restaurantMarkerMap.forEach(({ marker, card, tags }) => {
-        const show = tag === 'all' || tags.includes(tag);
-        card.style.display = show ? '' : 'none';
-        if (show) restaurantMap.addLayer(marker);
-        else restaurantMap.removeLayer(marker);
+  if (filtersEl) {
+    filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        filtersEl.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tag = btn.dataset.tag;
+        markers.forEach(({ marker: m, card: c, tags }) => {
+          const show = tag === 'all' || tags.includes(tag);
+          c.style.display = show ? '' : 'none';
+          if (show) map.addLayer(m);
+          else map.removeLayer(m);
+        });
       });
     });
-  });
-}
-
-/* ═══════════════════════════════════════════
-   SWEETS
-   ═══════════════════════════════════════════ */
-function populateSweets() {
-  const grid = document.getElementById('sweetsGrid');
-  const bounds = [];
-
-  SWEETS.forEach((s, i) => {
-    bounds.push([s.lat, s.lng]);
-
-    const marker = L.marker([s.lat, s.lng], {
-      icon: createMarkerIcon('marker-sweet', i + 1)
-    }).addTo(sweetsMap);
-    marker.bindPopup(`<strong>${s.name}</strong><br><span class="popup-addr">${s.address}</span>`);
-
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="card-name">
-        ${s.name}
-        ${s.freeSamples ? '<span class="badge badge-samples">Free Samples</span>' : ''}
-      </div>
-      ${s.rating ? `<div class="card-rating"><span class="stars">${stars(s.rating)}</span> ${s.rating} <span style="color:var(--gray);font-weight:400">(${formatCount(s.ratingCount)})</span></div>` : ''}
-      <div class="card-hours">${s.hours}</div>
-      <div class="card-notes">${s.notes}</div>
-      <div class="card-address">&#128205; ${s.address}</div>
-      ${s.tags ? `<div class="card-tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : ''}
-      <button class="add-to-day-btn" data-type="sweet" data-idx="${i}">+ Add to Day</button>
-    `;
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-day-btn')) return;
-      document.querySelectorAll('#sweetsGrid .card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      sweetsMap.flyTo([s.lat, s.lng], 17, { duration: 0.8 });
-      marker.openPopup();
-    });
-    grid.appendChild(card);
-  });
-
-  if (bounds.length) sweetsMap.fitBounds(bounds, { padding: [30, 30] });
-}
-
-/* ═══════════════════════════════════════════
-   ACTIVITIES
-   ═══════════════════════════════════════════ */
-function populateActivities() {
-  const grid = document.getElementById('activitiesGrid');
-  const bounds = [];
-
-  ACTIVITIES.forEach((a, i) => {
-    bounds.push([a.lat, a.lng]);
-
-    const marker = L.marker([a.lat, a.lng], {
-      icon: createMarkerIcon('marker-activity', i + 1)
-    }).addTo(activitiesMap);
-    marker.bindPopup(`<strong>${a.name}</strong><br><span class="popup-addr">${a.address}</span>`);
-
-    const isFree = a.cost && (a.cost.toUpperCase().includes('FREE') || a.cost.toLowerCase().includes('included'));
-
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-      <div class="card-name">
-        ${a.name}
-        ${isFree ? '<span class="badge badge-free">Free</span>' : ''}
-      </div>
-      ${a.rating ? `<div class="card-rating"><span class="stars">${stars(a.rating)}</span> ${a.rating} <span style="color:var(--gray);font-weight:400">(${formatCount(a.ratingCount || 0)})</span></div>` : ''}
-      ${a.hours ? `<div class="card-hours">${a.hours}</div>` : ''}
-      ${a.cost && !isFree ? `<div class="card-hours" style="color:var(--brown)">${a.cost}</div>` : ''}
-      <div class="card-notes">${a.notes}</div>
-      <div class="card-address">&#128205; ${a.address}</div>
-      ${a.goodFor ? `<div class="card-tags"><span class="tag">${a.goodFor}</span></div>` : ''}
-      <button class="add-to-day-btn" data-type="activity" data-idx="${i}">+ Add to Day</button>
-    `;
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-day-btn')) return;
-      document.querySelectorAll('#activitiesGrid .card').forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      activitiesMap.flyTo([a.lat, a.lng], 15, { duration: 0.8 });
-      marker.openPopup();
-    });
-    grid.appendChild(card);
-  });
-
-  if (bounds.length) activitiesMap.fitBounds(bounds, { padding: [30, 30] });
+  }
 }
 
 /* ═══════════════════════════════════════════
@@ -1531,13 +1897,16 @@ function populateActivities() {
    ═══════════════════════════════════════════ */
 function populateInfo() {
   const grid = document.getElementById('infoGrid');
+  if (!grid || !currentDest.data.practical) return;
+  grid.innerHTML = '';
 
+  const practical = currentDest.data.practical;
   const sections = [
-    { icon: '&#127754;', title: 'Waterpark Tips', items: PRACTICAL.waterpark, type: 'list' },
-    { icon: '&#129497;', title: 'Gnome Scavenger Hunt', items: PRACTICAL.gnomeHunt, type: 'list' },
-    { icon: '&#127873;', title: 'Free Stuff Checklist', items: PRACTICAL.freeStuff, type: 'checklist', key: 'free' },
-    { icon: '&#127890;', title: 'Packing Reminders', items: PRACTICAL.packing, type: 'checklist', key: 'pack' }
-  ];
+    { icon: '&#127754;', title: 'Waterpark Tips', items: practical.waterpark, type: 'list' },
+    { icon: '&#129497;', title: 'Gnome Scavenger Hunt', items: practical.gnomeHunt, type: 'list' },
+    { icon: '&#127873;', title: 'Free Stuff Checklist', items: practical.freeStuff, type: 'checklist', key: 'free' },
+    { icon: '&#127890;', title: 'Packing Reminders', items: practical.packing, type: 'checklist', key: 'pack' }
+  ].filter(s => s.items);
 
   sections.forEach((sec, si) => {
     const card = document.createElement('div');
@@ -1545,7 +1914,7 @@ function populateInfo() {
 
     let bodyHtml = '';
     if (sec.type === 'checklist') {
-      const saved = JSON.parse(localStorage.getItem(`fmuth_${sec.key}`) || '{}');
+      const saved = JSON.parse(localStorage.getItem(`travel_${currentDest.id}_${sec.key}`) || '{}');
       bodyHtml = sec.items.map((item, i) => {
         const checked = saved[i] ? 'checked' : '';
         const checkedClass = saved[i] ? ' checked' : '';
@@ -1569,15 +1938,14 @@ function populateInfo() {
       card.classList.toggle('open');
     });
 
-    // Checklist persistence
     if (sec.type === 'checklist') {
       card.querySelectorAll('input[type="checkbox"]').forEach(cb => {
         cb.addEventListener('change', () => {
           const key = cb.dataset.key;
           const idx = cb.dataset.idx;
-          const saved = JSON.parse(localStorage.getItem(`fmuth_${key}`) || '{}');
+          const saved = JSON.parse(localStorage.getItem(`travel_${currentDest.id}_${key}`) || '{}');
           saved[idx] = cb.checked;
-          localStorage.setItem(`fmuth_${key}`, JSON.stringify(saved));
+          localStorage.setItem(`travel_${currentDest.id}_${key}`, JSON.stringify(saved));
           cb.closest('.checklist-item').classList.toggle('checked', cb.checked);
         });
       });
@@ -1588,19 +1956,170 @@ function populateInfo() {
 }
 
 /* ═══════════════════════════════════════════
+   MY LIST (Explorer Format)
+   ═══════════════════════════════════════════ */
+function getMyList() {
+  return loadState('mylist') || [];
+}
+
+function addToMyList(tabId, idx) {
+  const list = getMyList();
+  if (!list.find(e => e.tab === tabId && e.idx === idx)) {
+    list.push({ tab: tabId, idx, addedAt: Date.now() });
+    saveState('mylist', list);
+  }
+  updateMyListBadge();
+}
+
+function removeFromMyList(tabId, idx) {
+  let list = getMyList();
+  list = list.filter(e => !(e.tab === tabId && e.idx === idx));
+  saveState('mylist', list);
+  updateMyListBadge();
+}
+
+function isInMyList(tabId, idx) {
+  return getMyList().some(e => e.tab === tabId && e.idx === idx);
+}
+
+function updateMyListBadge() {
+  const badge = document.getElementById('mylistBadge');
+  if (!badge) return;
+  const count = getMyList().length;
+  badge.textContent = count;
+  badge.style.display = count > 0 ? '' : 'none';
+}
+
+function renderMyList() {
+  const content = document.getElementById('mylistContent');
+  const mapWrapper = document.getElementById('mylistMap');
+  if (!content) return;
+
+  const list = getMyList();
+  updateMyListBadge();
+
+  if (list.length === 0) {
+    if (mapWrapper) mapWrapper.style.display = 'none';
+    content.innerHTML = `
+      <div class="mylist-empty">
+        <div class="mylist-empty-icon">&#128203;</div>
+        <h3>Your list is empty</h3>
+        <p>Browse the other tabs and save places you want to visit</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Group by tab
+  const groups = {};
+  list.forEach(entry => {
+    if (!groups[entry.tab]) groups[entry.tab] = [];
+    groups[entry.tab].push(entry);
+  });
+
+  // Show map
+  if (mapWrapper) {
+    mapWrapper.style.display = '';
+    const mapId = `map-${currentDest.id}-mylist`;
+    const map = getOrCreateMap(mapId, currentDest.mapCenter, currentDest.mapZoom);
+
+    // Clear old markers
+    map.eachLayer(layer => { if (layer instanceof L.Marker) map.removeLayer(layer); });
+
+    const bounds = [];
+    let markerIdx = 1;
+    list.forEach(entry => {
+      const item = currentDest.data[entry.tab] && currentDest.data[entry.tab][entry.idx];
+      if (item) {
+        bounds.push([item.lat, item.lng]);
+        const marker = L.marker([item.lat, item.lng], {
+          icon: createMarkerIcon('marker-default', markerIdx++)
+        }).addTo(map);
+        marker.bindPopup(`<strong>${item.name}</strong><br><span class="popup-addr">${item.address}</span>`);
+      }
+    });
+    if (bounds.length) setTimeout(() => map.fitBounds(bounds, { padding: [30, 30] }), 150);
+  }
+
+  // Render grouped cards
+  let html = '';
+  Object.keys(groups).forEach(tabId => {
+    const tabConfig = currentDest.tabs.find(t => t.id === tabId);
+    const label = tabConfig ? tabConfig.label : tabId;
+    html += `<div class="mylist-group"><h3 class="mylist-group-title">${label}</h3><div class="card-grid">`;
+
+    groups[tabId].forEach(entry => {
+      const item = currentDest.data[entry.tab] && currentDest.data[entry.tab][entry.idx];
+      if (!item) return;
+
+      let cardHtml = '<div class="card-name">' + item.name;
+      const isFree = item.cost && (item.cost.toUpperCase().includes('FREE') || item.cost.toLowerCase().includes('included'));
+      if (isFree) cardHtml += ' <span class="badge badge-free">Free</span>';
+      cardHtml += '</div>';
+      if (item.cuisine) cardHtml += `<div class="card-cuisine">${item.cuisine}${item.price ? ` &middot; <span class="badge badge-price">${item.price}</span>` : ''}</div>`;
+      if (item.rating) cardHtml += `<div class="card-rating"><span class="stars">${stars(item.rating)}</span> ${item.rating} <span style="color:var(--gray);font-weight:400">(${formatCount(item.ratingCount || 0)})</span></div>`;
+      if (item.hours) cardHtml += `<div class="card-hours">${item.hours}</div>`;
+      cardHtml += `<div class="card-notes">${item.notes}</div>`;
+      cardHtml += `<div class="card-address">&#128205; ${item.address}</div>`;
+      cardHtml += `<button class="mylist-remove" data-tab="${entry.tab}" data-idx="${entry.idx}">&#10005; Remove</button>`;
+
+      html += `<div class="card">${cardHtml}</div>`;
+    });
+
+    html += '</div></div>';
+  });
+  content.innerHTML = html;
+
+  // Wire remove buttons
+  content.querySelectorAll('.mylist-remove').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      removeFromMyList(btn.dataset.tab, parseInt(btn.dataset.idx));
+      // Update bookmark button in cards tab if visible
+      refreshBookmarkButtons();
+      renderMyList();
+      showToast('Removed from list');
+    });
+  });
+}
+
+function refreshBookmarkButtons() {
+  document.querySelectorAll('.bookmark-btn').forEach(btn => {
+    const saved = isInMyList(btn.dataset.tab, parseInt(btn.dataset.idx));
+    btn.className = saved ? 'bookmark-btn saved' : 'bookmark-btn';
+    btn.innerHTML = saved ? '\u2665 Saved' : '+ Save';
+  });
+}
+
+/* ═══════════════════════════════════════════
    DAY PICKER & TOAST
    ═══════════════════════════════════════════ */
 let pickerData = null;
 
 function showDayPicker(type, idx) {
-  const sources = { restaurant: RESTAURANTS, sweet: SWEETS, activity: ACTIVITIES };
-  const item = sources[type][idx];
+  const data = currentDest.data[type];
+  if (!data) return;
+  const item = data[idx];
   pickerData = { item, type };
   const overlay = document.getElementById('dayPickerOverlay');
   overlay.querySelector('.day-picker-name').textContent = item.name;
-  overlay.querySelectorAll('.day-picker-day').forEach(d => d.classList.remove('selected'));
-  overlay.querySelector('.day-picker-day[data-day="1"]').classList.add('selected');
-  overlay.querySelector('#pickerTime').value = '12:00';
+
+  // Generate day buttons from itinerary data
+  const daysContainer = document.getElementById('dayPickerDays');
+  daysContainer.innerHTML = '';
+  userItinerary.forEach((day, i) => {
+    const btn = document.createElement('button');
+    btn.className = `day-picker-day${i === 0 ? ' selected' : ''}`;
+    btn.dataset.day = day.day_number;
+    btn.innerHTML = `Day ${day.day_number}`;
+    btn.addEventListener('click', () => {
+      daysContainer.querySelectorAll('.day-picker-day').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+    });
+    daysContainer.appendChild(btn);
+  });
+
+  document.getElementById('pickerTime').value = '12:00';
   overlay.classList.add('show');
 }
 
@@ -1645,75 +2164,81 @@ function showToast(msg) {
 }
 
 function resetItinerary() {
-  localStorage.removeItem('fmuth_itinerary');
-  userItinerary = JSON.parse(JSON.stringify(DAYS));
+  localStorage.removeItem(`travel_${currentDest.id}_itinerary`);
+  userItinerary = JSON.parse(JSON.stringify(currentDest.data.days));
+  activeFilter = 0;
   renderItinerary();
   showToast('Reset to default');
 }
 
-// Day picker day selection
-document.querySelectorAll('.day-picker-day').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.day-picker-day').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
-  });
+/* ═══════════════════════════════════════════
+   EVENT DELEGATION
+   ═══════════════════════════════════════════ */
+document.addEventListener('click', (e) => {
+  // Add to Day buttons (itinerary format)
+  const addBtn = e.target.closest('.add-to-day-btn');
+  if (addBtn) {
+    e.stopPropagation();
+    showDayPicker(addBtn.dataset.type, parseInt(addBtn.dataset.idx));
+    return;
+  }
+
+  // Bookmark buttons (explorer format)
+  const bookmarkBtn = e.target.closest('.bookmark-btn');
+  if (bookmarkBtn) {
+    e.stopPropagation();
+    const tab = bookmarkBtn.dataset.tab;
+    const idx = parseInt(bookmarkBtn.dataset.idx);
+    if (isInMyList(tab, idx)) {
+      removeFromMyList(tab, idx);
+      showToast('Removed from list');
+    } else {
+      addToMyList(tab, idx);
+      const count = getMyList().length;
+      showToast(`Saved to My List (${count})`);
+    }
+    refreshBookmarkButtons();
+    return;
+  }
+
+  // Day picker overlay background click
+  if (e.target === document.getElementById('dayPickerOverlay')) {
+    hideDayPicker();
+    return;
+  }
 });
 
-// Close overlay on background click
-document.getElementById('dayPickerOverlay').addEventListener('click', (e) => {
-  if (e.target === e.currentTarget) hideDayPicker();
-});
-
-// Confirm/cancel buttons
+// Confirm/cancel day picker
 document.getElementById('pickerConfirm').addEventListener('click', confirmAddToDay);
 document.getElementById('pickerCancel').addEventListener('click', hideDayPicker);
 
-// Reset button
-document.getElementById('resetBtn').addEventListener('click', resetItinerary);
-
-// Add-to-day button delegation
+// Reset button (using delegation since it's dynamically created)
 document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.add-to-day-btn');
-  if (btn) {
-    e.stopPropagation();
-    showDayPicker(btn.dataset.type, parseInt(btn.dataset.idx));
+  if (e.target.closest('#resetBtn')) {
+    resetItinerary();
   }
 });
 
 /* ═══════════════════════════════════════════
-   NAVIGATION
+   HASH ROUTING
    ═══════════════════════════════════════════ */
-const tabs = document.querySelectorAll('.nav-tab');
-const sectionIds = ['itinerary', 'restaurants', 'sweets', 'activities', 'info'];
-
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    const target = tab.dataset.section;
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-
-    sectionIds.forEach(id => {
-      const el = document.getElementById(`section-${id}`);
-      if (id === target) {
-        el.classList.remove('section-hidden');
-        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        el.classList.add('section-hidden');
-      }
-    });
-
-    // Init or refresh maps after showing section
-    setTimeout(() => {
-      if (target === 'itinerary') itineraryMap.invalidateSize();
-      else initSectionMap(target);
-    }, 100);
-  });
-});
+function handleRoute() {
+  const hash = window.location.hash.replace('#', '');
+  if (hash && DESTINATIONS[hash]) {
+    loadDestination(hash);
+  } else {
+    renderLanding();
+  }
+}
 
 /* ═══════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════ */
-document.addEventListener('DOMContentLoaded', initMaps);
+document.addEventListener('DOMContentLoaded', () => {
+  migrateStorage();
+  handleRoute();
+  window.addEventListener('hashchange', handleRoute);
+});
 </script>
 </body>
 </html>
