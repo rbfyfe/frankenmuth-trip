@@ -979,6 +979,30 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .bookmark-btn.saved { color: #FFF; background: var(--primary); }
 .bookmark-btn.saved:hover { opacity: 0.85; }
 
+/* Uber Eats button */
+.uber-eats-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-right: 8px;
+  padding: 8px 18px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: #06C167;
+  border-radius: 50px;
+  transition: all 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+}
+.uber-eats-btn:hover {
+  background: #05A758;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(6, 193, 103, 0.3);
+}
+
 .mylist-empty {
   text-align: center;
   padding: 4rem 2rem;
@@ -1319,6 +1343,75 @@ const DESTINATIONS = {
       ]
     },
     footerText: 'Your North Suburbs kids guide \u00b7 Libertyville area'
+  },
+
+  holland: {
+    id: 'holland',
+    name: 'Holland',
+    title: 'Holland<br>Food Guide',
+    subtitle: 'Holland, Michigan \u00b7 Dutch Heritage & Tulips',
+    badge: '\uD83C\uDF37 Uber Eats Guide',
+    heroStats: ['41 Locations', '9 Categories', 'Uber Eats', 'Chain Favorites'],
+    format: 'explorer',
+    mapCenter: [42.7875, -86.1089],
+    mapZoom: 12,
+    theme: {
+      primary: '#E8442A', primaryLight: '#F05A42',
+      accent: '#2E7D32', accentLight: '#43A047',
+      heroGradient: 'linear-gradient(175deg, #1B3A1F 0%, #2E7D32 35%, #43A047 65%, #E8442A 100%)'
+    },
+    tabs: [
+      { id: 'mylist', label: 'My List', type: 'mylist' },
+      { id: 'uber_chains', label: 'Uber Chains', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Chain restaurants available on Uber Eats in the Holland area.' },
+      { id: 'local_eats', label: 'Local Eats', type: 'placeholder', desc: 'Local restaurants coming soon.' },
+      { id: 'activities', label: 'Activities', type: 'placeholder', desc: 'Activities and attractions coming soon.' },
+      { id: 'things_to_do', label: 'Things to Do', type: 'placeholder', desc: 'More things to do coming soon.' }
+    ],
+    data: {
+      uber_chains: [
+        { name: "Cinnabon", lat: 42.7407481, lng: -86.0698917, address: "853 Interchange Dr, Holland, MI 49423", tags: ["Dessert/Bakery"], notes: "Classic cinnamon rolls and baked treats.", uberEatsUrl: "https://www.ubereats.com/search?q=Cinnabon+Holland+MI" },
+        { name: "Crumbl", lat: 42.8145702, lng: -86.088756, address: "Holland, MI 49424", tags: ["Dessert/Bakery"], notes: "Rotating weekly cookie flavors.", uberEatsUrl: "https://www.ubereats.com/search?q=Crumbl+Holland+MI" },
+        { name: "Cold Stone Creamery", lat: 42.8816736, lng: -85.7491674, address: "3427 Century Center St SW, Grandville, MI 49418", tags: ["Dessert/Bakery"], notes: "Custom ice cream creations mixed on a frozen stone.", uberEatsUrl: "https://www.ubereats.com/search?q=Cold+Stone+Creamery+Grandville+MI" },
+        { name: "The Cheesecake Factory", lat: 42.9155938, lng: -85.5865702, address: "3195 28th St SE Suite B-121, Kentwood, MI 49512", tags: ["Dessert/Bakery"], notes: "Huge menu plus 30+ cheesecake varieties.", uberEatsUrl: "https://www.ubereats.com/search?q=Cheesecake+Factory+Kentwood+MI" },
+        { name: "Starbucks (16th St)", lat: 42.7826, lng: -86.08184, address: "590 E 16th St, Holland, MI 49423", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+16th+St+Holland+MI" },
+        { name: "Starbucks (W Shore Dr)", lat: 42.82694, lng: -86.0932, address: "3259 W Shore Dr, Holland, MI 49424", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+W+Shore+Dr+Holland+MI" },
+        { name: "Starbucks (Fresh Market)", lat: 42.80336, lng: -86.10885, address: "50 Douglas Ave, Holland, MI 49424", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+Douglas+Holland+MI" },
+        { name: "Starbucks (Target)", lat: 42.83102, lng: -86.09178, address: "3456 W Shore Dr, Holland, MI 49424", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+Target+Holland+MI" },
+        { name: "Starbucks (Butternut Dr)", lat: 42.82877, lng: -86.1367, address: "993 Butternut Dr, Holland, MI 49424", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+Butternut+Holland+MI" },
+        { name: "Starbucks (Zeeland)", lat: 42.8276095, lng: -86.0166374, address: "9479 Riley St, Zeeland, MI 49464", tags: ["Coffee"], notes: "Coffee, espresso, and seasonal drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Starbucks+Zeeland+MI" },
+        { name: "Jimmy John's (16th St)", lat: 42.7827501, lng: -86.0748463, address: "770 E 16th St Ste 10, Holland, MI 49423", tags: ["Sandwiches/Subs"], notes: "Freaky fast sub sandwiches.", uberEatsUrl: "https://www.ubereats.com/search?q=Jimmy+Johns+16th+St+Holland+MI" },
+        { name: "Jimmy John's (Downtown)", lat: 42.7905092, lng: -86.1061931, address: "23 E 8th St, Holland, MI 49423", tags: ["Sandwiches/Subs"], notes: "Freaky fast sub sandwiches.", uberEatsUrl: "https://www.ubereats.com/search?q=Jimmy+Johns+8th+St+Holland+MI" },
+        { name: "Jimmy John's (Riley St)", lat: 42.8280518, lng: -86.0961747, address: "12719 Riley St Ste 130, Holland, MI 49424", tags: ["Sandwiches/Subs"], notes: "Freaky fast sub sandwiches.", uberEatsUrl: "https://www.ubereats.com/search?q=Jimmy+Johns+Riley+St+Holland+MI" },
+        { name: "Jimmy John's (Zeeland)", lat: 42.8143608, lng: -86.0208486, address: "59 W Washington Ave, Zeeland, MI 49464", tags: ["Sandwiches/Subs"], notes: "Freaky fast sub sandwiches.", uberEatsUrl: "https://www.ubereats.com/search?q=Jimmy+Johns+Zeeland+MI" },
+        { name: "Jersey Mike's Subs", lat: 42.8124658, lng: -86.0896031, address: "Holland, MI", tags: ["Sandwiches/Subs"], notes: "Fresh-sliced, fresh-grilled subs.", uberEatsUrl: "https://www.ubereats.com/search?q=Jersey+Mikes+Holland+MI" },
+        { name: "Arby's (James St)", lat: 42.8118077, lng: -86.0855687, address: "12308 James St, Holland, MI 49424", tags: ["Sandwiches/Subs"], notes: "Roast beef sandwiches and curly fries.", uberEatsUrl: "https://www.ubereats.com/search?q=Arbys+James+St+Holland+MI" },
+        { name: "Arby's (Chicago Dr)", lat: 42.7975164, lng: -86.0766844, address: "700 Chicago Dr, Holland, MI 49423", tags: ["Sandwiches/Subs"], notes: "Roast beef sandwiches and curly fries.", uberEatsUrl: "https://www.ubereats.com/search?q=Arbys+Chicago+Dr+Holland+MI" },
+        { name: "Arby's (Washington)", lat: 42.75553, lng: -86.115834, address: "1195 Washington Ave, Holland, MI 49423", tags: ["Sandwiches/Subs"], notes: "Roast beef sandwiches and curly fries.", uberEatsUrl: "https://www.ubereats.com/search?q=Arbys+Washington+Holland+MI" },
+        { name: "Panera Bread", lat: 42.824192, lng: -86.09246, address: "3067 W Shore Dr, Holland, MI 49424", tags: ["Sandwiches/Subs"], notes: "Soups, salads, and bakery-cafe sandwiches.", uberEatsUrl: "https://www.ubereats.com/search?q=Panera+Bread+Holland+MI" },
+        { name: "Five Guys", lat: 42.8255502, lng: -86.0927775, address: "3155 W Shore Dr, Holland, MI 49424", tags: ["Burgers"], notes: "Smash burgers, fries, and milkshakes.", uberEatsUrl: "https://www.ubereats.com/search?q=Five+Guys+Holland+MI" },
+        { name: "Wendy's (16th St)", lat: 42.7827204, lng: -86.0724212, address: "816 E 16th St, Holland, MI 49423", tags: ["Burgers"], notes: "Fresh, never frozen beef and Frostys.", uberEatsUrl: "https://www.ubereats.com/search?q=Wendys+16th+St+Holland+MI" },
+        { name: "Wendy's (River Ave)", lat: 42.8052013, lng: -86.1154211, address: "250 N River Ave, Holland, MI 49424", tags: ["Burgers"], notes: "Fresh, never frozen beef and Frostys.", uberEatsUrl: "https://www.ubereats.com/search?q=Wendys+River+Ave+Holland+MI" },
+        { name: "Wendy's (Washington)", lat: 42.7563936, lng: -86.1169496, address: "1162 Washington Ave, Holland, MI 49423", tags: ["Burgers"], notes: "Fresh, never frozen beef and Frostys.", uberEatsUrl: "https://www.ubereats.com/search?q=Wendys+Washington+Holland+MI" },
+        { name: "Taco Bell (River Ave)", lat: 42.8032376, lng: -86.1141417, address: "190 N River Ave, Holland, MI 49424", tags: ["Mexican"], notes: "Tacos, burritos, and late-night cravings.", uberEatsUrl: "https://www.ubereats.com/search?q=Taco+Bell+River+Ave+Holland+MI" },
+        { name: "Taco Bell (W Shore Dr)", lat: 42.8313576, lng: -86.0948468, address: "3471 W Shore Dr, Holland, MI 49424", tags: ["Mexican"], notes: "Tacos, burritos, and late-night cravings.", uberEatsUrl: "https://www.ubereats.com/search?q=Taco+Bell+W+Shore+Dr+Holland+MI" },
+        { name: "Taco Bell (Washington)", lat: 42.7571804, lng: -86.1170873, address: "1144 S Washington, Holland, MI 49423", tags: ["Mexican"], notes: "Tacos, burritos, and late-night cravings.", uberEatsUrl: "https://www.ubereats.com/search?q=Taco+Bell+Washington+Holland+MI" },
+        { name: "Taco Bell (Waverly)", lat: 42.7965528, lng: -86.0772707, address: "25 S Waverly Rd, Holland, MI 49423", tags: ["Mexican"], notes: "Tacos, burritos, and late-night cravings.", uberEatsUrl: "https://www.ubereats.com/search?q=Taco+Bell+Waverly+Holland+MI" },
+        { name: "Taco Bell (Zeeland)", lat: 42.811663, lng: -85.9893985, address: "8387 Westpark Way, Zeeland, MI 49464", tags: ["Mexican"], notes: "Tacos, burritos, and late-night cravings.", uberEatsUrl: "https://www.ubereats.com/search?q=Taco+Bell+Zeeland+MI" },
+        { name: "Chipotle Mexican Grill", lat: 42.8153381, lng: -86.089122, address: "12365 James St, Holland, MI 49424", tags: ["Mexican"], notes: "Build-your-own burritos, bowls, and tacos.", uberEatsUrl: "https://www.ubereats.com/search?q=Chipotle+Holland+MI" },
+        { name: "QDOBA Mexican Eats", lat: 42.8256132, lng: -86.0928155, address: "3155 W Shore Dr, Holland, MI 49424", tags: ["Mexican"], notes: "Customizable Mexican entrees with free queso.", uberEatsUrl: "https://www.ubereats.com/search?q=Qdoba+Holland+MI" },
+        { name: "KFC", lat: 42.8063233, lng: -86.1023329, address: "131 E Lakewood Blvd, Holland, MI 49424", tags: ["Chicken"], notes: "Original recipe fried chicken and sides.", uberEatsUrl: "https://www.ubereats.com/search?q=KFC+Holland+MI" },
+        { name: "Popeyes Louisiana Kitchen", lat: 42.8116459, lng: -86.0865153, address: "Holland, MI 49424", tags: ["Chicken"], notes: "Cajun-seasoned fried chicken and biscuits.", uberEatsUrl: "https://www.ubereats.com/search?q=Popeyes+Holland+MI" },
+        { name: "Wingstop", lat: 42.8023231, lng: -86.1113594, address: "Douglas Ave, Holland, MI 49424", tags: ["Chicken"], notes: "Wings in 12 bold flavors.", uberEatsUrl: "https://www.ubereats.com/search?q=Wingstop+Holland+MI" },
+        { name: "Buffalo Wild Wings", lat: 42.821155, lng: -86.0913325, address: "2899 W Shore Dr, Holland, MI 49424", tags: ["Chicken"], notes: "Wings, sports, and 20+ signature sauces.", uberEatsUrl: "https://www.ubereats.com/search?q=Buffalo+Wild+Wings+Holland+MI" },
+        { name: "Panda Express", lat: 42.8277778, lng: -86.0936111, address: "Holland, MI 49424", tags: ["Asian"], notes: "American-Chinese favorites like orange chicken.", uberEatsUrl: "https://www.ubereats.com/search?q=Panda+Express+Holland+MI" },
+        { name: "Outback Steakhouse", lat: 42.8823114, lng: -85.7469961, address: "3333 Century Center St SW, Grandville, MI 49418", tags: ["Steakhouse/Seafood"], notes: "Australian-themed steaks and Bloomin' Onion.", uberEatsUrl: "https://www.ubereats.com/search?q=Outback+Steakhouse+Grandville+MI" },
+        { name: "Red Lobster", lat: 42.883149, lng: -85.749648, address: "3464 Rivertown Point Ct SW, Grandville, MI 49418", tags: ["Steakhouse/Seafood"], notes: "Seafood platters and Cheddar Bay Biscuits.", uberEatsUrl: "https://www.ubereats.com/search?q=Red+Lobster+Grandville+MI" },
+        { name: "Applebee's", lat: 42.8253439, lng: -86.0944931, address: "3134 Beeline Rd, Holland, MI 49424", tags: ["Casual Dining"], notes: "Neighborhood grill with burgers, ribs, and drinks.", uberEatsUrl: "https://www.ubereats.com/search?q=Applebees+Holland+MI" },
+        { name: "Denny's", lat: 42.7763557, lng: -86.0797616, address: "E 24th St, Holland, MI 49423", tags: ["Casual Dining"], notes: "Breakfast all day plus classic American diner fare.", uberEatsUrl: "https://www.ubereats.com/search?q=Dennys+Holland+MI" },
+        { name: "BJ's Restaurant & Brewhouse", lat: 42.9136906, lng: -85.5817, address: "3445 28th St SE, Grand Rapids, MI 49512", tags: ["Casual Dining"], notes: "Deep-dish pizza, craft beer, and Pizookies.", uberEatsUrl: "https://www.ubereats.com/search?q=BJs+Restaurant+Brewhouse+Grand+Rapids+MI" }
+      ]
+    },
+    footerText: 'Your Holland food guide \u00b7 Michigan'
   }
 };
 
@@ -1565,6 +1658,18 @@ function loadDestination(destId) {
           <p class="section-desc">Places you want to check out.</p>
           <div id="mylistMap" style="display:none"><div class="map-container"><div id="map-${dest.id}-mylist"></div></div></div>
           <div id="mylistContent"></div>
+        </section>
+      `;
+    } else if (tab.type === 'placeholder') {
+      sectionsHtml += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <h2 class="section-title">${tab.label}</h2>
+          <p class="section-desc">${tab.desc || ''}</p>
+          <div class="mylist-empty">
+            <div class="mylist-empty-icon">\uD83D\uDEA7</div>
+            <h3>Coming Soon</h3>
+            <p>We're working on adding ${tab.label.toLowerCase()} for ${dest.name}. Check back later!</p>
+          </div>
         </section>
       `;
     }
@@ -1879,7 +1984,7 @@ function populateCards(tabId, data, markerClass, map) {
   // Collect unique tags for filters
   const tagCounts = {};
   data.forEach(item => { (item.tags || []).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }); });
-  const topTags = Object.keys(tagCounts).sort((a,b) => tagCounts[b] - tagCounts[a]).slice(0, 8);
+  const topTags = Object.keys(tagCounts).sort((a,b) => tagCounts[b] - tagCounts[a]).slice(0, 12);
 
   if (filtersEl && topTags.length > 1) {
     filtersEl.innerHTML = '<button class="filter-btn active" data-tag="all">All</button>';
@@ -1927,6 +2032,11 @@ function populateCards(tabId, data, markerClass, map) {
     if (item.tags) html += `<div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
     if (item.goodFor) html += `<div class="card-tags"><span class="tag">${item.goodFor}</span></div>`;
 
+    // Uber Eats button
+    if (item.uberEatsUrl) {
+      html += `<a class="uber-eats-btn" href="${item.uberEatsUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\uD83D\uDEF5 Order on Uber Eats</a>`;
+    }
+
     // Action button
     if (isExplorer) {
       const saved = isInMyList(tabId, i);
@@ -1938,7 +2048,7 @@ function populateCards(tabId, data, markerClass, map) {
     card.innerHTML = html;
 
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-day-btn') || e.target.closest('.bookmark-btn')) return;
+      if (e.target.closest('.add-to-day-btn') || e.target.closest('.bookmark-btn') || e.target.closest('.uber-eats-btn')) return;
       grid.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       map.flyTo([item.lat, item.lng], 16, { duration: 0.8 });
@@ -2140,6 +2250,7 @@ function renderMyList() {
       if (item.hours) cardHtml += `<div class="card-hours">${item.hours}</div>`;
       cardHtml += `<div class="card-notes">${item.notes}</div>`;
       cardHtml += `<div class="card-address">&#128205; ${item.address}</div>`;
+      if (item.uberEatsUrl) cardHtml += `<a class="uber-eats-btn" href="${item.uberEatsUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\uD83D\uDEF5 Order on Uber Eats</a>`;
       cardHtml += `<button class="mylist-remove" data-tab="${entry.tab}" data-idx="${entry.idx}">&#10005; Remove</button>`;
 
       html += `<div class="card">${cardHtml}</div>`;
