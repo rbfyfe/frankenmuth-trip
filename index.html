@@ -561,11 +561,13 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* Stays tab */
 .stays-summary {
-  background: var(--cream);
-  border-radius: 12px;
-  padding: 20px 24px;
-  margin-top: 24px;
-  text-align: center;
+  margin-top: 12px;
+  padding: 12px 4px 0 48px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  font-size: 0.8rem;
+  color: var(--gray);
+  text-align: right;
+  line-height: 1.5;
 }
 .stays-option-cards {
   display: grid;
@@ -588,23 +590,12 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   color: #B45309;
 }
 .stays-summary-total {
-  font-size: 1.5rem;
   font-weight: 700;
   color: var(--brown);
-  margin-bottom: 4px;
-}
-.stays-summary-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--gray);
-  margin-bottom: 4px;
+  font-variant-numeric: tabular-nums;
 }
 .stays-summary-caption {
-  font-size: 0.76rem;
   color: var(--gray);
-  font-style: italic;
 }
 .stay-cost-line {
   display: flex;
@@ -2338,15 +2329,14 @@ function renderStays(tabId, stays, map) {
   }
   html += '</div>';
 
-  // Summary at the BOTTOM
+  // Subtle total at the end of the timeline
   if (anyCost) {
     const totalRange = totalMin === totalMax ? formatUSD(totalMin) : `${formatUSD(totalMin)}\u2013${formatUSD(totalMax)}`;
     const pricedDisplay = latestPricedAt ? new Date(latestPricedAt + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
     const hasOptions = sorted.some(s => s.optionLabel);
-    html += `<div class="stays-summary" role="region" aria-label="Total lodging cost summary">
-      <div class="stays-summary-label">Total lodging</div>
-      <div class="stays-summary-total">${totalRange}</div>
-      <div class="stays-summary-caption">${primaryCount}\u00a0nights${hasOptions ? ' \u00b7 based on Option\u00a0A where applicable' : ''}${pricedDisplay ? ` \u00b7 Prices updated ${pricedDisplay}` : ''}</div>
+    html += `<div class="stays-summary" role="note" aria-label="Total lodging cost">
+      ${primaryCount}\u00a0nights \u00b7 <span class="stays-summary-total">${totalRange}</span> total${hasOptions ? ' (Option\u00a0A)' : ''}
+      <span class="stays-summary-caption">${pricedDisplay ? ` \u00b7 updated ${pricedDisplay}` : ''}</span>
     </div>`;
   }
 
