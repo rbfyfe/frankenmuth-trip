@@ -554,12 +554,31 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 
 /* Stays tab */
 .stays-summary {
-  background: #FFF;
+  background: var(--cream);
   border-radius: 12px;
-  padding: 18px 22px;
-  margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  border-left: 4px solid var(--primary);
+  padding: 20px 24px;
+  margin-top: 24px;
+  text-align: center;
+}
+.stays-option-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+.stays-option-cards .stay-card { flex: 1; border-left-color: rgba(180, 83, 9, 0.5); }
+.stay-option-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-bottom: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  background: rgba(180, 83, 9, 0.12);
+  color: #B45309;
 }
 .stays-summary-total {
   font-size: 1.5rem;
@@ -1812,8 +1831,24 @@ const DESTINATIONS = {
           totalCost: { min: 130, max: 180 },
           pricedAt: '2026-04-18',
           website: 'https://www.druryhotels.com/locations/nashville-tn/drury-inn-and-suites-nashville-airport',
-          notes: 'Free hot dinner, drinks, and indoor/outdoor pool. Drury\u2019s signature Kickback.',
-          alternatives: 'Gaylord Opryland, Hyatt House Nashville Airport'
+          notes: 'Free hot dinner, drinks, and indoor/outdoor pool. Drury\u2019s signature Kickback. Pushes on from Memphis to Nashville on Day 7.',
+          alternatives: 'Gaylord Opryland, Hyatt House Nashville Airport',
+          optionGroup: 'night8', optionLabel: 'A'
+        },
+        {
+          name: 'Hampton Inn & Suites Memphis-Beale Street',
+          lat: 35.1390, lng: -90.0524,
+          address: '175 Peabody Pl, Memphis, TN 38103',
+          dates: 'Check-in Mon Jun 8, 2026',
+          checkIn: 'Jun 8, 2026',
+          checkOut: 'Jun 9, 2026',
+          nights: 1,
+          costPerNight: { min: 130, max: 200 },
+          totalCost: { min: 130, max: 200 },
+          pricedAt: '2026-04-18',
+          website: 'https://www.hilton.com/en/hotels/mempbhx-hampton-suites-memphis-beale-street/',
+          notes: 'Stop in Memphis instead of pushing on to Nashville \u2014 splits up the Day 7 drive. Downtown near Beale Street. Parking $26/night extra.',
+          optionGroup: 'night8', optionLabel: 'B'
         }
       ],
       fort_worth: [
@@ -2176,7 +2211,7 @@ function renderStays(tabId, stays, map) {
   listEl.innerHTML = '';
   const bounds = [];
 
-  // Sort chronologically by checkIn (parse via Date if possible, else preserve order)
+  // Sort chronologically by checkIn
   const sorted = [...stays].sort((a, b) => {
     const da = new Date(a.checkIn || '');
     const db = new Date(b.checkIn || '');
@@ -2184,10 +2219,16 @@ function renderStays(tabId, stays, map) {
     return da - db;
   });
 
-  // Compute grand total range
+  // Compute grand total range using only PRIMARY options (first in a group, or non-option)
   let totalMin = 0, totalMax = 0, anyCost = false;
   let latestPricedAt = null;
+  let primaryCount = 0;
+  const seenGroups = new Set();
   sorted.forEach(s => {
+    // Skip non-primary options
+    if (s.optionLabel && seenGroups.has(s.optionGroup)) return;
+    if (s.optionLabel) seenGroups.add(s.optionGroup);
+    primaryCount++;
     if (s.totalCost) {
       anyCost = true;
       totalMin += (typeof s.totalCost === 'number') ? s.totalCost : s.totalCost.min;
@@ -2198,18 +2239,34 @@ function renderStays(tabId, stays, map) {
     }
   });
 
-  let html = '';
-  if (anyCost) {
-    const totalRange = totalMin === totalMax ? `$${totalMin}` : `$${totalMin}–$${totalMax}`;
-    const pricedDisplay = latestPricedAt ? new Date(latestPricedAt + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
-    html += `<div class="stays-summary">
-      <div class="stays-summary-label">Total lodging</div>
-      <div class="stays-summary-total">${totalRange}</div>
-      <div class="stays-summary-caption">Across ${sorted.length} hotels${pricedDisplay ? ` \u00b7 Prices last checked ${pricedDisplay}` : ''}</div>
-    </div>`;
-  }
+  // Helper: build a single stay card's inner HTML (no timeline wrapper)
+  const buildStayCardHTML = (stay) => {
+    const costLine = stay.totalCost ? `<div class="stay-cost-line">
+      <span class="stay-cost-label">${stay.nights || 1} night${(stay.nights || 1) > 1 ? 's' : ''}${stay.costPerNight ? ' @ ' + formatCostRange(stay.costPerNight) + '/night' : ''}</span>
+      <span class="stay-cost-value stay-total-value">${formatCostRange(stay.totalCost)}</span>
+    </div>` : '';
 
-  html += '<div class="timeline">';
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stay.name + ', ' + stay.address)}`;
+    const linksHtml = `<div class="card-links">
+      <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Maps</a>
+      ${stay.website ? `<a class="card-link website-link" href="${stay.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83C\uDF10 Website</a>` : ''}
+    </div>`;
+
+    const optionBadge = stay.optionLabel ? `<div class="stay-option-badge">Option ${stay.optionLabel}</div>` : '';
+
+    return `<div class="stay-card" style="flex:1">
+      ${optionBadge}
+      <h4>${stay.name}</h4>
+      ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
+      <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
+      ${costLine}
+      ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
+      ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
+      ${linksHtml}
+    </div>`;
+  };
+
+  // Create map markers for every stay
   sorted.forEach((stay, i) => {
     if (stay.lat && stay.lng) {
       bounds.push([stay.lat, stay.lng]);
@@ -2218,39 +2275,57 @@ function renderStays(tabId, stays, map) {
       }).addTo(map);
       marker.bindPopup(`<strong>${stay.name}</strong><br><span class="popup-addr">${stay.address}</span>`);
     }
+  });
 
-    const costLine = stay.totalCost ? `<div class="stay-cost-line">
-      <span class="stay-cost-label">${stay.nights || 1} night${(stay.nights || 1) > 1 ? 's' : ''}${stay.costPerNight ? ' @ ' + formatCostRange(stay.costPerNight) + '/night' : ''}</span>
-      <span class="stay-cost-value stay-total-value">${formatCostRange(stay.totalCost)}</span>
-    </div>` : '';
-
-    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stay.name + ', ' + stay.address)}`;
-    const linksHtml = `<div class="card-links">
-      <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener">\uD83D\uDCCD Maps</a>
-      ${stay.website ? `<a class="card-link website-link" href="${stay.website}" target="_blank" rel="noopener">\uD83C\uDF10 Website</a>` : ''}
-    </div>`;
+  // Walk sorted stays, grouping consecutive option siblings into one timeline-item row
+  let html = '<div class="timeline">';
+  let i = 0;
+  while (i < sorted.length) {
+    const stay = sorted[i];
+    const groupIndexes = [i];
+    if (stay.optionLabel) {
+      let j = i + 1;
+      while (j < sorted.length && sorted[j].optionLabel && sorted[j].optionGroup === stay.optionGroup) {
+        groupIndexes.push(j);
+        j++;
+      }
+    }
+    const lastIdx = groupIndexes[groupIndexes.length - 1];
 
     html += `<div class="timeline-item" data-stay-idx="${i}">
       <div class="timeline-line">
         <div class="timeline-dot"></div>
-        ${i < sorted.length - 1 ? '<div class="timeline-connector"></div>' : ''}
-      </div>
-      <div class="stay-card" style="flex:1">
-        <h4>${stay.name}</h4>
-        ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
-        <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
-        ${costLine}
-        ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
-        ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
-        ${linksHtml}
-      </div>
-    </div>`;
-  });
+        ${lastIdx < sorted.length - 1 ? '<div class="timeline-connector"></div>' : ''}
+      </div>`;
+
+    if (groupIndexes.length === 1) {
+      html += buildStayCardHTML(stay);
+    } else {
+      html += '<div class="stays-option-cards">';
+      groupIndexes.forEach(gi => { html += buildStayCardHTML(sorted[gi]); });
+      html += '</div>';
+    }
+
+    html += '</div>';
+    i = lastIdx + 1;
+  }
   html += '</div>';
+
+  // Summary at the BOTTOM
+  if (anyCost) {
+    const totalRange = totalMin === totalMax ? `$${totalMin}` : `$${totalMin}\u2013$${totalMax}`;
+    const pricedDisplay = latestPricedAt ? new Date(latestPricedAt + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    const hasOptions = sorted.some(s => s.optionLabel);
+    html += `<div class="stays-summary">
+      <div class="stays-summary-label">Total lodging</div>
+      <div class="stays-summary-total">${totalRange}</div>
+      <div class="stays-summary-caption">Across ${primaryCount} nights${hasOptions ? ' (using primary option for each night)' : ''}${pricedDisplay ? ` \u00b7 Prices last checked ${pricedDisplay}` : ''}</div>
+    </div>`;
+  }
 
   listEl.innerHTML = html;
 
-  // Wire clicks to fly map
+  // Wire clicks to fly map (on the timeline-item, delegates to first stay's coords)
   listEl.querySelectorAll('[data-stay-idx]').forEach(el => {
     el.addEventListener('click', (e) => {
       if (e.target.closest('.card-link')) return;
