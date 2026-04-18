@@ -374,6 +374,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .marker-day1 { background: var(--red); }
 .marker-day2 { background: var(--green); }
 .marker-day3 { background: var(--wood); color: var(--brown); }
+.marker-day4 { background: #0C4A6E; }
+.marker-day5 { background: #B45309; }
+.marker-day6 { background: #7C2D12; }
+.marker-day7 { background: #166534; }
+.marker-day8 { background: #6B21A8; }
 .marker-restaurant { background: var(--primary); }
 .marker-sweet { background: var(--pink); }
 .marker-activity { background: var(--accent); }
@@ -403,6 +408,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .day-btn[data-day="1"].active { background: var(--red); }
 .day-btn[data-day="2"].active { background: var(--green); }
 .day-btn[data-day="3"].active { background: var(--wood); color: var(--brown); }
+.day-btn[data-day="4"].active { background: #0C4A6E; }
+.day-btn[data-day="5"].active { background: #B45309; }
+.day-btn[data-day="6"].active { background: #7C2D12; }
+.day-btn[data-day="7"].active { background: #166534; }
+.day-btn[data-day="8"].active { background: #6B21A8; }
 .day-btn:hover { opacity: 0.85; }
 
 /* ═══════════════════════════════════════════
@@ -428,6 +438,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
 .day-label.day1 { background: var(--red); }
 .day-label.day2 { background: var(--green); }
 .day-label.day3 { background: var(--wood); color: var(--brown); }
+.day-label.day4 { background: #0C4A6E; }
+.day-label.day5 { background: #B45309; }
+.day-label.day6 { background: #7C2D12; }
+.day-label.day7 { background: #166534; }
+.day-label.day8 { background: #6B21A8; }
 .day-header h3 {
   font-family: var(--font-display);
   font-size: 1.35rem;
@@ -438,6 +453,115 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-size: 0.88rem;
   color: var(--gray);
   line-height: 1.5;
+}
+/* Road trip extensions */
+.day-type-pill {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-radius: 50px;
+  vertical-align: middle;
+}
+.day-type-pill.pill-travel { background: rgba(12, 74, 110, 0.1); color: #0C4A6E; }
+.day-type-pill.pill-stationed { background: rgba(22, 101, 52, 0.1); color: #166534; }
+.day-type-pill.pill-wedding { background: rgba(180, 83, 9, 0.15); color: #B45309; }
+.day-route {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brown);
+  margin: 2px 0 2px;
+}
+.day-drive-summary {
+  font-size: 0.78rem;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.day-hotel-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: rgba(0,0,0,0.04);
+  border-left: 3px solid var(--primary);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.day-hotel-banner .hotel-where { color: var(--gray); font-weight: 400; margin-left: 4px; }
+.option-badge {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 50px;
+  background: rgba(180, 83, 9, 0.12);
+  color: #B45309;
+  vertical-align: middle;
+}
+.option-group-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 4px 48px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--gray);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+.hotel-stop .timeline-card {
+  background: #FFFBEB;
+  border-left: 3px solid var(--primary);
+}
+/* Stays tab */
+.stays-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.stay-card {
+  background: #FFF;
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--primary);
+}
+.stay-card h4 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.stay-dates {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.stay-address {
+  font-size: 0.8rem;
+  color: var(--gray);
+  margin-bottom: 8px;
+}
+.stay-notes {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--brown);
+}
+.stay-alts {
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: var(--gray);
+  font-style: italic;
 }
 
 /* ═══════════════════════════════════════════
@@ -1412,6 +1536,197 @@ const DESTINATIONS = {
       ]
     },
     footerText: 'Your Holland food guide \u00b7 Michigan'
+  },
+
+  roadtrip: {
+    id: 'roadtrip',
+    name: 'Dallas Wedding Road Trip',
+    title: 'Chicago \u2192 Dallas<br>Wedding Road Trip',
+    subtitle: 'June 2\u20139, 2026 \u00b7 8-Day Family Loop',
+    badge: '\uD83D\uDE97 Road Trip',
+    heroStats: ['8 Days', '4 Hotels', '~2,500 miles', '5 States'],
+    format: 'itinerary',
+    mapCenter: [37.5, -90],
+    mapZoom: 5,
+    theme: {
+      primary: '#B45309', primaryLight: '#D97706',
+      accent: '#1E3A8A', accentLight: '#3B82F6',
+      heroGradient: 'linear-gradient(175deg, #0C4A6E 0%, #1E3A8A 35%, #B45309 75%, #DC2626 100%)'
+    },
+    itineraryTitle: '8-Day Itinerary',
+    itineraryDesc: 'The full loop: Midwest \u2192 Texas \u2192 Arkansas \u2192 Tennessee \u2192 Kentucky \u2192 home.',
+    tabs: [
+      { id: 'itinerary', label: 'Itinerary', type: 'itinerary' },
+      { id: 'stays', label: 'Stays', type: 'stays', desc: '4 hotels across the route.', mapZoom: 5 },
+      { id: 'fort_worth', label: 'Fort Worth', type: 'cards', markerClass: 'marker-default', mapZoom: 11, desc: 'Wedding HQ \u2014 zoo, venues, and the hotel.' },
+      { id: 'memphis', label: 'Memphis', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Day 7 mid-drive break options.' },
+      { id: 'nashville', label: 'Nashville', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Night 7 overnight stop.' },
+      { id: 'louisville', label: 'Louisville', type: 'cards', markerClass: 'marker-default', mapZoom: 12, desc: 'Final stretch \u2014 Churchill Downs.' },
+      { id: 'info', label: 'Info', type: 'info' }
+    ],
+    data: {
+      days: [
+        {
+          day_number: 1,
+          title: 'Tuesday, June 2 \u2014 Libertyville \u2192 Springfield, MO',
+          narrative: 'Big push south. City Museum in St. Louis is the energy-burn stop. Lunch and dinner both have A/B options depending on timing.',
+          dayType: 'travel',
+          route: 'Libertyville, IL \u2192 St. Louis, MO \u2192 Springfield, MO',
+          driveSummary: '~11 hrs driving \u00b7 ~550 miles',
+          hotel: { name: "Bass Pro Angler's Lodge", cityShort: 'Springfield, MO' },
+          locations: [
+            { time: '7:00 AM', name: 'Depart Libertyville, IL', lat: 42.2834, lng: -87.9528, address: 'Home', duration: 0, notes: 'Hit the road early to make the City Museum window.', subtype: 'drive' },
+            { time: '10:00 AM', name: "Portillo's Normal, IL", lat: 40.5192, lng: -88.9935, address: '202 Landmark Dr, Normal, IL 61761', duration: 60, notes: 'Lunch on the way \u2014 ~2.5 hrs from Libertyville. Quick in and out.', cuisine: 'Chicago classics', optionGroup: 'lunch1', optionLabel: 'A' },
+            { time: '11:30 AM', name: "Obed & Isaac's (Springfield, IL)", lat: 39.7994, lng: -89.6459, address: '500 S 6th St, Springfield, IL 62701', duration: 60, notes: 'Lunch option B \u2014 ~3.5 hrs from Libertyville. Good lawn for kids to run around.', cuisine: 'American pub', optionGroup: 'lunch1', optionLabel: 'B' },
+            { time: '12:30 PM', name: 'City Museum (St. Louis)', lat: 38.6333, lng: -90.2013, address: '750 N 16th St, St. Louis, MO 63103', duration: 210, notes: 'The main event. 3\u20134 hours. Bring knee pads and long sleeves \u2014 tons of crawling.', highlight: true, cost: '$20 admission' },
+            { time: '4:45 PM', name: 'Dinner: Sunset Hills, MO', lat: 38.5380, lng: -90.4490, address: 'Chick-fil-A Fenton / Panera Sunset Hills / Freddy\u2019s', duration: 45, notes: '30 min into the drive. Quick dinner if the kids are fried.', optionGroup: 'dinner1', optionLabel: 'A' },
+            { time: '6:00 PM', name: "Dinner: Rolla, MO (Culver's)", lat: 37.9486, lng: -91.7626, address: 'Culver\u2019s or Panera, Rolla MO', duration: 45, notes: '1.5 hrs in \u2014 splits the remaining drive in half.', optionGroup: 'dinner1', optionLabel: 'B' },
+            { time: '9:30 PM', name: "Bass Pro Angler's Lodge", lat: 37.1817, lng: -93.2923, address: '621 W Sunshine St, Springfield, MO 65807', duration: 0, notes: '$159/night. 10% off the Wonders of Wildlife aquarium across the street.', subtype: 'hotel' }
+          ]
+        },
+        {
+          day_number: 2,
+          title: 'Wednesday, June 3 \u2014 Springfield, MO \u2192 Colleyville, TX',
+          narrative: 'Morning at Bass Pro + the flagship aquarium, then ~7 hrs south to the wedding HQ.',
+          dayType: 'travel',
+          route: 'Springfield, MO \u2192 Colleyville, TX',
+          driveSummary: '~7 hrs driving \u00b7 ~440 miles',
+          hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
+          locations: [
+            { time: '8:00 AM', name: 'Breakfast at lodge', lat: 37.1817, lng: -93.2923, address: "Bass Pro Angler's Lodge", duration: 60, notes: 'Hotel breakfast. Pack up.' },
+            { time: '9:00 AM', name: 'Bass Pro Shops (flagship)', lat: 37.1766, lng: -93.2983, address: '1935 S Campbell Ave, Springfield, MO', duration: 60, notes: 'Worth a wander \u2014 huge aquarium-style displays even in the store.' },
+            { time: '10:00 AM', name: 'Wonders of Wildlife Aquarium', lat: 37.1794, lng: -93.2970, address: '500 W Sunshine St, Springfield, MO', duration: 120, notes: '4.8\u2605 must-do. Use the 10% lodge discount.', highlight: true },
+            { time: '12:30 PM', name: 'Depart for Colleyville', lat: 37.1794, lng: -93.2970, address: 'Springfield, MO', duration: 0, notes: '~7 hrs on the road.', subtype: 'drive' },
+            { time: '4:45 PM', name: 'Dinner: Chick-fil-A McAlester, OK', lat: 34.9220, lng: -95.7697, address: '1209 Tanglewood Dr, McAlester, OK', duration: 45, notes: 'Closed Sun \u2014 Wednesday \u2705. Halfway-ish stop.', warning: 'Closed Sun' },
+            { time: '8:30 PM', name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', duration: 0, notes: 'Wedding HQ for the next 4 nights.', subtype: 'hotel' }
+          ]
+        },
+        {
+          day_number: 3,
+          title: 'Thursday, June 4 \u2014 Fort Worth Zoo + Family Picnic',
+          narrative: 'First stationed day. Big zoo morning, then pool and grill-out at the Lewis House.',
+          dayType: 'stationed',
+          route: 'Based in Colleyville',
+          hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
+          locations: [
+            { time: '10:00 AM', name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', duration: 240, notes: '4.6\u2605, ~35 min from hotel. Top-rated zoo in the country.', highlight: true, rating: 4.6, ratingCount: 45000 },
+            { time: '5:00 PM', name: 'Family Picnic @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Grill-out dinner. Pool open for kids. Family guests arriving.' }
+          ]
+        },
+        {
+          day_number: 4,
+          title: 'Friday, June 5 \u2014 Rehearsal Day (kids on own)',
+          narrative: 'Rehearsal + rehearsal dinner for the adults. Low-key kid dinner near the hotel, meet up later at Lewis House.',
+          dayType: 'stationed',
+          route: 'Based in Colleyville',
+          hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
+          locations: [
+            { time: '12:00 PM', name: 'Pool day / hotel relax', lat: 32.9030, lng: -97.1339, address: 'Hampton Inn Colleyville', duration: 240, notes: 'Unstructured afternoon. Pool, nap, room service.' },
+            { time: '6:00 PM', name: 'Kid dinner near hotel', lat: 32.9030, lng: -97.1339, address: 'Colleyville, TX \u2014 TBD', duration: 60, notes: 'Plenty of options within 5 min. Pick day-of based on mood.' },
+            { time: '8:00 PM', name: 'Meet up @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 90, notes: 'Rejoin the rehearsal group after their dinner.' }
+          ]
+        },
+        {
+          day_number: 5,
+          title: 'Saturday, June 6 \u2014 Wedding Day',
+          narrative: "The main event. Ceremony at 4:30 PM, reception follows ~10 min away.",
+          dayType: 'wedding',
+          route: 'Based in Colleyville',
+          hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
+          locations: [
+            { time: '4:30 PM', name: 'Ceremony: Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', duration: 60, notes: 'Wedding ceremony.', highlight: true },
+            { time: '5:45 PM', name: 'Reception: Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', duration: 300, notes: '~10 min from church. Cocktail hour + reception.' }
+          ]
+        },
+        {
+          day_number: 6,
+          title: 'Sunday, June 7 \u2014 Brunch \u2192 Little Rock',
+          narrative: 'Family brunch, afternoon hang, then ~4.5 hrs to Little Rock.',
+          dayType: 'travel',
+          route: 'Colleyville, TX \u2192 Little Rock, AR',
+          driveSummary: '~4.5 hrs driving \u00b7 ~320 miles',
+          hotel: { name: 'Quality Inn West Little Rock', cityShort: 'Little Rock, AR' },
+          locations: [
+            { time: '10:00 AM', name: 'Family Brunch @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Breakfast + family hangout before heading out.' },
+            { time: '5:30 PM', name: 'Depart Colleyville', lat: 32.9030, lng: -97.1339, address: 'Hampton Inn Colleyville', duration: 0, notes: '~4.5 hrs to Little Rock.', subtype: 'drive' },
+            { time: '10:00 PM', name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', duration: 0, notes: 'Near I-40/I-430. Alts: Drury Inn, Hampton Inn, Holiday Inn Express.', subtype: 'hotel' }
+          ]
+        },
+        {
+          day_number: 7,
+          title: 'Monday, June 8 \u2014 Little Rock \u2192 Memphis \u2192 Nashville',
+          narrative: 'Mid-drive museum stop in Memphis. Two options depending on weather \u2014 indoor children\u2019s museum or outdoor park.',
+          dayType: 'travel',
+          route: 'Little Rock, AR \u2192 Memphis, TN \u2192 Nashville, TN',
+          driveSummary: '~5.5 hrs driving \u00b7 ~340 miles',
+          hotel: { name: 'Drury Plaza Nashville Airport', cityShort: 'Nashville, TN' },
+          locations: [
+            { time: '8:30 AM', name: 'Depart Little Rock', lat: 34.7564, lng: -92.3745, address: 'Little Rock, AR', duration: 0, notes: '~2.5 hrs to Memphis.', subtype: 'drive' },
+            { time: '11:00 AM', name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', duration: 150, notes: '4.6\u2605. Indoor option \u2014 good if weather is bad.', optionGroup: 'memphis', optionLabel: 'A', rating: 4.6 },
+            { time: '11:00 AM', name: 'Shelby Farms Park + Woodland Discovery Playground', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', duration: 150, notes: '4.8\u2605. Outdoor option \u2014 huge playground, great if weather cooperates.', optionGroup: 'memphis', optionLabel: 'B', rating: 4.8 },
+            { time: '1:30 PM', name: 'Depart Memphis', lat: 35.1162, lng: -89.9786, address: 'Memphis, TN', duration: 0, notes: '~3\u20133.5 hrs to Nashville.', subtype: 'drive' },
+            { time: '5:00 PM', name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', duration: 0, notes: 'Free hot dinner + drinks + indoor/outdoor pool. Alts: Gaylord Opryland, Hyatt House.', subtype: 'hotel' }
+          ]
+        },
+        {
+          day_number: 8,
+          title: 'Tuesday, June 9 \u2014 Nashville \u2192 Louisville \u2192 Home',
+          narrative: 'Final push. Churchill Downs if they let us on the grounds \u2014 otherwise the Derby Museum is open Tuesdays.',
+          dayType: 'travel',
+          route: 'Nashville, TN \u2192 Louisville, KY \u2192 Libertyville, IL',
+          driveSummary: '~8 hrs driving \u00b7 ~540 miles',
+          locations: [
+            { time: '8:00 AM', name: 'Depart Nashville', lat: 36.1217, lng: -86.6713, address: 'Nashville, TN', duration: 0, notes: '~2.5\u20133 hrs to Louisville.', subtype: 'drive' },
+            { time: '11:00 AM', name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', duration: 90, notes: 'Walk grounds, see Derby track + twin spires.', warning: 'Grounds closed Mon/Tue', optionGroup: 'louisville', optionLabel: 'A' },
+            { time: '11:00 AM', name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', duration: 90, notes: 'Open Tuesdays 8\u20135. Backup plan if the grounds are closed.', optionGroup: 'louisville', optionLabel: 'B' },
+            { time: '2:30 PM', name: 'Leave Louisville', lat: 38.2049, lng: -85.7702, address: 'Louisville, KY', duration: 0, notes: '~5 hrs to Libertyville.', subtype: 'drive' },
+            { time: '5:00 PM', name: 'Food stop near Indianapolis', lat: 39.7684, lng: -86.1581, address: 'Indianapolis, IN area', duration: 60, notes: '~1 hr break, gas up, grab dinner.' },
+            { time: '9:00 PM', name: 'Home \u2014 Libertyville, IL', lat: 42.2834, lng: -87.9528, address: 'Libertyville, IL', duration: 0, notes: '\uD83C\uDFE0 Home sweet home.', subtype: 'hotel' }
+          ]
+        }
+      ],
+      stays: [
+        { name: "Bass Pro Shops Angler's Lodge", lat: 37.1817, lng: -93.2923, address: '621 W Sunshine St, Springfield, MO 65807', dates: 'Night of Tue Jun 2', notes: '$159/night. 10% off Wonders of Wildlife aquarium across the street.' },
+        { name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', dates: 'Jun 3\u20136 \u00b7 4 nights', notes: 'Wedding HQ. 4 nights covering the ceremony weekend.' },
+        { name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', dates: 'Night of Sun Jun 7', notes: 'Near I-40/I-430 junction.', alternatives: 'Drury Inn, Hampton Inn, Holiday Inn Express' },
+        { name: 'Drury Plaza Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', dates: 'Night of Mon Jun 8', notes: 'Free hot dinner + drinks + indoor/outdoor pool.', alternatives: 'Gaylord Opryland, Hyatt House Nashville Airport' }
+      ],
+      fort_worth: [
+        { name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', rating: 4.6, ratingCount: 45000, notes: 'Top-rated zoo in the country. ~35 min from the wedding hotel.', tags: ['zoo', 'kids', 'outdoor'] },
+        { name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', notes: 'The wedding hotel \u2014 4 nights of home base.', tags: ['hotel', 'home base'] },
+        { name: 'Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', notes: 'Wedding ceremony venue.', tags: ['ceremony', 'wedding'] },
+        { name: 'Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', notes: 'Reception venue. ~10 min from the church.', tags: ['reception', 'wedding'] }
+      ],
+      memphis: [
+        { name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', rating: 4.6, notes: 'Indoor option for the Day 7 break. Good for bad weather.', tags: ['indoor', 'museum', 'kids'] },
+        { name: 'Shelby Farms Park', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', rating: 4.8, notes: 'Huge park with the Woodland Discovery Playground. Outdoor option.', tags: ['outdoor', 'park', 'playground'] }
+      ],
+      nashville: [
+        { name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', notes: 'Free hot dinner, drinks, and indoor/outdoor pool.', tags: ['hotel', 'booked'] },
+        { name: 'Gaylord Opryland Resort', lat: 36.2126, lng: -86.6942, address: '2800 Opryland Dr, Nashville, TN', notes: 'Backup option \u2014 massive indoor gardens and riverboat.', tags: ['hotel', 'alternative'] },
+        { name: 'Hyatt House Nashville Airport', lat: 36.1269, lng: -86.6782, address: '720 Royal Pkwy, Nashville, TN', notes: 'Second backup near the airport.', tags: ['hotel', 'alternative'] }
+      ],
+      louisville: [
+        { name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', notes: 'Home of the Kentucky Derby. Walk the grounds if open.', warning: 'Grounds closed Mon/Tue', tags: ['iconic', 'derby', 'outdoor'] },
+        { name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', notes: 'Open Tuesdays 8\u20135. Backup if Churchill grounds are closed.', tags: ['museum', 'derby', 'indoor'] }
+      ],
+      practical: [
+        { icon: '\uD83D\uDE97', title: 'Total driving', body: '~2,500 miles over 8 days. The two long pushes are Day 1 (~11 hrs) and Day 8 (~8 hrs).' },
+        { icon: '\uD83C\uDFE8', title: 'Hotels booked', body: '4 hotels: Bass Pro Angler\u2019s Lodge (Night 1), Hampton Inn Colleyville (Nights 2\u20135), Quality Inn West Little Rock (Night 6), Drury Plaza Nashville Airport (Night 7).' },
+        { icon: '\u26A0\uFE0F', title: 'Closures to watch', body: 'D\u2019Arcy\u2019s Pint (Springfield IL) closed Sun/Mon \u2014 Tue OK. Chick-fil-A McAlester closed Sun \u2014 Wed OK. Churchill Downs grounds closed Mon/Tue \u2014 call ahead, Derby Museum is the backup.' },
+        { icon: '\uD83D\uDC8D', title: 'Wedding logistics', body: 'Ceremony 4:30 PM Saturday Jun 6 at Ash Lane UMC (Euless). Reception ~5:45 PM at Montclair Event Venue (Colleyville), ~10 min drive.' }
+      ],
+      routeInfo: [
+        { route: 'Libertyville \u2192 Springfield, MO', time: '~11 hrs' },
+        { route: 'Springfield, MO \u2192 Colleyville, TX', time: '~7 hrs' },
+        { route: 'Colleyville \u2192 Little Rock', time: '~4.5 hrs' },
+        { route: 'Little Rock \u2192 Memphis', time: '~2.5 hrs' },
+        { route: 'Memphis \u2192 Nashville', time: '~3 hrs' },
+        { route: 'Nashville \u2192 Louisville', time: '~2.5 hrs' },
+        { route: 'Louisville \u2192 Libertyville', time: '~5 hrs' }
+      ]
+    },
+    footerText: 'Chicago \u2192 Dallas \u2192 Home \u00b7 June 2026'
   }
 };
 
@@ -1672,6 +1987,15 @@ function loadDestination(destId) {
           </div>
         </section>
       `;
+    } else if (tab.type === 'stays') {
+      sectionsHtml += `
+        <section class="section${hidden}" id="section-${tab.id}">
+          <h2 class="section-title">${tab.label}</h2>
+          <p class="section-desc">${tab.desc || 'Where we sleep each night.'}</p>
+          <div class="map-container"><div id="map-${dest.id}-${tab.id}"></div></div>
+          <div class="stays-list" id="stays-${tab.id}"></div>
+        </section>
+      `;
     }
   });
 
@@ -1707,7 +2031,41 @@ function initTab(tab) {
   } else if (tab.type === 'mylist') {
     renderMyList();
     updateMyListBadge();
+  } else if (tab.type === 'stays') {
+    const mapId = `map-${currentDest.id}-${tab.id}`;
+    const map = getOrCreateMap(mapId, currentDest.mapCenter, tab.mapZoom || 5);
+    renderStays(tab.id, currentDest.data.stays || [], map);
   }
+}
+
+function renderStays(tabId, stays, map) {
+  const listEl = document.getElementById(`stays-${tabId}`);
+  if (!listEl) return;
+  listEl.innerHTML = '';
+  const bounds = [];
+  stays.forEach((stay, i) => {
+    if (stay.lat && stay.lng) {
+      bounds.push([stay.lat, stay.lng]);
+      const marker = L.marker([stay.lat, stay.lng], {
+        icon: createMarkerIcon('marker-default', i + 1)
+      }).addTo(map);
+      marker.bindPopup(`<strong>${stay.name}</strong><br><span class="popup-addr">${stay.address}</span>`);
+    }
+    const card = document.createElement('div');
+    card.className = 'stay-card';
+    card.innerHTML = `
+      <h4>${stay.name}</h4>
+      ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
+      <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
+      ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
+      ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
+    `;
+    card.addEventListener('click', () => {
+      if (stay.lat && stay.lng) map.flyTo([stay.lat, stay.lng], 13, { duration: 0.8 });
+    });
+    listEl.appendChild(card);
+  });
+  if (bounds.length) map.fitBounds(bounds, { padding: [40, 40] });
 }
 
 function wireNavTabs() {
@@ -1754,6 +2112,14 @@ function wireNavTabs() {
             if (!document.getElementById('infoGrid').children.length && currentDest.data.practical) {
               populateInfo();
             }
+          } else if (tabConfig.type === 'stays') {
+            const mapId = `map-${currentDest.id}-${tabConfig.id}`;
+            if (!maps[mapId]) {
+              const map = getOrCreateMap(mapId, currentDest.mapCenter, tabConfig.mapZoom || currentDest.mapZoom);
+              renderStays(tabConfig.id, currentDest.data.stays || [], map);
+            } else {
+              maps[mapId].invalidateSize();
+            }
           }
         }
       }, 100);
@@ -1764,8 +2130,8 @@ function wireNavTabs() {
 /* ═══════════════════════════════════════════
    ITINERARY (Format A)
    ═══════════════════════════════════════════ */
-const dayColors = { 1: '#8B2500', 2: '#2D5016', 3: '#D4A574' };
-const dayClasses = { 1: 'marker-day1', 2: 'marker-day2', 3: 'marker-day3' };
+const dayColors = { 1: '#8B2500', 2: '#2D5016', 3: '#D4A574', 4: '#0C4A6E', 5: '#B45309', 6: '#7C2D12', 7: '#166534', 8: '#6B21A8' };
+const dayClasses = { 1: 'marker-day1', 2: 'marker-day2', 3: 'marker-day3', 4: 'marker-day4', 5: 'marker-day5', 6: 'marker-day6', 7: 'marker-day7', 8: 'marker-day8' };
 
 function loadItinerary() {
   const saved = loadState('itinerary');
@@ -1808,18 +2174,26 @@ function renderItinerary() {
   let globalIdx = 0;
 
   userItinerary.forEach(day => {
-    // Route polyline
-    const routeCoords = day.locations.map(l => [l.lat, l.lng]);
+    // Route polyline (skip option items so the route line stays clean)
+    const routeCoords = day.locations.filter(l => !l.optionLabel).map(l => [l.lat, l.lng]);
     const polyline = L.polyline(routeCoords, { color: dayColors[day.day_number] || '#888', weight: 3, opacity: 0.5, dashArray: '8 6' }).addTo(map);
 
     // Day header in timeline
     const header = document.createElement('div');
     header.className = 'day-header';
     header.dataset.day = day.day_number;
+    const typePillLabels = { travel: '\uD83D\uDE97 Travel Day', stationed: '\uD83C\uDFE8 Stationed', wedding: '\uD83D\uDC8D Wedding Day' };
+    const typePill = day.dayType ? `<span class="day-type-pill pill-${day.dayType}">${typePillLabels[day.dayType] || day.dayType}</span>` : '';
+    const routeLine = day.route ? `<div class="day-route">${day.route}</div>` : '';
+    const driveSummary = day.driveSummary ? `<div class="day-drive-summary">${day.driveSummary}</div>` : '';
+    const hotelBanner = day.hotel ? `<div class="day-hotel-banner">\uD83D\uDECF\uFE0F Tonight: ${day.hotel.name}<span class="hotel-where">· ${day.hotel.cityShort || day.hotel.address}</span></div>` : '';
     header.innerHTML = `
-      <span class="day-label day${day.day_number}">Day ${day.day_number}</span>
+      <span class="day-label day${day.day_number}">Day ${day.day_number}</span>${typePill}
       <h3>${day.title}</h3>
+      ${routeLine}
+      ${driveSummary}
       <p class="day-narrative">${day.narrative}</p>
+      ${hotelBanner}
     `;
     timelineEl.appendChild(header);
 
@@ -1837,7 +2211,7 @@ function renderItinerary() {
 
       // Timeline card
       const item = document.createElement('div');
-      item.className = `timeline-item day${day.day_number}`;
+      item.className = `timeline-item day${day.day_number}${loc.subtype === 'hotel' ? ' hotel-stop' : ''}`;
       item.dataset.day = day.day_number;
       item.dataset.idx = idx;
 
@@ -1847,6 +2221,8 @@ function renderItinerary() {
       if (loc.cost && loc.cost.toUpperCase().includes('FREE')) badges += '<span class="badge badge-free">Free</span> ';
       if (loc.cuisine) badges += `<span class="badge badge-price">${loc.cuisine}</span> `;
       if (loc.price) badges += `<span class="badge badge-price">${loc.price}</span> `;
+      if (loc.warning) badges += `<span class="badge badge-warning">${loc.warning}</span> `;
+      const optionBadge = loc.optionLabel ? `<span class="option-badge">Option ${loc.optionLabel}</span>` : '';
 
       let ratingHtml = '';
       if (loc.rating) {
@@ -1861,12 +2237,12 @@ function renderItinerary() {
         <div class="timeline-card">
           <button class="timeline-remove" title="Remove">&times;</button>
           <div class="timeline-card-header">
-            <h4>${loc.name}</h4>
+            <h4>${loc.name}${optionBadge}</h4>
             <span class="timeline-time">${loc.time}</span>
           </div>
           ${badges ? `<div style="margin-bottom:6px">${badges}</div>` : ''}
           ${ratingHtml}
-          <div class="timeline-meta">${loc.duration} min &middot; ${loc.address}</div>
+          <div class="timeline-meta">${loc.duration ? loc.duration + ' min &middot; ' : ''}${loc.address}</div>
           <div class="timeline-notes">${loc.notes}</div>
         </div>
       `;
