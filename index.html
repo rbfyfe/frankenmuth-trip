@@ -547,10 +547,17 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   background: rgba(0,0,0,0.04);
   border-radius: 50px;
   text-decoration: none;
-  transition: all 0.15s;
+  transition: background-color 0.15s, box-shadow 0.15s, color 0.15s;
 }
 .card-link:hover { background: rgba(0,0,0,0.09); text-decoration: none; }
+.card-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary), 0 0 0 4px rgba(139, 37, 0, 0.2);
+}
 .card-link.website-link { color: var(--accent); }
+.card-link.website-link:focus-visible {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(30, 58, 138, 0.2);
+}
 
 /* Stays tab */
 .stays-summary {
@@ -610,8 +617,9 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   font-size: 0.85rem;
 }
 .stay-cost-label { color: var(--gray); font-weight: 600; }
-.stay-cost-value { font-weight: 700; color: var(--brown); }
+.stay-cost-value { font-weight: 700; color: var(--brown); font-variant-numeric: tabular-nums; }
 .stay-total-value { font-size: 1rem; }
+.stays-summary-total { font-variant-numeric: tabular-nums; }
 .stays-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -624,10 +632,11 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
   border-left: 4px solid var(--primary);
 }
-.stay-card h4 {
+.stay-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
   margin-bottom: 4px;
+  text-wrap: balance;
 }
 .stay-dates {
   font-size: 0.75rem;
@@ -647,10 +656,20 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   line-height: 1.5;
   color: var(--brown);
 }
+#stays-stays .timeline-item:focus-visible {
+  outline: none;
+}
+#stays-stays .timeline-item:focus-visible .stay-card,
+#stays-stays .timeline-item:focus-visible .stays-option-cards .stay-card {
+  box-shadow: 0 0 0 2px var(--primary), 0 2px 8px rgba(0,0,0,0.06);
+}
+#stays-stays .timeline-item:hover .stay-card {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
 .stay-alts {
   margin-top: 10px;
   font-size: 0.75rem;
-  color: var(--gray);
+  color: var(--brown-light);
   font-style: italic;
 }
 
@@ -1700,7 +1719,7 @@ const DESTINATIONS = {
           hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
           locations: [
             { time: '10:00 AM', name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', duration: 240, notes: '4.6\u2605, ~35 min from hotel. Top-rated zoo in the country.', highlight: true, rating: 4.6, ratingCount: 45000, website: 'https://www.fortworthzoo.org/' },
-            { time: '5:00 PM', name: 'Family Picnic @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Grill-out dinner. Pool open for kids. Family guests arriving.' }
+            { time: '5:00 PM', name: 'Family Picnic @ Lewis House', lat: 32.8812, lng: -97.1506, address: '4702 Melrose Park Ct, Colleyville, TX 76034', duration: 180, notes: 'Grill-out dinner. Pool open for kids. Family guests arriving.' }
           ]
         },
         {
@@ -1713,7 +1732,7 @@ const DESTINATIONS = {
           locations: [
             { time: '12:00 PM', name: 'Pool day / hotel relax', lat: 32.9030, lng: -97.1339, address: 'Hampton Inn Colleyville', duration: 240, notes: 'Unstructured afternoon. Pool, nap, room service.' },
             { time: '6:00 PM', name: 'Kid dinner near hotel', lat: 32.9030, lng: -97.1339, address: 'Colleyville, TX \u2014 TBD', duration: 60, notes: 'Plenty of options within 5 min. Pick day-of based on mood.' },
-            { time: '8:00 PM', name: 'Meet up @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 90, notes: 'Rejoin the rehearsal group after their dinner.' }
+            { time: '8:00 PM', name: 'Meet up @ Lewis House', lat: 32.8812, lng: -97.1506, address: '4702 Melrose Park Ct, Colleyville, TX 76034', duration: 90, notes: 'Rejoin the rehearsal group after their dinner.' }
           ]
         },
         {
@@ -1731,13 +1750,14 @@ const DESTINATIONS = {
         {
           day_number: 6,
           title: 'Sunday, June 7 \u2014 Brunch \u2192 Little Rock',
-          narrative: 'Family brunch, afternoon hang, then ~4.5 hrs to Little Rock.',
+          narrative: 'Family brunch, stop by Grant and Katherine\u2019s, then ~4.5 hrs to Little Rock.',
           dayType: 'travel',
-          route: 'Colleyville, TX \u2192 Little Rock, AR',
+          route: 'Colleyville, TX \u2192 Northlake, TX \u2192 Little Rock, AR',
           driveSummary: '~4.5 hrs driving \u00b7 ~320 miles',
           hotel: { name: 'Quality Inn West Little Rock', cityShort: 'Little Rock, AR' },
           locations: [
-            { time: '10:00 AM', name: 'Family Brunch @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Breakfast + family hangout before heading out.' },
+            { time: '10:00 AM', name: 'Family Brunch @ Lewis House', lat: 32.8812, lng: -97.1506, address: '4702 Melrose Park Ct, Colleyville, TX 76034', duration: 180, notes: 'Breakfast + family hangout before heading out.' },
+            { time: '1:00 PM', name: "Grant and Katherine's", lat: 33.0912, lng: -97.2450, address: '1533 Tanglewood Trail, Northlake, TX 76226', duration: 180, notes: 'Quick visit with Grant and Katherine before hitting the road. ~35 min NW of Colleyville.' },
             { time: '5:30 PM', name: 'Depart Colleyville', lat: 32.9030, lng: -97.1339, address: 'Hampton Inn Colleyville', duration: 0, notes: '~4.5 hrs to Little Rock.', subtype: 'drive' },
             { time: '10:00 PM', name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', duration: 0, notes: 'Near I-40/I-430. Alts: Drury Inn, Hampton Inn, Holiday Inn Express.', subtype: 'hotel', website: 'https://www.choicehotels.com/arkansas/little-rock/quality-inn-hotels/ar114' }
           ]
@@ -2198,11 +2218,14 @@ function initTab(tab) {
   }
 }
 
+function formatUSD(n) {
+  return '$' + n.toLocaleString('en-US');
+}
 function formatCostRange(range) {
   if (!range) return '';
-  if (typeof range === 'number') return `$${range}`;
-  if (range.min === range.max) return `$${range.min}`;
-  return `$${range.min}–$${range.max}`;
+  if (typeof range === 'number') return formatUSD(range);
+  if (range.min === range.max) return formatUSD(range.min);
+  return `${formatUSD(range.min)}\u2013${formatUSD(range.max)}`;
 }
 
 function renderStays(tabId, stays, map) {
@@ -2241,27 +2264,28 @@ function renderStays(tabId, stays, map) {
 
   // Helper: build a single stay card's inner HTML (no timeline wrapper)
   const buildStayCardHTML = (stay) => {
+    const nightsLabel = `${stay.nights || 1}\u00a0night${(stay.nights || 1) > 1 ? 's' : ''}`;
     const costLine = stay.totalCost ? `<div class="stay-cost-line">
-      <span class="stay-cost-label">${stay.nights || 1} night${(stay.nights || 1) > 1 ? 's' : ''}${stay.costPerNight ? ' @ ' + formatCostRange(stay.costPerNight) + '/night' : ''}</span>
+      <span class="stay-cost-label">${nightsLabel}${stay.costPerNight ? ' @ ' + formatCostRange(stay.costPerNight) + '/night' : ''}</span>
       <span class="stay-cost-value stay-total-value">${formatCostRange(stay.totalCost)}</span>
     </div>` : '';
 
     const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stay.name + ', ' + stay.address)}`;
     const linksHtml = `<div class="card-links">
-      <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Maps</a>
-      ${stay.website ? `<a class="card-link website-link" href="${stay.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83C\uDF10 Website</a>` : ''}
+      <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener" aria-label="Open ${stay.name} in Google Maps" onclick="event.stopPropagation()"><span aria-hidden="true">\uD83D\uDCCD</span> Maps</a>
+      ${stay.website ? `<a class="card-link website-link" href="${stay.website}" target="_blank" rel="noopener" aria-label="Visit ${stay.name} website" onclick="event.stopPropagation()"><span aria-hidden="true">\uD83C\uDF10</span> Website</a>` : ''}
     </div>`;
 
-    const optionBadge = stay.optionLabel ? `<div class="stay-option-badge">Option ${stay.optionLabel}</div>` : '';
+    const optionBadge = stay.optionLabel ? `<div class="stay-option-badge" aria-label="Alternative ${stay.optionLabel}">Option ${stay.optionLabel}</div>` : '';
 
     return `<div class="stay-card" style="flex:1">
       ${optionBadge}
-      <h4>${stay.name}</h4>
+      <h3>${stay.name}</h3>
       ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
-      <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
+      <div class="stay-address"><span aria-hidden="true">\uD83D\uDCCD</span> ${stay.address}</div>
       ${costLine}
       ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
-      ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
+      ${stay.alternatives ? `<div class="stay-alts">Other nearby: ${stay.alternatives}</div>` : ''}
       ${linksHtml}
     </div>`;
   };
@@ -2292,8 +2316,11 @@ function renderStays(tabId, stays, map) {
     }
     const lastIdx = groupIndexes[groupIndexes.length - 1];
 
-    html += `<div class="timeline-item" data-stay-idx="${i}">
-      <div class="timeline-line">
+    const ariaLabel = groupIndexes.length > 1
+      ? `Night ${i + 1}: ${groupIndexes.map(gi => sorted[gi].name).join(' or ')}. Activate to focus on map.`
+      : `${stay.name}. Activate to focus on map.`;
+    html += `<div class="timeline-item" data-stay-idx="${i}" role="button" tabindex="0" aria-label="${ariaLabel.replace(/"/g, '&quot;')}">
+      <div class="timeline-line" aria-hidden="true">
         <div class="timeline-dot"></div>
         ${lastIdx < sorted.length - 1 ? '<div class="timeline-connector"></div>' : ''}
       </div>`;
@@ -2313,25 +2340,36 @@ function renderStays(tabId, stays, map) {
 
   // Summary at the BOTTOM
   if (anyCost) {
-    const totalRange = totalMin === totalMax ? `$${totalMin}` : `$${totalMin}\u2013$${totalMax}`;
+    const totalRange = totalMin === totalMax ? formatUSD(totalMin) : `${formatUSD(totalMin)}\u2013${formatUSD(totalMax)}`;
     const pricedDisplay = latestPricedAt ? new Date(latestPricedAt + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
     const hasOptions = sorted.some(s => s.optionLabel);
-    html += `<div class="stays-summary">
+    html += `<div class="stays-summary" role="region" aria-label="Total lodging cost summary">
       <div class="stays-summary-label">Total lodging</div>
       <div class="stays-summary-total">${totalRange}</div>
-      <div class="stays-summary-caption">Across ${primaryCount} nights${hasOptions ? ' (using primary option for each night)' : ''}${pricedDisplay ? ` \u00b7 Prices last checked ${pricedDisplay}` : ''}</div>
+      <div class="stays-summary-caption">${primaryCount}\u00a0nights${hasOptions ? ' \u00b7 based on Option\u00a0A where applicable' : ''}${pricedDisplay ? ` \u00b7 Prices updated ${pricedDisplay}` : ''}</div>
     </div>`;
   }
 
   listEl.innerHTML = html;
 
-  // Wire clicks to fly map (on the timeline-item, delegates to first stay's coords)
+  // Wire clicks + keyboard to fly the map. Respect prefers-reduced-motion.
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const flyDuration = prefersReduced ? 0 : 0.8;
+  const focusOnMap = (idx) => {
+    const stay = sorted[idx];
+    if (stay && stay.lat && stay.lng) map.flyTo([stay.lat, stay.lng], 13, { duration: flyDuration });
+  };
   listEl.querySelectorAll('[data-stay-idx]').forEach(el => {
     el.addEventListener('click', (e) => {
       if (e.target.closest('.card-link')) return;
-      const i = parseInt(el.dataset.stayIdx, 10);
-      const stay = sorted[i];
-      if (stay.lat && stay.lng) map.flyTo([stay.lat, stay.lng], 13, { duration: 0.8 });
+      focusOnMap(parseInt(el.dataset.stayIdx, 10));
+    });
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        if (e.target.closest('.card-link')) return;
+        e.preventDefault();
+        focusOnMap(parseInt(el.dataset.stayIdx, 10));
+      }
     });
   });
 
