@@ -517,6 +517,14 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
+.timeline-option-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+.timeline-item.option-group .timeline-card { border-left: 3px solid rgba(180, 83, 9, 0.4); }
 .hotel-stop .timeline-card {
   background: #FFFBEB;
   border-left: 3px solid var(--primary);
@@ -2215,24 +2223,22 @@ function renderItinerary() {
       }
     });
 
-    day.locations.forEach((loc, i) => {
-      const idx = globalIdx++;
+    // Phase 1: create all map markers for this day
+    const markerRefs = day.locations.map((loc, i) => {
       bounds.push([loc.lat, loc.lng]);
-
-      // Map marker
       const marker = L.marker([loc.lat, loc.lng], {
         icon: createMarkerIcon(dayClasses[day.day_number] || 'marker-default', labels[i])
       }).addTo(map);
-      marker.bindPopup(`<strong>${loc.name}</strong><br><span class="popup-time">${loc.time} &middot; ${loc.duration} min</span><br><span class="popup-addr">${loc.address}</span>`);
-
+      marker.bindPopup(`<strong>${loc.name}</strong><br><span class="popup-time">${loc.time} &middot; ${loc.duration || ''} min</span><br><span class="popup-addr">${loc.address}</span>`);
+      const idx = globalIdx++;
       itineraryMarkers.push({ marker, polyline, day: day.day_number, idx });
+      return { marker, idx };
+    });
 
-      // Timeline card
-      const item = document.createElement('div');
-      item.className = `timeline-item day${day.day_number}${loc.subtype === 'hotel' ? ' hotel-stop' : ''}`;
-      item.dataset.day = day.day_number;
-      item.dataset.idx = idx;
-
+    // Helper: build a single .timeline-card element (no outer .timeline-item)
+    const buildCard = (loc, i) => {
+      const card = document.createElement('div');
+      card.className = 'timeline-card';
       let badges = '';
       if (loc.highlight) badges += '<span class="badge badge-highlight">Must Try</span> ';
       if (loc.freeSamples) badges += '<span class="badge badge-samples">Free Samples</span> ';
@@ -2241,41 +2247,34 @@ function renderItinerary() {
       if (loc.price) badges += `<span class="badge badge-price">${loc.price}</span> `;
       if (loc.warning) badges += `<span class="badge badge-warning">${loc.warning}</span> `;
       const optionBadge = loc.optionLabel ? `<span class="option-badge">Option ${loc.optionLabel}</span>` : '';
-
       let ratingHtml = '';
       if (loc.rating) {
         ratingHtml = `<div class="card-rating"><span class="stars">${stars(loc.rating)}</span> ${loc.rating}${loc.ratingCount ? ` <span style="color:var(--gray);font-weight:400">(${formatCount(loc.ratingCount)} reviews)</span>` : ''}</div>`;
       }
-
-      item.innerHTML = `
-        <div class="timeline-line">
-          <div class="timeline-dot"></div>
-          ${i < day.locations.length - 1 ? '<div class="timeline-connector"></div>' : ''}
+      card.innerHTML = `
+        <button class="timeline-remove" title="Remove">&times;</button>
+        <div class="timeline-card-header">
+          <h4>${loc.name}${optionBadge}</h4>
+          <span class="timeline-time">${loc.time}</span>
         </div>
-        <div class="timeline-card">
-          <button class="timeline-remove" title="Remove">&times;</button>
-          <div class="timeline-card-header">
-            <h4>${loc.name}${optionBadge}</h4>
-            <span class="timeline-time">${loc.time}</span>
-          </div>
-          ${badges ? `<div style="margin-bottom:6px">${badges}</div>` : ''}
-          ${ratingHtml}
-          <div class="timeline-meta">${loc.duration ? loc.duration + ' min &middot; ' : ''}${loc.address}</div>
-          <div class="timeline-notes">${loc.notes}</div>
-        </div>
+        ${badges ? `<div style="margin-bottom:6px">${badges}</div>` : ''}
+        ${ratingHtml}
+        <div class="timeline-meta">${loc.duration ? loc.duration + ' min &middot; ' : ''}${loc.address}</div>
+        <div class="timeline-notes">${loc.notes}</div>
       `;
 
+      const { marker } = markerRefs[i];
       // Click card -> fly to marker
-      item.addEventListener('click', (e) => {
+      card.addEventListener('click', (e) => {
         if (e.target.closest('.timeline-remove') || e.target.closest('.time-edit-input')) return;
-        document.querySelectorAll('.timeline-item').forEach(el => el.classList.remove('active'));
-        item.classList.add('active');
+        document.querySelectorAll('.timeline-item, .timeline-card').forEach(el => el.classList.remove('active'));
+        card.classList.add('active');
         map.flyTo([loc.lat, loc.lng], 16, { duration: 0.8 });
         marker.openPopup();
       });
 
       // Remove button
-      item.querySelector('.timeline-remove').addEventListener('click', (e) => {
+      card.querySelector('.timeline-remove').addEventListener('click', (e) => {
         e.stopPropagation();
         const dayObj = userItinerary.find(d => d.day_number === day.day_number);
         dayObj.locations.splice(i, 1);
@@ -2285,9 +2284,9 @@ function renderItinerary() {
       });
 
       // Time editing
-      item.querySelector('.timeline-time').addEventListener('click', (e) => {
+      card.querySelector('.timeline-time').addEventListener('click', (e) => {
         e.stopPropagation();
-        if (item.querySelector('.time-edit-input')) return;
+        if (card.querySelector('.time-edit-input')) return;
         const timeSpan = e.currentTarget;
         const input = document.createElement('input');
         input.type = 'time';
@@ -2309,8 +2308,47 @@ function renderItinerary() {
         input.addEventListener('keydown', (ke) => { if (ke.key === 'Enter') { ke.preventDefault(); input.blur(); } });
       });
 
+      return card;
+    };
+
+    // Phase 2: walk locations, grouping consecutive options into one timeline-item row
+    let i = 0;
+    while (i < day.locations.length) {
+      const loc = day.locations[i];
+
+      // Collect consecutive siblings with same optionGroup
+      const groupIndexes = [i];
+      if (loc.optionLabel) {
+        let j = i + 1;
+        while (j < day.locations.length && day.locations[j].optionLabel && day.locations[j].optionGroup === loc.optionGroup) {
+          groupIndexes.push(j);
+          j++;
+        }
+      }
+
+      const lastIdxInDay = groupIndexes[groupIndexes.length - 1];
+      const item = document.createElement('div');
+      item.className = `timeline-item day${day.day_number}${loc.subtype === 'hotel' ? ' hotel-stop' : ''}${groupIndexes.length > 1 ? ' option-group' : ''}`;
+      item.dataset.day = day.day_number;
+      item.dataset.idx = markerRefs[i].idx;
+
+      const line = document.createElement('div');
+      line.className = 'timeline-line';
+      line.innerHTML = `<div class="timeline-dot"></div>${lastIdxInDay < day.locations.length - 1 ? '<div class="timeline-connector"></div>' : ''}`;
+      item.appendChild(line);
+
+      if (groupIndexes.length === 1) {
+        item.appendChild(buildCard(loc, i));
+      } else {
+        const wrap = document.createElement('div');
+        wrap.className = 'timeline-option-cards';
+        groupIndexes.forEach(gi => wrap.appendChild(buildCard(day.locations[gi], gi)));
+        item.appendChild(wrap);
+      }
+
       timelineEl.appendChild(item);
-    });
+      i = lastIdxInDay + 1;
+    }
   });
 
   if (bounds.length) map.fitBounds(bounds, { padding: [30, 30] });
