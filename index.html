@@ -529,7 +529,70 @@ button { font-family: var(--font); cursor: pointer; border: none; background: no
   background: #FFFBEB;
   border-left: 3px solid var(--primary);
 }
+/* Place links on cards */
+.card-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 11px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(0,0,0,0.04);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+.card-link:hover { background: rgba(0,0,0,0.09); text-decoration: none; }
+.card-link.website-link { color: var(--accent); }
+
 /* Stays tab */
+.stays-summary {
+  background: #FFF;
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border-left: 4px solid var(--primary);
+}
+.stays-summary-total {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--brown);
+  margin-bottom: 4px;
+}
+.stays-summary-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray);
+  margin-bottom: 4px;
+}
+.stays-summary-caption {
+  font-size: 0.76rem;
+  color: var(--gray);
+  font-style: italic;
+}
+.stay-cost-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 8px 0 4px;
+  padding: 8px 12px;
+  background: rgba(180, 83, 9, 0.08);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+.stay-cost-label { color: var(--gray); font-weight: 600; }
+.stay-cost-value { font-weight: 700; color: var(--brown); }
+.stay-total-value { font-size: 1rem; }
 .stays-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -1253,31 +1316,31 @@ const DESTINATIONS = {
           day_number: 1, title: "Sunday: Arrive & Explore Before Check-In",
           narrative: "Arrive around noon and hit the town before your 4pm check-in. Bronner\u2019s opens at noon on Sundays \u2014 perfect timing. Stroll Main Street, grab lunch, then check in and splash until bedtime.",
           locations: [
-            { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12\u20135:30pm. Strollers available. Kids will love the lights and displays. Budget ~45\u201360 min.", time: "12:00 PM", duration: 60, rating: 4.7, ratingCount: 16781, cost: "FREE", category: "activity" },
+            { name: "Bronner's Christmas Wonderland", lat: 43.3140278, lng: -83.7370808, address: "25 Christmas Ln, Frankenmuth, MI 48734", notes: "World's largest Christmas store. FREE admission. Sunday hours 12\u20135:30pm. Strollers available. Kids will love the lights and displays. Budget ~45\u201360 min.", time: "12:00 PM", duration: 60, rating: 4.7, ratingCount: 16781, cost: "FREE", category: "activity", website: "https://www.bronners.com/" },
             { name: "Visitor & Welcome Center", lat: 43.3278156, lng: -83.7396648, address: "635 S Main St, Frankenmuth, MI 48734", notes: "Grab the FREE coupon book and pick up the Gnome Scavenger Hunt guide. Sunday hours 12\u20135pm.", time: "1:15 PM", duration: 10, cost: "FREE", category: "activity" },
             { name: "Frankenmuth Cheese Haus", lat: 43.3289762, lng: -83.7390368, address: "545 S Main St, Frankenmuth, MI 48734", notes: "Free cheese samples! 270+ varieties including chocolate cheese and cheese shaped like animals. Quick fun stop for kids.", time: "1:30 PM", duration: 15, rating: 4.6, ratingCount: 4874, category: "sweets", freeSamples: true },
             { name: "Frankenmuth Fudge Kitchen", lat: 43.3284016, lng: -83.7399622, address: "606 S Main St, Frankenmuth, MI 48734", notes: "Watch fudge being made right in front of you. Free samples. Right on Main Street.", time: "1:50 PM", duration: 15, rating: 4.7, ratingCount: 1109, category: "sweets", freeSamples: true },
             { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", notes: "Louisiana-style beignets with powdered sugar + great coffee. Perfect quick lunch with kids.", time: "2:15 PM", duration: 30, rating: 4.3, ratingCount: 32, cuisine: "Cajun / Caf\u00e9", price: "$", category: "restaurant" },
             { name: "River Place Shops", lat: 43.3235779, lng: -83.7396469, address: "925 S Main St, Frankenmuth, MI 48734", notes: "40+ indoor shops. Kids love the Mirror Maze, xylophone/drums play area, and SugarHigh Bakery. Good spot to hunt gnomes.", time: "2:50 PM", duration: 50, rating: 4.7, ratingCount: 13742, cost: "Free to browse", category: "activity" },
-            { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Check in at 4pm. Waterpark access starts immediately \u2014 open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120, rating: 4.5, category: "activity" },
-            { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75, rating: 4.3, ratingCount: 12631, cuisine: "German / American", price: "$$", category: "restaurant", highlight: true }
+            { name: "Bavarian Inn Lodge (CHECK-IN)", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", website: "https://www.bavarianinn.com/", notes: "Check in at 4pm. Waterpark access starts immediately \u2014 open until 8pm Sunday. Wave pool, lazy river, toddler slides.", time: "4:00 PM", duration: 120, rating: 4.5, category: "activity" },
+            { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", website: "https://www.bavarianinn.com/", notes: "THE famous family-style chicken dinner. Giant platters passed around the table. Kids' menu available. Arrive early to avoid a wait.", time: "6:30 PM", duration: 75, rating: 4.3, ratingCount: 12631, cuisine: "German / American", price: "$$", category: "restaurant", highlight: true }
           ]
         },
         {
           day_number: 2, title: "Monday: Waterpark Day + Town Fun",
           narrative: "Full waterpark day with breaks to explore town. Mix in mini golf, arcade, and a walk through town for gnome hunting and sweet shops.",
           locations: [
-            { name: "Bavarian Inn Lodge \u2014 Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Waterpark 10am\u20138pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180, rating: 4.5, cost: "Included with stay", category: "activity" },
+            { name: "Bavarian Inn Lodge \u2014 Waterpark", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", website: "https://www.bavarianinn.com/", notes: "Waterpark 10am\u20138pm. Toddler slides: Kinder Blast (36\"+), Buttered Noodle. Wave pool has gentle shore for little ones. Kids under 48\" must wear lifejackets. Also: mini golf, mini bowling, arcade, Build-A-Bear.", time: "10:00 AM", duration: 180, rating: 4.5, cost: "Included with stay", category: "activity" },
             { name: "Frankenmuth Taffy Kitchen", lat: 43.3285048, lng: -83.7392678, address: "565\u00bd S Main St, Frankenmuth, MI 48734", notes: "Midday break from the waterpark. Watch taffy being pulled \u2014 mesmerizing for the almost-4-year-old.", time: "1:30 PM", duration: 15, rating: 4.3, ratingCount: 51, category: "sweets", freeSamples: true },
             { name: "Jaami's Ice Cream and Treats", lat: 43.3285176, lng: -83.740093, address: "592 Cass St, Frankenmuth, MI 48734", notes: "40 flavors of Hudsonville ice cream, house-made waffle cones. Great midday treat. Just off Main Street.", time: "2:00 PM", duration: 20, rating: 4.6, ratingCount: 400, category: "sweets" },
-            { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75, rating: 4.4, ratingCount: 18879, cuisine: "American / German", price: "$$", category: "restaurant", highlight: true }
+            { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", website: "https://www.zehnders.com/", notes: "Dinner at the other famous chicken spot. Similar family-style experience to Bavarian Inn. Explore the bakery and gift shops in the lower level after dinner.", time: "5:30 PM", duration: 75, rating: 4.4, ratingCount: 18879, cuisine: "American / German", price: "$$", category: "restaurant", highlight: true }
           ]
         },
         {
           day_number: 3, title: "Tuesday: Checkout & Drive to Holland via Grand Rapids",
           narrative: "Morning waterpark session, check out by 11am, then head west. Grand Rapids is the perfect pit stop \u2014 about 2 hours from Frankenmuth, 35 min from Holland.",
           locations: [
-            { name: "Bavarian Inn Lodge \u2014 Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60, category: "activity" },
+            { name: "Bavarian Inn Lodge \u2014 Last Splash", lat: 43.325915, lng: -83.736793, address: "1 Covered Bridge Ln, Frankenmuth, MI 48734", website: "https://www.bavarianinn.com/", notes: "Last waterpark session starting at 10am. Check out by 11am.", time: "10:00 AM", duration: 60, category: "activity" },
             { name: "Birch Run Premium Outlets", lat: 43.246353, lng: -83.7751016, address: "12240 S Beyer Rd, Birch Run, MI 48415", notes: "Optional quick stop \u2014 10 min south on I-75. 100+ outlet stores (Nike, Under Armour, Coach). Opens at 10am.", time: "11:15 AM", duration: 45, category: "activity" },
             { name: "Grand Rapids Children's Museum", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "TOP PICK for your kids' ages. Dedicated Just-For-Tots area for the 17-month-old. Little GR mini city, bubbles, Water Works for the almost-4-year-old. Open Tues 9am\u20134pm. Plan 1.5\u20132 hrs.", time: "1:30 PM", duration: 120, rating: 4.5, ratingCount: 0, cost: "Admission fee", category: "activity" },
             { name: "Grand Rapids Children's Museum \u2014 Departure", lat: 42.9636004, lng: -85.667191, address: "11 Sheldon Ave NE, Grand Rapids, MI 49503", notes: "Head home to Holland \u2014 only 35 min from Grand Rapids.", time: "3:30 PM", duration: 0 }
@@ -1285,8 +1348,8 @@ const DESTINATIONS = {
         }
       ],
       restaurants: [
-        { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", cuisine: "German / American", rating: 4.3, ratingCount: 12631, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "Famous family-style chicken dinner. Giant platters, German decor, staff in traditional attire. Kids' menu available.", tags: ["chicken dinner","family-style","german","kids menu"], highlight: true },
-        { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", cuisine: "American / German", rating: 4.4, ratingCount: 18879, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "The other famous chicken dinner spot. Similar family-style experience. Explore the bakery & gift shops downstairs.", tags: ["chicken dinner","family-style","bakery","kids menu"], highlight: true },
+        { name: "Bavarian Inn Restaurant", lat: 43.3265447, lng: -83.7398378, address: "713 S Main St, Frankenmuth, MI 48734", website: "https://www.bavarianinn.com/", cuisine: "German / American", rating: 4.3, ratingCount: 12631, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "Famous family-style chicken dinner. Giant platters, German decor, staff in traditional attire. Kids' menu available.", tags: ["chicken dinner","family-style","german","kids menu"], highlight: true },
+        { name: "Zehnder's of Frankenmuth", lat: 43.3269107, lng: -83.740799, address: "730 S Main St, Frankenmuth, MI 48734", website: "https://www.zehnders.com/", cuisine: "American / German", rating: 4.4, ratingCount: 18879, price: "$$", hours: "Sun\u2013Thu 11am\u20138pm, Fri\u2013Sat 11am\u20139pm", notes: "The other famous chicken dinner spot. Similar family-style experience. Explore the bakery & gift shops downstairs.", tags: ["chicken dinner","family-style","bakery","kids menu"], highlight: true },
         { name: "N'Orlins Beignets & Coffee", lat: 43.327947, lng: -83.7403082, address: "646 S Main St, Frankenmuth, MI 48734", cuisine: "Cajun / Caf\u00e9", rating: 4.3, ratingCount: 32, price: "$", hours: "Varies", notes: "Louisiana-style beignets, gumbo, caf\u00e9 au lait. Quick & easy with kids. Two locations.", tags: ["beignets","coffee","quick bite","cajun"] },
         { name: "La Cr\u00eape du Jour", lat: 43.3235818, lng: -83.7397406, address: "925 S Main St H7 (River Place)", cuisine: "French / Cr\u00eapes", rating: 4.5, ratingCount: 1346, price: "$", hours: "Sun\u2013Thu 10am\u20136pm, Fri\u2013Sat 10am\u20138pm", notes: "Sweet & savory crepes at River Place. Gluten-free options. Kids love the cookie dough crepe.", tags: ["crepes","gluten-free","river place","quick bite"] },
         { name: "Pasty Haus", lat: 43.3239861, lng: -83.739832, address: "925 S Main St G2 (River Place)", cuisine: "Michigan / Comfort", rating: 4.4, ratingCount: 477, price: "$$", hours: "Sun\u2013Thu 11am\u20136pm, Fri\u2013Sat 11am\u20138pm", notes: "Pasties, brats, bubble tea at River Place. Vegan options. Good quick lunch.", tags: ["pasties","vegan options","bubble tea","river place"] },
@@ -1586,10 +1649,10 @@ const DESTINATIONS = {
             { time: '7:00 AM', name: 'Depart Libertyville, IL', lat: 42.2834, lng: -87.9528, address: 'Home', duration: 0, notes: 'Hit the road early to make the City Museum window.', subtype: 'drive' },
             { time: '10:00 AM', name: "Portillo's Normal, IL", lat: 40.5192, lng: -88.9935, address: '202 Landmark Dr, Normal, IL 61761', duration: 60, notes: 'Lunch on the way \u2014 ~2.5 hrs from Libertyville. Quick in and out.', cuisine: 'Chicago classics', optionGroup: 'lunch1', optionLabel: 'A' },
             { time: '11:30 AM', name: "Obed & Isaac's (Springfield, IL)", lat: 39.7994, lng: -89.6459, address: '500 S 6th St, Springfield, IL 62701', duration: 60, notes: 'Lunch option B \u2014 ~3.5 hrs from Libertyville. Good lawn for kids to run around.', cuisine: 'American pub', optionGroup: 'lunch1', optionLabel: 'B' },
-            { time: '12:30 PM', name: 'City Museum (St. Louis)', lat: 38.6333, lng: -90.2013, address: '750 N 16th St, St. Louis, MO 63103', duration: 210, notes: 'The main event. 3\u20134 hours. Bring knee pads and long sleeves \u2014 tons of crawling.', highlight: true, cost: '$20 admission' },
+            { time: '12:30 PM', name: 'City Museum (St. Louis)', lat: 38.6333, lng: -90.2013, address: '750 N 16th St, St. Louis, MO 63103', duration: 210, notes: 'The main event. 3\u20134 hours. Bring knee pads and long sleeves \u2014 tons of crawling.', highlight: true, cost: '$20 admission', website: 'https://www.citymuseum.org/' },
             { time: '4:45 PM', name: 'Dinner: Sunset Hills, MO', lat: 38.5380, lng: -90.4490, address: 'Chick-fil-A Fenton / Panera Sunset Hills / Freddy\u2019s', duration: 45, notes: '30 min into the drive. Quick dinner if the kids are fried.', optionGroup: 'dinner1', optionLabel: 'A' },
             { time: '6:00 PM', name: "Dinner: Rolla, MO (Culver's)", lat: 37.9486, lng: -91.7626, address: 'Culver\u2019s or Panera, Rolla MO', duration: 45, notes: '1.5 hrs in \u2014 splits the remaining drive in half.', optionGroup: 'dinner1', optionLabel: 'B' },
-            { time: '9:30 PM', name: "Bass Pro Angler's Lodge", lat: 37.1817, lng: -93.2923, address: '621 W Sunshine St, Springfield, MO 65807', duration: 0, notes: '$159/night. 10% off the Wonders of Wildlife aquarium across the street.', subtype: 'hotel' }
+            { time: '9:30 PM', name: "Bass Pro Angler's Lodge", lat: 37.1817, lng: -93.2923, address: '621 W Sunshine St, Springfield, MO 65807', duration: 0, notes: '$140\u2013$200/night range. 10% off the Wonders of Wildlife aquarium across the street.', subtype: 'hotel', website: 'https://bassproanglerslodge.com/springfield/' }
           ]
         },
         {
@@ -1602,11 +1665,11 @@ const DESTINATIONS = {
           hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
           locations: [
             { time: '8:00 AM', name: 'Breakfast at lodge', lat: 37.1817, lng: -93.2923, address: "Bass Pro Angler's Lodge", duration: 60, notes: 'Hotel breakfast. Pack up.' },
-            { time: '9:00 AM', name: 'Bass Pro Shops (flagship)', lat: 37.1766, lng: -93.2983, address: '1935 S Campbell Ave, Springfield, MO', duration: 60, notes: 'Worth a wander \u2014 huge aquarium-style displays even in the store.' },
-            { time: '10:00 AM', name: 'Wonders of Wildlife Aquarium', lat: 37.1794, lng: -93.2970, address: '500 W Sunshine St, Springfield, MO', duration: 120, notes: '4.8\u2605 must-do. Use the 10% lodge discount.', highlight: true },
+            { time: '9:00 AM', name: 'Bass Pro Shops (flagship)', lat: 37.1766, lng: -93.2983, address: '1935 S Campbell Ave, Springfield, MO', duration: 60, notes: 'Worth a wander \u2014 huge aquarium-style displays even in the store.', website: 'https://stores.basspro.com/us/mo/springfield/1935-s-campbell-ave.html' },
+            { time: '10:00 AM', name: 'Wonders of Wildlife Aquarium', lat: 37.1794, lng: -93.2970, address: '500 W Sunshine St, Springfield, MO', duration: 120, notes: '4.8\u2605 must-do. Use the 10% lodge discount.', highlight: true, website: 'https://wondersofwildlife.org/' },
             { time: '12:30 PM', name: 'Depart for Colleyville', lat: 37.1794, lng: -93.2970, address: 'Springfield, MO', duration: 0, notes: '~7 hrs on the road.', subtype: 'drive' },
             { time: '4:45 PM', name: 'Dinner: Chick-fil-A McAlester, OK', lat: 34.9220, lng: -95.7697, address: '1209 Tanglewood Dr, McAlester, OK', duration: 45, notes: 'Closed Sun \u2014 Wednesday \u2705. Halfway-ish stop.', warning: 'Closed Sun' },
-            { time: '8:30 PM', name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', duration: 0, notes: 'Wedding HQ for the next 4 nights.', subtype: 'hotel' }
+            { time: '8:30 PM', name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', duration: 0, notes: 'Wedding HQ for the next 4 nights.', subtype: 'hotel', website: 'https://www.hilton.com/en/hotels/dfwgdhx-hampton-suites-colleyville-dfw-airport-west/' }
           ]
         },
         {
@@ -1617,7 +1680,7 @@ const DESTINATIONS = {
           route: 'Based in Colleyville',
           hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
           locations: [
-            { time: '10:00 AM', name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', duration: 240, notes: '4.6\u2605, ~35 min from hotel. Top-rated zoo in the country.', highlight: true, rating: 4.6, ratingCount: 45000 },
+            { time: '10:00 AM', name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', duration: 240, notes: '4.6\u2605, ~35 min from hotel. Top-rated zoo in the country.', highlight: true, rating: 4.6, ratingCount: 45000, website: 'https://www.fortworthzoo.org/' },
             { time: '5:00 PM', name: 'Family Picnic @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Grill-out dinner. Pool open for kids. Family guests arriving.' }
           ]
         },
@@ -1642,8 +1705,8 @@ const DESTINATIONS = {
           route: 'Based in Colleyville',
           hotel: { name: 'Hampton Inn & Suites Colleyville', cityShort: 'Colleyville, TX' },
           locations: [
-            { time: '4:30 PM', name: 'Ceremony: Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', duration: 60, notes: 'Wedding ceremony.', highlight: true },
-            { time: '5:45 PM', name: 'Reception: Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', duration: 300, notes: '~10 min from church. Cocktail hour + reception.' }
+            { time: '4:30 PM', name: 'Ceremony: Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', duration: 60, notes: 'Wedding ceremony.', highlight: true, website: 'https://ashlaneumc.org/' },
+            { time: '5:45 PM', name: 'Reception: Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', duration: 300, notes: '~10 min from church. Cocktail hour + reception.', website: 'https://montclaireventvenue.com/' }
           ]
         },
         {
@@ -1657,7 +1720,7 @@ const DESTINATIONS = {
           locations: [
             { time: '10:00 AM', name: 'Family Brunch @ Lewis House', lat: 32.8812, lng: -97.1506, address: 'Colleyville, TX', duration: 180, notes: 'Breakfast + family hangout before heading out.' },
             { time: '5:30 PM', name: 'Depart Colleyville', lat: 32.9030, lng: -97.1339, address: 'Hampton Inn Colleyville', duration: 0, notes: '~4.5 hrs to Little Rock.', subtype: 'drive' },
-            { time: '10:00 PM', name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', duration: 0, notes: 'Near I-40/I-430. Alts: Drury Inn, Hampton Inn, Holiday Inn Express.', subtype: 'hotel' }
+            { time: '10:00 PM', name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', duration: 0, notes: 'Near I-40/I-430. Alts: Drury Inn, Hampton Inn, Holiday Inn Express.', subtype: 'hotel', website: 'https://www.choicehotels.com/arkansas/little-rock/quality-inn-hotels/ar114' }
           ]
         },
         {
@@ -1670,10 +1733,10 @@ const DESTINATIONS = {
           hotel: { name: 'Drury Plaza Nashville Airport', cityShort: 'Nashville, TN' },
           locations: [
             { time: '8:30 AM', name: 'Depart Little Rock', lat: 34.7564, lng: -92.3745, address: 'Little Rock, AR', duration: 0, notes: '~2.5 hrs to Memphis.', subtype: 'drive' },
-            { time: '11:00 AM', name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', duration: 150, notes: '4.6\u2605. Indoor option \u2014 good if weather is bad.', optionGroup: 'memphis', optionLabel: 'A', rating: 4.6 },
-            { time: '11:00 AM', name: 'Shelby Farms Park + Woodland Discovery Playground', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', duration: 150, notes: '4.8\u2605. Outdoor option \u2014 huge playground, great if weather cooperates.', optionGroup: 'memphis', optionLabel: 'B', rating: 4.8 },
+            { time: '11:00 AM', name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', duration: 150, notes: '4.6\u2605. Indoor option \u2014 good if weather is bad.', optionGroup: 'memphis', optionLabel: 'A', rating: 4.6, website: 'https://www.cmom.com/' },
+            { time: '11:00 AM', name: 'Shelby Farms Park + Woodland Discovery Playground', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', duration: 150, notes: '4.8\u2605. Outdoor option \u2014 huge playground, great if weather cooperates.', optionGroup: 'memphis', optionLabel: 'B', rating: 4.8, website: 'https://www.shelbyfarmspark.org/' },
             { time: '1:30 PM', name: 'Depart Memphis', lat: 35.1162, lng: -89.9786, address: 'Memphis, TN', duration: 0, notes: '~3\u20133.5 hrs to Nashville.', subtype: 'drive' },
-            { time: '5:00 PM', name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', duration: 0, notes: 'Free hot dinner + drinks + indoor/outdoor pool. Alts: Gaylord Opryland, Hyatt House.', subtype: 'hotel' }
+            { time: '5:00 PM', name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', duration: 0, notes: 'Free hot dinner + drinks + indoor/outdoor pool. Alts: Gaylord Opryland, Hyatt House.', subtype: 'hotel', website: 'https://www.druryhotels.com/locations/nashville-tn/drury-inn-and-suites-nashville-airport' }
           ]
         },
         {
@@ -1685,8 +1748,8 @@ const DESTINATIONS = {
           driveSummary: '~8 hrs driving \u00b7 ~540 miles',
           locations: [
             { time: '8:00 AM', name: 'Depart Nashville', lat: 36.1217, lng: -86.6713, address: 'Nashville, TN', duration: 0, notes: '~2.5\u20133 hrs to Louisville.', subtype: 'drive' },
-            { time: '11:00 AM', name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', duration: 90, notes: 'Walk grounds, see Derby track + twin spires.', warning: 'Grounds closed Mon/Tue', optionGroup: 'louisville', optionLabel: 'A' },
-            { time: '11:00 AM', name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', duration: 90, notes: 'Open Tuesdays 8\u20135. Backup plan if the grounds are closed.', optionGroup: 'louisville', optionLabel: 'B' },
+            { time: '11:00 AM', name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', duration: 90, notes: 'Walk grounds, see Derby track + twin spires.', warning: 'Grounds closed Mon/Tue', optionGroup: 'louisville', optionLabel: 'A', website: 'https://www.churchilldowns.com/' },
+            { time: '11:00 AM', name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', duration: 90, notes: 'Open Tuesdays 8\u20135. Backup plan if the grounds are closed.', optionGroup: 'louisville', optionLabel: 'B', website: 'https://www.derbymuseum.org/' },
             { time: '2:30 PM', name: 'Leave Louisville', lat: 38.2049, lng: -85.7702, address: 'Louisville, KY', duration: 0, notes: '~5 hrs to Libertyville.', subtype: 'drive' },
             { time: '5:00 PM', name: 'Food stop near Indianapolis', lat: 39.7684, lng: -86.1581, address: 'Indianapolis, IN area', duration: 60, notes: '~1 hr break, gas up, grab dinner.' },
             { time: '9:00 PM', name: 'Home \u2014 Libertyville, IL', lat: 42.2834, lng: -87.9528, address: 'Libertyville, IL', duration: 0, notes: '\uD83C\uDFE0 Home sweet home.', subtype: 'hotel' }
@@ -1694,29 +1757,83 @@ const DESTINATIONS = {
         }
       ],
       stays: [
-        { name: "Bass Pro Shops Angler's Lodge", lat: 37.1817, lng: -93.2923, address: '621 W Sunshine St, Springfield, MO 65807', dates: 'Night of Tue Jun 2', notes: '$159/night. 10% off Wonders of Wildlife aquarium across the street.' },
-        { name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', dates: 'Jun 3\u20136 \u00b7 4 nights', notes: 'Wedding HQ. 4 nights covering the ceremony weekend.' },
-        { name: 'Quality Inn West Little Rock', lat: 34.7564, lng: -92.3745, address: '300 Markham Center Dr, Little Rock, AR', dates: 'Night of Sun Jun 7', notes: 'Near I-40/I-430 junction.', alternatives: 'Drury Inn, Hampton Inn, Holiday Inn Express' },
-        { name: 'Drury Plaza Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', dates: 'Night of Mon Jun 8', notes: 'Free hot dinner + drinks + indoor/outdoor pool.', alternatives: 'Gaylord Opryland, Hyatt House Nashville Airport' }
+        {
+          name: "Bass Pro Shops Angler's Lodge",
+          lat: 37.1817, lng: -93.2923,
+          address: '621 W Sunshine St, Springfield, MO 65807',
+          dates: 'Check-in Tue Jun 2, 2026',
+          checkIn: 'Jun 2, 2026',
+          checkOut: 'Jun 3, 2026',
+          nights: 1,
+          costPerNight: { min: 140, max: 200 },
+          totalCost: { min: 140, max: 200 },
+          pricedAt: '2026-04-18',
+          website: 'https://bassproanglerslodge.com/springfield/',
+          notes: 'Comp breakfast, indoor pool + hot tub, all rooms w/ A/C and WiFi. 10% off Wonders of Wildlife aquarium across the street.'
+        },
+        {
+          name: 'Hampton Inn & Suites Colleyville DFW Airport West',
+          lat: 32.9030, lng: -97.1339,
+          address: '5300 Hwy 121, Colleyville, TX 76034',
+          dates: 'Check-in Wed Jun 3 \u2192 Check-out Sun Jun 7',
+          checkIn: 'Jun 3, 2026',
+          checkOut: 'Jun 7, 2026',
+          nights: 4,
+          costPerNight: { min: 100, max: 160 },
+          totalCost: { min: 400, max: 640 },
+          pricedAt: '2026-04-18',
+          website: 'https://www.hilton.com/en/hotels/dfwgdhx-hampton-suites-colleyville-dfw-airport-west/',
+          notes: 'Wedding HQ \u2014 4 nights covering the ceremony weekend. Free breakfast, pool, near DFW airport.'
+        },
+        {
+          name: 'Quality Inn & Suites Little Rock West',
+          lat: 34.7564, lng: -92.3745,
+          address: '300 Markham Center Dr, Little Rock, AR',
+          dates: 'Check-in Sun Jun 7, 2026',
+          checkIn: 'Jun 7, 2026',
+          checkOut: 'Jun 8, 2026',
+          nights: 1,
+          costPerNight: { min: 80, max: 110 },
+          totalCost: { min: 80, max: 110 },
+          pricedAt: '2026-04-18',
+          website: 'https://www.choicehotels.com/arkansas/little-rock/quality-inn-hotels/ar114',
+          notes: 'Near I-40/I-430 junction. Budget-friendly stop on the way home.',
+          alternatives: 'Drury Inn, Hampton Inn, Holiday Inn Express'
+        },
+        {
+          name: 'Drury Inn & Suites Nashville Airport',
+          lat: 36.1217, lng: -86.6713,
+          address: '555 Donelson Pike, Nashville, TN',
+          dates: 'Check-in Mon Jun 8, 2026',
+          checkIn: 'Jun 8, 2026',
+          checkOut: 'Jun 9, 2026',
+          nights: 1,
+          costPerNight: { min: 130, max: 180 },
+          totalCost: { min: 130, max: 180 },
+          pricedAt: '2026-04-18',
+          website: 'https://www.druryhotels.com/locations/nashville-tn/drury-inn-and-suites-nashville-airport',
+          notes: 'Free hot dinner, drinks, and indoor/outdoor pool. Drury\u2019s signature Kickback.',
+          alternatives: 'Gaylord Opryland, Hyatt House Nashville Airport'
+        }
       ],
       fort_worth: [
-        { name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', rating: 4.6, ratingCount: 45000, notes: 'Top-rated zoo in the country. ~35 min from the wedding hotel.', tags: ['zoo', 'kids', 'outdoor'] },
-        { name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', notes: 'The wedding hotel \u2014 4 nights of home base.', tags: ['hotel', 'home base'] },
-        { name: 'Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', notes: 'Wedding ceremony venue.', tags: ['ceremony', 'wedding'] },
-        { name: 'Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', notes: 'Reception venue. ~10 min from the church.', tags: ['reception', 'wedding'] }
+        { name: 'Fort Worth Zoo', lat: 32.7267, lng: -97.3587, address: '1989 Colonial Pkwy, Fort Worth, TX 76110', rating: 4.6, ratingCount: 45000, notes: 'Top-rated zoo in the country. ~35 min from the wedding hotel.', tags: ['zoo', 'kids', 'outdoor'], website: 'https://www.fortworthzoo.org/' },
+        { name: 'Hampton Inn & Suites Colleyville', lat: 32.9030, lng: -97.1339, address: '5300 Hwy 121, Colleyville, TX 76034', notes: 'The wedding hotel \u2014 4 nights of home base.', tags: ['hotel', 'home base'], website: 'https://www.hilton.com/en/hotels/dfwgdhx-hampton-suites-colleyville-dfw-airport-west/' },
+        { name: 'Ash Lane United Methodist Church', lat: 32.8542, lng: -97.0822, address: '1001 W Ash Ln, Euless, TX 76039', notes: 'Wedding ceremony venue.', tags: ['ceremony', 'wedding'], website: 'https://ashlaneumc.org/' },
+        { name: 'Montclair Event Venue', lat: 32.9082, lng: -97.1487, address: '6504 Colleyville Blvd, Colleyville, TX', notes: 'Reception venue. ~10 min from the church.', tags: ['reception', 'wedding'], website: 'https://montclaireventvenue.com/' }
       ],
       memphis: [
-        { name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', rating: 4.6, notes: 'Indoor option for the Day 7 break. Good for bad weather.', tags: ['indoor', 'museum', 'kids'] },
-        { name: 'Shelby Farms Park', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', rating: 4.8, notes: 'Huge park with the Woodland Discovery Playground. Outdoor option.', tags: ['outdoor', 'park', 'playground'] }
+        { name: "Children's Museum of Memphis", lat: 35.1162, lng: -89.9786, address: '2525 Central Ave, Memphis, TN', rating: 4.6, notes: 'Indoor option for the Day 7 break. Good for bad weather.', tags: ['indoor', 'museum', 'kids'], website: 'https://www.cmom.com/' },
+        { name: 'Shelby Farms Park', lat: 35.1495, lng: -89.8586, address: '6903 Great View Dr N, Memphis, TN', rating: 4.8, notes: 'Huge park with the Woodland Discovery Playground. Outdoor option.', tags: ['outdoor', 'park', 'playground'], website: 'https://www.shelbyfarmspark.org/' }
       ],
       nashville: [
-        { name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', notes: 'Free hot dinner, drinks, and indoor/outdoor pool.', tags: ['hotel', 'booked'] },
-        { name: 'Gaylord Opryland Resort', lat: 36.2126, lng: -86.6942, address: '2800 Opryland Dr, Nashville, TN', notes: 'Backup option \u2014 massive indoor gardens and riverboat.', tags: ['hotel', 'alternative'] },
-        { name: 'Hyatt House Nashville Airport', lat: 36.1269, lng: -86.6782, address: '720 Royal Pkwy, Nashville, TN', notes: 'Second backup near the airport.', tags: ['hotel', 'alternative'] }
+        { name: 'Drury Plaza Hotel Nashville Airport', lat: 36.1217, lng: -86.6713, address: '555 Donelson Pike, Nashville, TN', notes: 'Free hot dinner, drinks, and indoor/outdoor pool.', tags: ['hotel', 'booked'], website: 'https://www.druryhotels.com/locations/nashville-tn/drury-inn-and-suites-nashville-airport' },
+        { name: 'Gaylord Opryland Resort', lat: 36.2126, lng: -86.6942, address: '2800 Opryland Dr, Nashville, TN', notes: 'Backup option \u2014 massive indoor gardens and riverboat.', tags: ['hotel', 'alternative'], website: 'https://www.marriott.com/en-us/hotels/bnago-gaylord-opryland-resort-and-convention-center/' },
+        { name: 'Hyatt House Nashville Airport', lat: 36.1269, lng: -86.6782, address: '720 Royal Pkwy, Nashville, TN', notes: 'Second backup near the airport.', tags: ['hotel', 'alternative'], website: 'https://www.hyatt.com/en-US/hotel/tennessee/hyatt-house-nashville-airport/bnarn' }
       ],
       louisville: [
-        { name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', notes: 'Home of the Kentucky Derby. Walk the grounds if open.', warning: 'Grounds closed Mon/Tue', tags: ['iconic', 'derby', 'outdoor'] },
-        { name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', notes: 'Open Tuesdays 8\u20135. Backup if Churchill grounds are closed.', tags: ['museum', 'derby', 'indoor'] }
+        { name: 'Churchill Downs', lat: 38.2049, lng: -85.7702, address: '700 Central Ave, Louisville, KY', notes: 'Home of the Kentucky Derby. Walk the grounds if open.', warning: 'Grounds closed Mon/Tue', tags: ['iconic', 'derby', 'outdoor'], website: 'https://www.churchilldowns.com/' },
+        { name: 'Kentucky Derby Museum', lat: 38.2054, lng: -85.7698, address: '704 Central Ave, Louisville, KY', notes: 'Open Tuesdays 8\u20135. Backup if Churchill grounds are closed.', tags: ['museum', 'derby', 'indoor'], website: 'https://www.derbymuseum.org/' }
       ],
       practical: [
         { icon: '\uD83D\uDE97', title: 'Total driving', body: '~2,500 miles over 8 days. The two long pushes are Day 1 (~11 hrs) and Day 8 (~8 hrs).' },
@@ -2046,12 +2163,54 @@ function initTab(tab) {
   }
 }
 
+function formatCostRange(range) {
+  if (!range) return '';
+  if (typeof range === 'number') return `$${range}`;
+  if (range.min === range.max) return `$${range.min}`;
+  return `$${range.min}–$${range.max}`;
+}
+
 function renderStays(tabId, stays, map) {
   const listEl = document.getElementById(`stays-${tabId}`);
   if (!listEl) return;
   listEl.innerHTML = '';
   const bounds = [];
-  stays.forEach((stay, i) => {
+
+  // Sort chronologically by checkIn (parse via Date if possible, else preserve order)
+  const sorted = [...stays].sort((a, b) => {
+    const da = new Date(a.checkIn || '');
+    const db = new Date(b.checkIn || '');
+    if (isNaN(da) || isNaN(db)) return 0;
+    return da - db;
+  });
+
+  // Compute grand total range
+  let totalMin = 0, totalMax = 0, anyCost = false;
+  let latestPricedAt = null;
+  sorted.forEach(s => {
+    if (s.totalCost) {
+      anyCost = true;
+      totalMin += (typeof s.totalCost === 'number') ? s.totalCost : s.totalCost.min;
+      totalMax += (typeof s.totalCost === 'number') ? s.totalCost : s.totalCost.max;
+    }
+    if (s.pricedAt) {
+      if (!latestPricedAt || s.pricedAt > latestPricedAt) latestPricedAt = s.pricedAt;
+    }
+  });
+
+  let html = '';
+  if (anyCost) {
+    const totalRange = totalMin === totalMax ? `$${totalMin}` : `$${totalMin}–$${totalMax}`;
+    const pricedDisplay = latestPricedAt ? new Date(latestPricedAt + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
+    html += `<div class="stays-summary">
+      <div class="stays-summary-label">Total lodging</div>
+      <div class="stays-summary-total">${totalRange}</div>
+      <div class="stays-summary-caption">Across ${sorted.length} hotels${pricedDisplay ? ` \u00b7 Prices last checked ${pricedDisplay}` : ''}</div>
+    </div>`;
+  }
+
+  html += '<div class="timeline">';
+  sorted.forEach((stay, i) => {
     if (stay.lat && stay.lng) {
       bounds.push([stay.lat, stay.lng]);
       const marker = L.marker([stay.lat, stay.lng], {
@@ -2059,20 +2218,48 @@ function renderStays(tabId, stays, map) {
       }).addTo(map);
       marker.bindPopup(`<strong>${stay.name}</strong><br><span class="popup-addr">${stay.address}</span>`);
     }
-    const card = document.createElement('div');
-    card.className = 'stay-card';
-    card.innerHTML = `
-      <h4>${stay.name}</h4>
-      ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
-      <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
-      ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
-      ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
-    `;
-    card.addEventListener('click', () => {
+
+    const costLine = stay.totalCost ? `<div class="stay-cost-line">
+      <span class="stay-cost-label">${stay.nights || 1} night${(stay.nights || 1) > 1 ? 's' : ''}${stay.costPerNight ? ' @ ' + formatCostRange(stay.costPerNight) + '/night' : ''}</span>
+      <span class="stay-cost-value stay-total-value">${formatCostRange(stay.totalCost)}</span>
+    </div>` : '';
+
+    const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(stay.name + ', ' + stay.address)}`;
+    const linksHtml = `<div class="card-links">
+      <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener">\uD83D\uDCCD Maps</a>
+      ${stay.website ? `<a class="card-link website-link" href="${stay.website}" target="_blank" rel="noopener">\uD83C\uDF10 Website</a>` : ''}
+    </div>`;
+
+    html += `<div class="timeline-item" data-stay-idx="${i}">
+      <div class="timeline-line">
+        <div class="timeline-dot"></div>
+        ${i < sorted.length - 1 ? '<div class="timeline-connector"></div>' : ''}
+      </div>
+      <div class="stay-card" style="flex:1">
+        <h4>${stay.name}</h4>
+        ${stay.dates ? `<div class="stay-dates">${stay.dates}</div>` : ''}
+        <div class="stay-address">\uD83D\uDCCD ${stay.address}</div>
+        ${costLine}
+        ${stay.notes ? `<div class="stay-notes">${stay.notes}</div>` : ''}
+        ${stay.alternatives ? `<div class="stay-alts">Alt: ${stay.alternatives}</div>` : ''}
+        ${linksHtml}
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+
+  listEl.innerHTML = html;
+
+  // Wire clicks to fly map
+  listEl.querySelectorAll('[data-stay-idx]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.card-link')) return;
+      const i = parseInt(el.dataset.stayIdx, 10);
+      const stay = sorted[i];
       if (stay.lat && stay.lng) map.flyTo([stay.lat, stay.lng], 13, { duration: 0.8 });
     });
-    listEl.appendChild(card);
   });
+
   if (bounds.length) map.fitBounds(bounds, { padding: [40, 40] });
 }
 
@@ -2251,6 +2438,12 @@ function renderItinerary() {
       if (loc.rating) {
         ratingHtml = `<div class="card-rating"><span class="stars">${stars(loc.rating)}</span> ${loc.rating}${loc.ratingCount ? ` <span style="color:var(--gray);font-weight:400">(${formatCount(loc.ratingCount)} reviews)</span>` : ''}</div>`;
       }
+      const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(loc.name + ', ' + (loc.address || ''))}`;
+      const linksHtml = `<div class="card-links">
+        <a class="card-link maps-link" href="${mapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Maps</a>
+        ${loc.website ? `<a class="card-link website-link" href="${loc.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83C\uDF10 Website</a>` : ''}
+      </div>`;
+
       card.innerHTML = `
         <button class="timeline-remove" title="Remove">&times;</button>
         <div class="timeline-card-header">
@@ -2261,6 +2454,7 @@ function renderItinerary() {
         ${ratingHtml}
         <div class="timeline-meta">${loc.duration ? loc.duration + ' min &middot; ' : ''}${loc.address}</div>
         <div class="timeline-notes">${loc.notes}</div>
+        ${linksHtml}
       `;
 
       const { marker } = markerRefs[i];
@@ -2464,6 +2658,13 @@ function populateCards(tabId, data, markerClass, map) {
     if (item.tags) html += `<div class="card-tags">${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`;
     if (item.goodFor) html += `<div class="card-tags"><span class="tag">${item.goodFor}</span></div>`;
 
+    // Place links (Maps + optional Website)
+    const cardMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ', ' + (item.address || ''))}`;
+    html += `<div class="card-links">
+      <a class="card-link maps-link" href="${cardMapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Maps</a>
+      ${item.website ? `<a class="card-link website-link" href="${item.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83C\uDF10 Website</a>` : ''}
+    </div>`;
+
     // Uber Eats button
     if (item.uberEatsUrl) {
       html += `<a class="uber-eats-btn" href="${item.uberEatsUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\uD83D\uDEF5 Order on Uber Eats</a>`;
@@ -2480,7 +2681,7 @@ function populateCards(tabId, data, markerClass, map) {
     card.innerHTML = html;
 
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.add-to-day-btn') || e.target.closest('.bookmark-btn') || e.target.closest('.uber-eats-btn')) return;
+      if (e.target.closest('.add-to-day-btn') || e.target.closest('.bookmark-btn') || e.target.closest('.uber-eats-btn') || e.target.closest('.card-link')) return;
       grid.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
       card.classList.add('active');
       map.flyTo([item.lat, item.lng], 16, { duration: 0.8 });
@@ -2682,6 +2883,11 @@ function renderMyList() {
       if (item.hours) cardHtml += `<div class="card-hours">${item.hours}</div>`;
       cardHtml += `<div class="card-notes">${item.notes}</div>`;
       cardHtml += `<div class="card-address">&#128205; ${item.address}</div>`;
+      const myListMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + ', ' + (item.address || ''))}`;
+      cardHtml += `<div class="card-links">
+        <a class="card-link maps-link" href="${myListMapsUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83D\uDCCD Maps</a>
+        ${item.website ? `<a class="card-link website-link" href="${item.website}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\uD83C\uDF10 Website</a>` : ''}
+      </div>`;
       if (item.uberEatsUrl) cardHtml += `<a class="uber-eats-btn" href="${item.uberEatsUrl}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation()">\uD83D\uDEF5 Order on Uber Eats</a>`;
       cardHtml += `<button class="mylist-remove" data-tab="${entry.tab}" data-idx="${entry.idx}">&#10005; Remove</button>`;
 
