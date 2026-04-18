@@ -2197,13 +2197,31 @@ function renderItinerary() {
     `;
     timelineEl.appendChild(header);
 
+    // Compute marker labels: primary stops get sequential slot numbers,
+    // option siblings share the slot with letter suffixes (e.g., 2A/2B).
+    let slot = 0;
+    let lastOptionGroup = null;
+    const labels = day.locations.map(loc => {
+      if (loc.optionLabel) {
+        if (loc.optionGroup !== lastOptionGroup) {
+          slot++;
+          lastOptionGroup = loc.optionGroup;
+        }
+        return `${slot}${loc.optionLabel}`;
+      } else {
+        slot++;
+        lastOptionGroup = null;
+        return `${slot}`;
+      }
+    });
+
     day.locations.forEach((loc, i) => {
       const idx = globalIdx++;
       bounds.push([loc.lat, loc.lng]);
 
       // Map marker
       const marker = L.marker([loc.lat, loc.lng], {
-        icon: createMarkerIcon(dayClasses[day.day_number] || 'marker-default', i + 1)
+        icon: createMarkerIcon(dayClasses[day.day_number] || 'marker-default', labels[i])
       }).addTo(map);
       marker.bindPopup(`<strong>${loc.name}</strong><br><span class="popup-time">${loc.time} &middot; ${loc.duration} min</span><br><span class="popup-addr">${loc.address}</span>`);
 
